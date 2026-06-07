@@ -1,0 +1,24 @@
+{
+  "name": "80others - Bộ bài kết nối gia đình",
+  "short_name": "80others",
+  "description": "Bộ bài kết nối gia đình Việt Nam theo phong cách pixel art ấm áp.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F8F5FF",
+  "theme_color": "#8B5CF6",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/logo.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg",
+      "purpose": "any"
+    },
+    {
+      "src": "/logo.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg",
+      "purpose": "maskable"
+    }
+  ]
+}
