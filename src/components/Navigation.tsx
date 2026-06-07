@@ -26,6 +26,8 @@ const NavigationContent: React.FC<{ children: React.ReactNode }> = ({ children }
   const tab = searchParams.get("tab");
   const { points, streak, completedCount, theme, toggleTheme } = useApp();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
+  const [isFundraisingModalOpen, setIsFundraisingModalOpen] = useState(false);
 
   // PWA install prompt
   const [installPrompt, setInstallPrompt] = useState<BeforeInstallPromptEvent | null>(null);
@@ -97,7 +99,7 @@ const NavigationContent: React.FC<{ children: React.ReactNode }> = ({ children }
     { name: "Bộ sưu tập", href: "/cards", icon: "hn-book-bookmark-solid" }, // Links to cards as deck library
     { name: "Cộng đồng", href: "/community", icon: "hn-users-solid" },
     { name: "Hồ sơ", href: "/profile", icon: "hn-user-solid" },
-    { name: "Cài đặt", href: "/profile", icon: "hn-cog-solid" },
+    { name: "Gây quỹ cho nhóm", href: "#", icon: "hn-heart-solid" },
   ];
 
   const getIsActive = (href: string, name: string) => {
@@ -117,11 +119,7 @@ const NavigationContent: React.FC<{ children: React.ReactNode }> = ({ children }
       }
     }
 
-    if (normBasePath === "/profile") {
-      if (name === "Cài đặt") {
-        return false;
-      }
-    }
+
 
     return true;
   };
@@ -279,6 +277,18 @@ const NavigationContent: React.FC<{ children: React.ReactNode }> = ({ children }
           <div className="space-y-1">
             {sidebarItems.map((item) => {
               const isActive = getIsActive(item.href, item.name);
+              if (item.name === "Gây quỹ cho nhóm") {
+                return (
+                  <button
+                    key={item.name}
+                    onClick={() => setIsFundraisingModalOpen(true)}
+                    className="flex items-center gap-3 px-4 py-3 rounded-xl border-2 transition-all font-semibold bg-transparent text-brand-text border-transparent hover:bg-brand-border/40 hover:border-brand-border w-full text-left cursor-pointer"
+                  >
+                    <i className={`hn ${item.icon} text-brand-text text-[18px]`} />
+                    <span className="font-pixel text-[13px] tracking-wide font-medium">{item.name}</span>
+                  </button>
+                );
+              }
               return (
                 <Link
                   key={item.name}
@@ -380,6 +390,21 @@ const NavigationContent: React.FC<{ children: React.ReactNode }> = ({ children }
                 <div className="space-y-1">
                   {sidebarItems.map((item) => {
                     const isActive = getIsActive(item.href, item.name);
+                    if (item.name === "Gây quỹ cho nhóm") {
+                      return (
+                        <button
+                          key={item.name}
+                          onClick={() => {
+                            setIsMobileMenuOpen(false);
+                            setIsFundraisingModalOpen(true);
+                          }}
+                          className="flex items-center gap-3 px-4 py-2.5 rounded-xl border-2 transition-all font-semibold bg-transparent text-brand-text border-transparent hover:bg-brand-border/40 w-full text-left cursor-pointer"
+                        >
+                          <i className={`hn ${item.icon} text-[16px]`} />
+                          <span className="font-pixel text-xs tracking-wide font-medium">{item.name}</span>
+                        </button>
+                      );
+                    }
                     return (
                       <Link
                         key={item.name}
@@ -583,6 +608,51 @@ const NavigationContent: React.FC<{ children: React.ReactNode }> = ({ children }
                 Đóng
               </button>
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* ================= FUNDRAISING MODAL ================= */}
+      {isFundraisingModalOpen && (
+        <div className="fixed inset-0 bg-brand-text/60 backdrop-blur-md z-[60] flex items-center justify-center p-4 animate-in fade-in duration-200">
+          <div className="bg-brand-card border-3 border-brand-outline rounded-3xl shadow-pixel max-w-sm w-full p-6 relative overflow-hidden animate-in fade-in zoom-in duration-200 text-center">
+            {/* Header */}
+            <div className="flex justify-between items-center mb-4 border-b-2 border-brand-border pb-3">
+              <h3 className="font-pixel text-lg font-bold text-brand-text flex items-center gap-2">
+                <i className="hn hn-heart-solid text-brand-pink text-lg animate-pulse" />
+                Gây quỹ phát triển
+              </h3>
+              <button
+                onClick={() => setIsFundraisingModalOpen(false)}
+                className="p-1.5 border-2 border-brand-outline rounded-lg bg-brand-bg hover:bg-brand-border cursor-pointer flex items-center justify-center transition-colors shadow-pixel-sm active:translate-y-0.5 active:translate-x-0.5"
+                aria-label="Đóng"
+              >
+                <i className="hn hn-times-solid text-[16px] text-brand-text" />
+              </button>
+            </div>
+
+            {/* QR display */}
+            <p className="text-xs text-brand-text/80 font-cozy leading-relaxed mb-4">
+              Đồng hành cùng <strong>80others</strong> để xây dựng thêm nhiều tính năng kết nối gia đình ý nghĩa. Hãy quét mã QR dưới đây nhé!
+            </p>
+            
+            <div className="flex flex-col items-center justify-center p-3.5 bg-white border-3 border-brand-outline rounded-2xl w-fit mx-auto shadow-pixel-sm mb-4">
+              <img
+                src="https://img.vietqr.io/image/MB-0397963469-compact.png?addInfo=GAYQUY80OTHERS&accountName=DO%20DUY%20DUNG"
+                alt="Mã QR Gây Quỹ"
+                className="w-44 h-44 object-contain"
+              />
+              <span className="text-[9px] font-pixel font-bold text-brand-outline mt-2 uppercase tracking-wide bg-brand-yellow/30 px-2 py-0.5 rounded">
+                Cú pháp: GAYQUY80OTHERS
+              </span>
+            </div>
+
+            <button
+              onClick={() => setIsFundraisingModalOpen(false)}
+              className="w-full py-2.5 border-2 border-brand-outline rounded-xl bg-brand-purple text-white font-pixel font-bold text-xs shadow-pixel-sm transition-all hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
+            >
+              Đóng
+            </button>
           </div>
         </div>
       )}

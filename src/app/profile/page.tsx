@@ -145,6 +145,27 @@ export default function ProfilePage() {
         </div>
       </section>
 
+      {/* GÂY QUỸ NHÓM */}
+      <section className="bg-brand-card border-3 border-brand-outline p-5 rounded-3xl shadow-pixel space-y-4">
+        <h3 className="font-pixel text-base font-bold flex items-center gap-2 text-brand-text">
+          <i className="hn hn-heart-solid text-brand-pink text-[18px] animate-pulse" />
+          Gây quỹ phát triển nhóm
+        </h3>
+        <p className="text-xs text-brand-text/85 font-cozy leading-relaxed">
+          Đồng hành cùng <strong>80others</strong> để xây dựng thêm nhiều tính năng kết nối gia đình ý nghĩa. Hãy quét mã QR bên dưới để ủng hộ nhóm nhé!
+        </p>
+        <div className="flex flex-col items-center justify-center p-3.5 bg-white border-3 border-brand-outline rounded-2xl w-fit mx-auto shadow-pixel-sm relative overflow-hidden">
+          <img
+            src="https://img.vietqr.io/image/MB-0397963469-compact.png?addInfo=GAYQUY80OTHERS&accountName=DO%20DUY%20DUNG"
+            alt="Mã QR Gây Quỹ"
+            className="w-48 h-48 object-contain"
+          />
+          <span className="text-[10px] font-pixel font-bold text-brand-outline mt-2 uppercase tracking-wide bg-brand-yellow/30 px-2 py-0.5 rounded">
+            Cú pháp: GAYQUY80OTHERS
+          </span>
+        </div>
+      </section>
+
       {/* 3. FUNCTION MENU LIST */}
       <section className="bg-brand-card border-3 border-brand-outline p-3 rounded-3xl shadow-pixel space-y-1">
         {menuItems.map((item, i) => {
