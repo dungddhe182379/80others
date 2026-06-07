@@ -543,8 +543,8 @@ export default function BadgeCollectionPage() {
           <i className="hn hn-crown-solid text-2xl text-brand-text" />
         </div>
         <div className="space-y-1.5 max-w-lg mx-auto">
-          <h2 className="font-pixel text-2xl md:text-3xl font-bold text-brand-text">
-            🏆 Badge Collection
+          <h2 className="font-pixel text-2xl md:text-3xl font-bold text-brand-text flex items-center justify-center gap-2">
+            <i className="hn hn-trophy-solid text-brand-yellow" /> Badge Collection
           </h2>
           <p className="text-xs md:text-sm text-brand-text/75 font-medium leading-relaxed font-pixel">
             Tích lũy các huy hiệu danh giá bằng cách hoàn thành các thẻ bài, thử thách gia đình và tương tác cộng đồng.
@@ -630,21 +630,22 @@ export default function BadgeCollectionPage() {
         {/* Category switcher */}
         <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-thin">
           {[
-            { key: "all", label: "Tất cả chủ đề" },
-            { key: "general", label: "Chung 🌐" },
-            { key: "connection", label: "Gắn kết ❤️" },
-            { key: "challenge", label: "Thử thách 🏆" },
-            { key: "community", label: "Cộng đồng 💬" },
+            { key: "all", label: "Tất cả chủ đề", icon: "" },
+            { key: "general", label: "Chung", icon: "hn hn-globe-solid text-blue-500" },
+            { key: "connection", label: "Gắn kết", icon: "hn hn-heart-solid text-brand-pink" },
+            { key: "challenge", label: "Thử thách", icon: "hn hn-trophy-solid text-brand-yellow" },
+            { key: "community", label: "Cộng đồng", icon: "hn hn-comments-solid text-brand-purple" },
           ].map((cat) => (
             <button
               key={cat.key}
               onClick={() => setCategoryFilter(cat.key)}
-              className={`px-3 py-1.5 rounded-lg border-2 font-pixel font-bold text-[10px] whitespace-nowrap transition-all cursor-pointer ${
+              className={`px-3 py-1.5 rounded-lg border-2 font-pixel font-bold text-[10px] whitespace-nowrap transition-all cursor-pointer flex items-center gap-1.5 ${
                 categoryFilter === cat.key
                   ? "bg-brand-outline text-brand-card border-brand-outline"
                   : "bg-brand-bg/30 text-brand-text/70 border-brand-border/30 hover:bg-brand-border/20 hover:border-brand-border"
               }`}
             >
+              {cat.icon && <i className={cat.icon} />}
               {cat.label}
             </button>
           ))}

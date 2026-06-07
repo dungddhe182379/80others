@@ -96,7 +96,6 @@ const NavigationContent: React.FC<{ children: React.ReactNode }> = ({ children }
     { name: "Trang chủ", href: "/", icon: "hn-home-solid" },
     { name: "Thẻ hôm nay", href: "/cards?tab=today", icon: "hn-grid-solid" },
     { name: "Thử thách", href: "/challenges", icon: "hn-trophy-solid" },
-    { name: "Bộ sưu tập", href: "/cards", icon: "hn-book-bookmark-solid" }, // Links to cards as deck library
     { name: "Huy hiệu", href: "/badges", icon: "hn-crown-solid" },
     { name: "Cộng đồng", href: "/community", icon: "hn-users-solid" },
     { name: "Hồ sơ", href: "/profile", icon: "hn-user-solid" },
@@ -115,12 +114,7 @@ const NavigationContent: React.FC<{ children: React.ReactNode }> = ({ children }
       if (name === "Thẻ hôm nay" || name === "Thẻ") {
         return isTodayTab;
       }
-      if (name === "Bộ sưu tập") {
-        return !isTodayTab;
-      }
     }
-
-
 
     return true;
   };

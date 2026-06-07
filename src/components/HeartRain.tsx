@@ -62,7 +62,7 @@ export const HeartRain: React.FC = () => {
             fontSize: `${h.size}px`,
           }}
         >
-          ❤️
+          <i className="hn hn-heart-solid" style={{ fontSize: "inherit" }} />
         </span>
       ))}
     </div>
