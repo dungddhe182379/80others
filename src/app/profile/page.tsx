@@ -70,7 +70,7 @@ export default function ProfilePage() {
           <div className="relative w-24 h-24 rounded-full border-3 border-brand-outline overflow-hidden bg-brand-purple-light shadow-pixel">
             <Image
               src="/assets/avatars/avatar.png"
-              alt="Đỗ Duy Dũng Profile"
+              alt="Charlie Puth Profile"
               fill
               sizes="96px"
               priority
@@ -80,7 +80,7 @@ export default function ProfilePage() {
 
           <div className="space-y-1">
             <h2 className="font-pixel text-xl font-bold text-brand-text flex items-center justify-center gap-1.5">
-              Đỗ Duy Dũng
+              Charlie Puth
             </h2>
             <span className="inline-block text-xs font-pixel text-brand-purple-light font-bold bg-brand-outline px-2.5 py-0.5 rounded-md">
               Lv.5

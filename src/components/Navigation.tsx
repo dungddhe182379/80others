@@ -104,9 +104,9 @@ const NavigationContent: React.FC<{ children: React.ReactNode }> = ({ children }
     const basePath = href.split("?")[0];
     const normPathname = pathname.replace(/\/$/, "");
     const normBasePath = basePath.replace(/\/$/, "");
-    
+
     if (normPathname !== normBasePath) return false;
-    
+
     if (normBasePath === "/cards") {
       const isTodayTab = tab === "today";
       if (name === "Thẻ hôm nay" || name === "Thẻ") {
@@ -116,13 +116,13 @@ const NavigationContent: React.FC<{ children: React.ReactNode }> = ({ children }
         return !isTodayTab;
       }
     }
-    
+
     if (normBasePath === "/profile") {
       if (name === "Cài đặt") {
         return false;
       }
     }
-    
+
     return true;
   };
 
@@ -185,7 +185,7 @@ const NavigationContent: React.FC<{ children: React.ReactNode }> = ({ children }
           )}
 
           {/* Theme Toggle Button */}
-          <button 
+          <button
             onClick={toggleTheme}
             className="p-2 border-2 border-brand-outline rounded-lg bg-brand-bg hover:bg-brand-border transition-colors shadow-pixel-sm active:translate-y-0.5 active:translate-x-0.5 cursor-pointer flex items-center justify-center"
             aria-label="Toggle theme"
@@ -205,14 +205,14 @@ const NavigationContent: React.FC<{ children: React.ReactNode }> = ({ children }
             <div className="relative w-9 h-9 rounded-full border-2 border-brand-outline overflow-hidden bg-brand-purple-light shadow-pixel-sm">
               <Image
                 src="/assets/avatars/avatar.png"
-                alt="Đỗ Duy Dũng avatar"
+                alt="Charlie Puth avatar"
                 fill
                 sizes="36px"
                 className="object-cover"
               />
             </div>
             <div className="text-left leading-tight hidden lg:block">
-              <p className="font-pixel font-bold text-sm text-brand-text">Đỗ Duy Dũng</p>
+              <p className="font-pixel font-bold text-sm text-brand-text">Charlie Puth</p>
               <span className="text-[11px] font-pixel text-brand-purple-light font-bold bg-brand-outline px-1.5 py-0.2 rounded">Lv.5</span>
             </div>
           </Link>
@@ -255,7 +255,7 @@ const NavigationContent: React.FC<{ children: React.ReactNode }> = ({ children }
           )}
 
           {/* Mobile Theme Toggle */}
-          <button 
+          <button
             onClick={toggleTheme}
             className="p-2 border-2 border-brand-outline rounded-lg bg-brand-bg shadow-pixel-sm active:translate-y-0.5 cursor-pointer flex items-center justify-center"
             aria-label="Toggle theme"
@@ -266,7 +266,7 @@ const NavigationContent: React.FC<{ children: React.ReactNode }> = ({ children }
               <i className="hn hn-moon-solid text-[18px] text-brand-purple" />
             )}
           </button>
-          
+
           <button className="p-2 border-2 border-brand-outline rounded-lg bg-brand-bg shadow-pixel-sm active:translate-y-0.5 flex items-center justify-center">
             <i className="hn hn-bell-solid text-[20px] text-brand-text" />
           </button>
@@ -283,11 +283,10 @@ const NavigationContent: React.FC<{ children: React.ReactNode }> = ({ children }
                 <Link
                   key={item.name}
                   href={item.href}
-                  className={`flex items-center gap-3 px-4 py-3 rounded-xl border-2 transition-all font-semibold ${
-                    isActive
-                      ? "bg-brand-purple text-white border-brand-outline shadow-pixel-sm translate-x-1"
-                      : "bg-transparent text-brand-text border-transparent hover:bg-brand-border/40 hover:border-brand-border"
-                  }`}
+                  className={`flex items-center gap-3 px-4 py-3 rounded-xl border-2 transition-all font-semibold ${isActive
+                    ? "bg-brand-purple text-white border-brand-outline shadow-pixel-sm translate-x-1"
+                    : "bg-transparent text-brand-text border-transparent hover:bg-brand-border/40 hover:border-brand-border"
+                    }`}
                 >
                   <i className={`hn ${item.icon} ${isActive ? "text-white" : "text-brand-text"} text-[18px]`} />
                   <span className="font-pixel text-[13px] tracking-wide font-medium">{item.name}</span>
@@ -302,14 +301,14 @@ const NavigationContent: React.FC<{ children: React.ReactNode }> = ({ children }
               <div className="relative w-12 h-12 rounded-full border-2 border-brand-outline overflow-hidden bg-brand-purple-light shadow-pixel-sm shrink-0">
                 <Image
                   src="/assets/avatars/avatar.png"
-                  alt="Đỗ Duy Dũng avatar"
+                  alt="Charlie Puth avatar"
                   fill
                   sizes="48px"
                   className="object-cover"
                 />
               </div>
               <div className="leading-tight">
-                <h4 className="font-pixel font-bold text-sm text-brand-text">Đỗ Duy Dũng</h4>
+                <h4 className="font-pixel font-bold text-sm text-brand-text">Charlie Puth</h4>
                 <span className="text-[10px] font-pixel text-brand-purple-light font-bold bg-brand-outline px-1.5 py-0.2 rounded">Lv.5</span>
               </div>
             </div>
@@ -386,11 +385,10 @@ const NavigationContent: React.FC<{ children: React.ReactNode }> = ({ children }
                         key={item.name}
                         href={item.href}
                         onClick={() => setIsMobileMenuOpen(false)}
-                        className={`flex items-center gap-3 px-4 py-2.5 rounded-xl border-2 transition-all font-semibold ${
-                          isActive
-                            ? "bg-brand-purple text-white border-brand-outline shadow-pixel-sm translate-x-1"
-                            : "bg-transparent text-brand-text border-transparent hover:bg-brand-border/40"
-                        }`}
+                        className={`flex items-center gap-3 px-4 py-2.5 rounded-xl border-2 transition-all font-semibold ${isActive
+                          ? "bg-brand-purple text-white border-brand-outline shadow-pixel-sm translate-x-1"
+                          : "bg-transparent text-brand-text border-transparent hover:bg-brand-border/40"
+                          }`}
                       >
                         <i className={`hn ${item.icon} text-[16px]`} />
                         <span className="font-pixel text-xs tracking-wide font-medium">{item.name}</span>
@@ -428,11 +426,10 @@ const NavigationContent: React.FC<{ children: React.ReactNode }> = ({ children }
             <Link
               key={item.name}
               href={item.href}
-              className={`flex flex-col items-center justify-center w-14 h-12 rounded-lg transition-all ${
-                isActive
-                  ? "text-brand-purple scale-110 font-bold"
-                  : "text-brand-text/60 hover:text-brand-text"
-              }`}
+              className={`flex flex-col items-center justify-center w-14 h-12 rounded-lg transition-all ${isActive
+                ? "text-brand-purple scale-110 font-bold"
+                : "text-brand-text/60 hover:text-brand-text"
+                }`}
             >
               <i className={`hn ${item.icon} ${isActive ? "text-brand-purple text-[22px]" : "text-brand-text/60 text-[20px]"} transition-all`} />
               <span className="text-[10px] mt-1 font-pixel tracking-wide font-medium">{item.name}</span>
