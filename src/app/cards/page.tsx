@@ -186,7 +186,6 @@ const DECKS_CONFIG = [
     subtitle: "Khởi động",
     desc: "Những câu hỏi nhẹ nhàng để mở lời và làm ấm bầu không khí.",
     icon: "hn-lightbulb-solid",
-    emoji: "☕",
     image: "/assets/decks/warm.png",
     cardCount: 20,
     color: "bg-amber-100 border-amber-400 text-amber-700",
@@ -199,7 +198,6 @@ const DECKS_CONFIG = [
     subtitle: "Tương tác",
     desc: "Các thử thách tương tác vui nhộn mang lại tiếng cười cho cả nhà.",
     icon: "hn-play-solid",
-    emoji: "🎲",
     image: "/assets/decks/play.png",
     cardCount: 20,
     color: "bg-blue-100 border-blue-400 text-blue-700",
@@ -212,7 +210,6 @@ const DECKS_CONFIG = [
     subtitle: "Thấu hiểu",
     desc: "Nhớ lại kỷ niệm và cùng nhau thấu hiểu sâu sắc hơn về nhau.",
     icon: "hn-retro-camera-solid",
-    emoji: "📸",
     image: "/assets/decks/bond.png",
     cardCount: 20,
     color: "bg-purple-100 border-purple-400 text-brand-purple",
@@ -225,7 +222,6 @@ const DECKS_CONFIG = [
     subtitle: "Yêu thương",
     desc: "Bộc lộ những cảm xúc sâu kín và gửi lời yêu thương ngọt ngào.",
     icon: "hn-heart-solid",
-    emoji: "💌",
     image: "/assets/decks/heart.png",
     cardCount: 20,
     color: "bg-pink-100 border-pink-400 text-brand-pink",
@@ -238,7 +234,6 @@ const DECKS_CONFIG = [
     subtitle: "Quyền im lặng",
     desc: "Khi ai đó cần không gian riêng, tạo cảm giác an toàn tuyệt đối.",
     icon: "hn-lock-solid",
-    emoji: "🛡️",
     image: "/assets/decks/safe.png",
     cardCount: 10,
     color: "bg-slate-100 border-slate-400 text-slate-700",
@@ -345,7 +340,8 @@ function CardsPageContent() {
       {/* 1. DECK TITLE */}
       <section className="bg-brand-card border-3 border-brand-outline p-6 rounded-3xl shadow-pixel">
         <h2 className="font-pixel text-2xl font-bold text-brand-text mb-2 flex items-center gap-2">
-          🗂️ Khám phá các bộ bài
+          <i className="hn hn-grid-solid text-brand-purple text-[22px]" />
+          Khám phá các bộ bài
         </h2>
         <p className="text-brand-text/80 text-sm font-semibold">
           80others bao gồm 5 bộ bài với các chủ đề khác nhau, giúp gia đình bạn từng bước mở lòng, tương tác vui vẻ và thấu hiểu nhau sâu sắc hơn.
@@ -381,7 +377,8 @@ function CardsPageContent() {
                     {deck.title}
                   </span>
                   <h3 className="font-cozy font-extrabold text-lg text-brand-text leading-tight flex items-center gap-1.5">
-                    {deck.emoji} {deck.subtitle}
+                    <i className={`hn ${deck.icon} text-[18px]`} />
+                    {deck.subtitle}
                   </h3>
                   <p className="text-xs text-brand-text/70 leading-relaxed font-semibold">
                     {deck.desc}
@@ -494,8 +491,9 @@ function CardsPageContent() {
               </div>
 
               {/* Tips for listening */}
-              <div className="bg-brand-bg border-2 border-brand-border p-3 rounded-2xl text-xs text-brand-text/80 font-semibold text-center">
-                💡 <span className="text-brand-text font-bold">Lắng nghe:</span> {currentCard.listenTip}
+              <div className="bg-brand-bg border-2 border-brand-border p-3 rounded-2xl text-xs text-brand-text/80 font-semibold text-center flex items-center justify-center gap-1.5">
+                <i className="hn hn-lightbulb-solid text-brand-yellow text-[14px] shrink-0" />
+                <span><span className="text-brand-text font-bold">Lắng nghe:</span> {currentCard.listenTip}</span>
               </div>
 
               {/* Interactive buttons */}
