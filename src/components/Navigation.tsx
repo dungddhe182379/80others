@@ -60,12 +60,20 @@ const NavigationContent: React.FC<{ children: React.ReactNode }> = ({ children }
 
   const handleInstall = async () => {
     if (installPrompt) {
-      // Native install (Chrome/Edge)
-      await installPrompt.prompt();
-      const { outcome } = await installPrompt.userChoice;
-      if (outcome === "accepted") {
-        setInstallPrompt(null);
-        setIsInstalled(true);
+      try {
+        // Native install (Chrome/Edge)
+        await installPrompt.prompt();
+        const { outcome } = await installPrompt.userChoice;
+        if (outcome === "accepted") {
+          setInstallPrompt(null);
+          setIsInstalled(true);
+        } else {
+          // If user dismissed the prompt, show guide as fallback
+          setShowInstallGuide(true);
+        }
+      } catch (error) {
+        // If native prompt fails
+        setShowInstallGuide(true);
       }
     } else {
       // No native prompt — show manual instructions
