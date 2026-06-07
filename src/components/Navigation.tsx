@@ -130,9 +130,9 @@ const NavigationContent: React.FC<{ children: React.ReactNode }> = ({ children }
       {/* ================= DESKTOP HEADER ================= */}
       <header className="hidden md:flex items-center justify-between px-6 py-4 bg-brand-card border-b-3 border-brand-outline sticky top-0 z-40">
         <Link href="/" className="flex items-center gap-3">
-          <div className="relative w-10 h-10 border-2 border-brand-outline rounded-lg overflow-hidden bg-brand-bg flex items-center justify-center shadow-pixel-sm">
+          <div className="relative w-10 h-10 border-2 border-brand-outline rounded-lg overflow-hidden bg-[#1A102B] flex items-center justify-center shadow-pixel-sm">
             <Image
-              src="/assets/logo.jpg"
+              src="/assets/logo_pixel.png"
               alt="80others logo"
               fill
               className="object-cover"
@@ -228,9 +228,9 @@ const NavigationContent: React.FC<{ children: React.ReactNode }> = ({ children }
         </button>
 
         <Link href="/" className="flex items-center gap-2">
-          <div className="relative w-8 h-8 border border-brand-outline rounded-md overflow-hidden bg-brand-bg">
+          <div className="relative w-8 h-8 border border-brand-outline rounded-md overflow-hidden bg-[#1A102B]">
             <Image
-              src="/assets/logo.jpg"
+              src="/assets/logo_pixel.png"
               alt="80others logo"
               fill
               sizes="32px"
@@ -359,9 +359,9 @@ const NavigationContent: React.FC<{ children: React.ReactNode }> = ({ children }
               <div>
                 <div className="flex items-center justify-between mb-6">
                   <div className="flex items-center gap-2">
-                    <div className="relative w-8 h-8 border border-brand-outline rounded-md overflow-hidden bg-brand-bg">
+                    <div className="relative w-8 h-8 border border-brand-outline rounded-md overflow-hidden bg-[#1A102B]">
                       <Image
-                        src="/assets/logo.jpg"
+                        src="/assets/logo_pixel.png"
                         alt="80others logo"
                         fill
                         sizes="32px"
