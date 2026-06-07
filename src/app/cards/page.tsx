@@ -198,6 +198,7 @@ const DECKS_CONFIG = [
     desc: "Những câu hỏi nhẹ nhàng để mở lời và làm ấm bầu không khí.",
     icon: Coffee,
     emoji: "☕",
+    image: "/deck_warm.png",
     cardCount: 20,
     color: "bg-amber-100 border-amber-400 text-amber-700",
     bgClass: "bg-amber-500",
@@ -210,6 +211,7 @@ const DECKS_CONFIG = [
     desc: "Các thử thách tương tác vui nhộn mang lại tiếng cười cho cả nhà.",
     icon: Dices,
     emoji: "🎲",
+    image: "/deck_play.png",
     cardCount: 20,
     color: "bg-blue-100 border-blue-400 text-blue-700",
     bgClass: "bg-blue-500",
@@ -222,6 +224,7 @@ const DECKS_CONFIG = [
     desc: "Nhớ lại kỷ niệm và cùng nhau thấu hiểu sâu sắc hơn về nhau.",
     icon: Camera,
     emoji: "📸",
+    image: "/deck_bond.png",
     cardCount: 20,
     color: "bg-purple-100 border-purple-400 text-brand-purple",
     bgClass: "bg-brand-purple",
@@ -234,6 +237,7 @@ const DECKS_CONFIG = [
     desc: "Bộc lộ những cảm xúc sâu kín và gửi lời yêu thương ngọt ngào.",
     icon: Heart,
     emoji: "💌",
+    image: "/deck_heart.png",
     cardCount: 20,
     color: "bg-pink-100 border-pink-400 text-brand-pink",
     bgClass: "bg-brand-pink",
@@ -246,6 +250,7 @@ const DECKS_CONFIG = [
     desc: "Khi ai đó cần không gian riêng, tạo cảm giác an toàn tuyệt đối.",
     icon: ShieldAlert,
     emoji: "🛡️",
+    image: "/deck_safe.png",
     cardCount: 10,
     color: "bg-slate-100 border-slate-400 text-slate-700",
     bgClass: "bg-slate-500",
@@ -349,7 +354,7 @@ function CardsPageContent() {
     <div className="max-w-4xl mx-auto space-y-6 pb-6">
       
       {/* 1. DECK TITLE */}
-      <section className="bg-brand-card border-3 border-brand-text p-6 rounded-3xl shadow-pixel">
+      <section className="bg-brand-card border-3 border-brand-outline p-6 rounded-3xl shadow-pixel">
         <h2 className="font-pixel text-2xl font-bold text-brand-text mb-2 flex items-center gap-2">
           🗂️ Khám phá các bộ bài
         </h2>
@@ -361,20 +366,25 @@ function CardsPageContent() {
       {/* 2. DECKS GRID */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {DECKS_CONFIG.map((deck) => {
-          const Icon = deck.icon;
           return (
             <div
               key={deck.key}
               onClick={(e) => handleSelectDeck(deck.key, e)}
-              className={`bg-brand-card border-3 border-brand-text p-5 rounded-3xl cursor-pointer transition-all transform hover:-translate-y-1.5 active:translate-y-0 shadow-pixel ${deck.shadowColor} flex flex-col justify-between h-72`}
+              className={`bg-brand-card border-3 border-brand-outline p-5 rounded-3xl cursor-pointer transition-all transform hover:-translate-y-1.5 active:translate-y-0 shadow-pixel ${deck.shadowColor} flex flex-col justify-between h-72`}
             >
               <div className="space-y-4">
                 {/* Header of the deck box */}
                 <div className="flex justify-between items-start">
-                  <div className={`w-12 h-12 rounded-2xl border-2 border-brand-text flex items-center justify-center text-2xl shadow-pixel-sm ${deck.color}`}>
-                    <Icon className="w-6 h-6 shrink-0" />
+                  <div className="relative w-12 h-12 rounded-2xl border-2 border-brand-outline bg-brand-bg flex items-center justify-center shadow-pixel-sm overflow-hidden shrink-0">
+                    <Image
+                      src={deck.image}
+                      alt={deck.title}
+                      fill
+                      sizes="48px"
+                      className="object-contain p-1.5 image-rendering-pixelated"
+                    />
                   </div>
-                  <span className="font-pixel text-[10px] font-bold bg-brand-text text-white px-2 py-0.5 rounded-md">
+                  <span className="font-pixel text-[10px] font-bold bg-brand-outline text-white px-2 py-0.5 rounded-md">
                     {deck.cardCount} THẺ
                   </span>
                 </div>
@@ -415,17 +425,17 @@ function CardsPageContent() {
               initial={{ scale: 0.9, y: 20 }}
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.9, y: 20 }}
-              className="bg-brand-card border-3 border-brand-text p-6 rounded-3xl shadow-pixel-lg max-w-md w-full relative space-y-6"
+              className="bg-brand-card border-3 border-brand-outline p-6 rounded-3xl shadow-pixel-lg max-w-md w-full relative space-y-6"
             >
               {/* Header inside modal */}
               <div className="flex items-center justify-between border-b-2 border-brand-border pb-3">
                 <button
                   onClick={handleClose}
-                  className="flex items-center gap-1 text-xs font-bold text-brand-text/60 hover:text-brand-text"
+                  className="flex items-center gap-1 text-xs font-bold text-brand-text/60 hover:text-brand-text font-pixel"
                 >
                   <ArrowLeft className="w-4 h-4" /> Quay lại
                 </button>
-                <span className="font-pixel text-xs font-bold bg-brand-text text-white px-2 py-0.5 rounded">
+                <span className="font-pixel text-xs font-bold bg-brand-outline text-white px-2 py-0.5 rounded">
                   {activeDeck.subtitle}
                 </span>
               </div>
@@ -440,7 +450,7 @@ function CardsPageContent() {
                 >
                   {/* CARD FRONT SIDE (Question card) */}
                   <div 
-                    className={`absolute inset-0 backface-hidden rounded-2xl border-3 border-brand-text p-4 flex flex-col justify-between bg-white text-brand-text overflow-hidden ${
+                    className={`absolute inset-0 backface-hidden rounded-2xl border-3 border-brand-outline p-4 flex flex-col justify-between bg-white text-brand-text overflow-hidden ${
                       isFlipped ? "pointer-events-none" : ""
                     }`}
                   >
@@ -450,22 +460,30 @@ function CardsPageContent() {
                       <span>No. {currentCard.id}</span>
                     </div>
 
-                    <div className="flex flex-col items-center text-center justify-center flex-grow py-4">
-                      <span className="text-3xl mb-3">{activeDeck.emoji}</span>
+                    <div className="flex flex-col items-center text-center justify-center flex-grow py-4 gap-2">
+                      <div className="relative w-16 h-16 shrink-0 border-2 border-brand-outline rounded-xl bg-brand-bg flex items-center justify-center shadow-pixel-sm mb-1">
+                        <Image
+                          src={activeDeck.image}
+                          alt={activeDeck.title}
+                          fill
+                          sizes="64px"
+                          className="object-contain p-1.5 image-rendering-pixelated"
+                        />
+                      </div>
                       <h4 className="font-cozy font-bold text-sm md:text-base leading-relaxed text-brand-text px-1">
                         {currentCard.question}
                       </h4>
                     </div>
 
                     {/* Bottom tip decoration */}
-                    <div className="border-t border-brand-border pt-2.5 text-[10px] text-brand-text/60 font-semibold text-center italic">
+                    <div className="border-t border-brand-border pt-2.5 text-[10px] text-brand-text/60 font-semibold text-center italic font-pixel">
                       {currentCard.hint}
                     </div>
                   </div>
 
                   {/* CARD BACK SIDE (Pattern card) */}
                   <div 
-                    className={`absolute inset-0 backface-hidden rotate-y-180 rounded-2xl border-3 border-brand-text p-4 flex flex-col justify-between text-white overflow-hidden ${
+                    className={`absolute inset-0 backface-hidden rotate-y-180 rounded-2xl border-3 border-brand-outline p-4 flex flex-col justify-between text-white overflow-hidden ${
                       activeDeck.bgClass
                     }`}
                   >
@@ -499,20 +517,20 @@ function CardsPageContent() {
               <div className="grid grid-cols-2 gap-3 pt-2">
                 <button
                   onClick={handleDrawNext}
-                  className="py-3 px-4 bg-brand-bg text-brand-text font-pixel font-bold rounded-2xl border-3 border-brand-text shadow-pixel hover:shadow-pixel-hover hover:-translate-y-0.5 active:translate-y-0 transition-all text-xs flex items-center justify-center gap-1.5 cursor-pointer"
+                  className="py-3 px-4 bg-brand-bg text-brand-text font-pixel font-bold rounded-2xl border-3 border-brand-outline shadow-pixel hover:shadow-pixel-hover hover:-translate-y-0.5 active:translate-y-0 transition-all text-xs flex items-center justify-center gap-1.5 cursor-pointer"
                 >
                   <RotateCw className="w-4 h-4" />
                   Rút thẻ khác
                 </button>
 
                 {isCompleted ? (
-                  <div className="py-3 px-4 bg-green-50 text-green-700 font-bold border-2 border-green-500 rounded-2xl flex items-center justify-center gap-1 text-xs">
+                  <div className="py-3 px-4 bg-green-50 text-green-700 font-bold border-2 border-green-500 rounded-2xl flex items-center justify-center gap-1 text-xs font-pixel">
                     Đã hoàn thành!
                   </div>
                 ) : (
                   <button
                     onClick={handleCompleteCard}
-                    className="py-3 px-4 bg-brand-pink text-white font-pixel font-bold rounded-2xl border-3 border-brand-text shadow-pixel hover:shadow-pixel-hover hover:-translate-y-0.5 active:translate-y-0 transition-all text-xs flex items-center justify-center gap-1 cursor-pointer"
+                    className="py-3 px-4 bg-brand-pink text-white font-pixel font-bold rounded-2xl border-3 border-brand-outline shadow-pixel hover:shadow-pixel-hover hover:-translate-y-0.5 active:translate-y-0 transition-all text-xs flex items-center justify-center gap-1 cursor-pointer"
                   >
                     <CheckCircle className="w-4 h-4" />
                     Hoàn thành (+30 ❤️)

@@ -77,6 +77,13 @@ const CARD_POOL = [
   }
 ];
 
+const MOOD_IMAGES: Record<string, string> = {
+  "😍": "/mood_love.png",
+  "🙂": "/mood_nice.png",
+  "😐": "/mood_okay.png",
+  "😔": "/mood_sad.png"
+};
+
 export default function HomePage() {
   const {
     points,
@@ -166,7 +173,7 @@ export default function HomePage() {
     <div className="max-w-4xl mx-auto space-y-6 pb-6">
       
       {/* 1. WELCOME BANNER */}
-      <section className="bg-brand-card border-3 border-brand-text p-6 rounded-3xl shadow-pixel relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-6">
+      <section className="bg-brand-card border-3 border-brand-outline p-6 rounded-3xl shadow-pixel relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-6">
         <div className="space-y-3 flex-grow">
           <h2 className="font-pixel text-2xl md:text-3xl font-bold text-brand-text flex items-center gap-2">
             {greeting}
@@ -182,7 +189,7 @@ export default function HomePage() {
         </div>
         
         {/* Pixel banner image on the right */}
-        <div className="relative w-full md:w-56 h-28 border-2 border-brand-text rounded-xl overflow-hidden shrink-0 shadow-pixel-sm bg-brand-bg">
+        <div className="relative w-full md:w-56 h-28 border-2 border-brand-outline rounded-xl overflow-hidden shrink-0 shadow-pixel-sm bg-brand-bg">
           <Image 
             src="/pixel_cozy_banner.png" 
             alt="Cozy window banner" 
@@ -196,7 +203,7 @@ export default function HomePage() {
       {/* MOBILE ONLY QUICK STATS */}
       <div className="grid grid-cols-2 gap-3 md:hidden">
         {/* Streak 🔥 */}
-        <div className="flex items-center gap-3 bg-orange-50 border-3 border-brand-text p-3 rounded-2xl shadow-pixel">
+        <div className="flex items-center gap-3 bg-orange-50 border-3 border-brand-outline p-3 rounded-2xl shadow-pixel">
           <Flame className="w-8 h-8 text-orange-500 fill-orange-500 shrink-0" />
           <div className="leading-tight">
             <span className="font-pixel text-lg font-bold block">{streak} ngày</span>
@@ -205,7 +212,7 @@ export default function HomePage() {
         </div>
 
         {/* Connection Points ❤️ */}
-        <div className="flex items-center gap-3 bg-pink-50 border-3 border-brand-text p-3 rounded-2xl shadow-pixel">
+        <div className="flex items-center gap-3 bg-pink-50 border-3 border-brand-outline p-3 rounded-2xl shadow-pixel">
           <Heart className="w-8 h-8 text-brand-pink fill-brand-pink shrink-0" />
           <div className="leading-tight">
             <span className="font-pixel text-lg font-bold block">{points}</span>
@@ -220,12 +227,12 @@ export default function HomePage() {
         <div className="md:col-span-2 space-y-6">
           
           {/* 2. TODAY'S CARD WIDGET */}
-          <section className="bg-brand-card border-3 border-brand-text p-5 rounded-3xl shadow-pixel">
+          <section className="bg-brand-card border-3 border-brand-outline p-5 rounded-3xl shadow-pixel">
             <div className="flex items-center justify-between mb-4 border-b-2 border-brand-border pb-3">
               <h3 className="font-pixel text-lg font-bold flex items-center gap-2">
                 🃏 Thẻ hôm nay
               </h3>
-              <span className="text-xs font-semibold text-brand-text/50">
+              <span className="text-xs font-semibold text-brand-text/50 font-pixel">
                 Đã mở: {completedCardIds.length} / 100 thẻ
               </span>
             </div>
@@ -235,7 +242,7 @@ export default function HomePage() {
               {/* Card visual representation */}
               <div className="sm:col-span-5 flex justify-center py-4">
                 <div 
-                  className={`relative w-44 h-60 rounded-2xl border-3 border-brand-text bg-brand-purple p-3 flex flex-col justify-between shadow-pixel-lg text-white select-none transition-transform duration-300 ${
+                  className={`relative w-44 h-60 rounded-2xl border-3 border-brand-outline bg-brand-purple p-3 flex flex-col justify-between shadow-pixel-lg text-white select-none transition-transform duration-300 ${
                     isFlipped ? "rotate-y-180 scale-95" : "hover:-translate-y-2 hover:scale-[1.02]"
                   }`}
                 >
@@ -261,26 +268,43 @@ export default function HomePage() {
 
               {/* Card content and Draw action */}
               <div className="sm:col-span-7 space-y-4">
-                <div className={`p-4 border-2 border-dashed rounded-2xl bg-brand-bg transition-opacity duration-300 ${isFlipped ? "opacity-30" : "opacity-100"}`}>
-                  <span className={`inline-block px-2.5 py-0.5 rounded-full border-2 text-[10px] font-bold mb-2 ${currentCard.color}`}>
-                    {currentCard.deckTitle}
-                  </span>
-                  
-                  <h4 className="font-cozy font-bold text-base md:text-lg text-brand-text leading-snug mb-3">
-                    {currentCard.question}
-                  </h4>
-                  
-                  <div className="space-y-1.5 border-t border-brand-border pt-3 text-xs text-brand-text/70">
-                    <p className="flex items-center gap-1.5 font-semibold">
-                      <Heart className="w-3.5 h-3.5 text-brand-pink fill-brand-pink" />
-                      <span>{currentCard.listenTip}</span>
-                    </p>
+                <div className={`p-4 border-3 border-brand-outline rounded-2xl bg-brand-card shadow-pixel-sm transition-opacity duration-300 ${isFlipped ? "opacity-30" : "opacity-100"} flex gap-4 items-start`}>
+                  <div className="relative w-14 h-14 shrink-0 border-2 border-brand-outline rounded-xl bg-brand-bg flex items-center justify-center shadow-pixel-sm">
+                    <Image
+                      src={
+                        currentCard.deck === "WARM" ? "/deck_warm.png" :
+                        currentCard.deck === "PLAY" ? "/deck_play.png" :
+                        currentCard.deck === "BOND" ? "/deck_bond.png" :
+                        currentCard.deck === "HEART" ? "/deck_heart.png" :
+                        "/deck_safe.png"
+                      }
+                      alt={currentCard.deck}
+                      fill
+                      sizes="56px"
+                      className="object-contain p-1 image-rendering-pixelated"
+                    />
+                  </div>
+                  <div className="space-y-1.5 flex-grow">
+                    <span className={`inline-block px-2.5 py-0.5 rounded-full border-2 text-[10px] font-bold mb-1 ${currentCard.color}`}>
+                      {currentCard.deckTitle}
+                    </span>
+                    
+                    <h4 className="font-cozy font-bold text-sm md:text-base text-brand-text leading-snug">
+                      {currentCard.question}
+                    </h4>
+                    
+                    <div className="space-y-1.5 border-t border-brand-border pt-2 text-xs text-brand-text/70">
+                      <p className="flex items-center gap-1.5 font-semibold font-pixel">
+                        <Heart className="w-3.5 h-3.5 text-brand-pink fill-brand-pink" />
+                        <span>{currentCard.listenTip}</span>
+                      </p>
+                    </div>
                   </div>
                 </div>
 
                 <button
                   onClick={handleDrawCard}
-                  className="w-full py-3.5 px-6 bg-brand-purple text-white font-pixel font-bold rounded-2xl border-3 border-brand-text shadow-pixel hover:shadow-pixel-hover hover:-translate-y-0.5 active:translate-y-0 transition-all flex items-center justify-center gap-2 text-sm sm:text-base cursor-pointer"
+                  className="w-full py-3.5 px-6 bg-brand-purple text-white font-pixel font-bold rounded-2xl border-3 border-brand-outline shadow-pixel hover:shadow-pixel-hover hover:-translate-y-0.5 active:translate-y-0 transition-all flex items-center justify-center gap-2 text-sm sm:text-base cursor-pointer"
                 >
                   <RotateCw className={`w-5 h-5 ${isFlipped ? "animate-spin" : ""}`} />
                   Rút thẻ khác (+30 ❤️)
@@ -290,18 +314,27 @@ export default function HomePage() {
           </section>
 
           {/* 3. EMOTION CHECK-IN */}
-          <section className="bg-brand-card border-3 border-brand-text p-5 rounded-3xl shadow-pixel">
-            <h3 className="font-pixel text-lg font-bold mb-1 flex items-center gap-1.5 border-b-2 border-brand-border pb-3">
-              😊 Hôm nay bạn cảm thấy thế nào?
+          <section className="bg-brand-card border-3 border-brand-outline p-5 rounded-3xl shadow-pixel">
+            <h3 className="font-pixel text-lg font-bold mb-1 flex items-center gap-2 border-b-2 border-brand-border pb-3">
+              <div className="relative w-6 h-6 shrink-0">
+                <Image 
+                  src="/mood_nice.png" 
+                  alt="Smile Face" 
+                  fill
+                  sizes="24px"
+                  className="object-contain image-rendering-pixelated"
+                />
+              </div>
+              Hôm nay bạn cảm thấy thế nào?
             </h3>
             
             <div className="py-3">
               <div className="grid grid-cols-4 gap-2 sm:gap-4 max-w-md mx-auto">
                 {[
-                  { emoji: "😍", label: "Tuyệt vời", color: "hover:bg-pink-100 hover:border-brand-pink border-2" },
-                  { emoji: "🙂", label: "Ổn nhé", color: "hover:bg-amber-100 hover:border-brand-yellow border-2" },
-                  { emoji: "😐", label: "Bình thường", color: "hover:bg-purple-100 hover:border-brand-purple border-2" },
-                  { emoji: "😔", label: "Không vui", color: "hover:bg-blue-100 hover:border-blue-400 border-2" }
+                  { emoji: "😍", label: "Tuyệt vời", color: "hover:bg-pink-105 hover:border-brand-pink border-2" },
+                  { emoji: "🙂", label: "Ổn nhé", color: "hover:bg-amber-105 hover:border-brand-yellow border-2" },
+                  { emoji: "😐", label: "Bình thường", color: "hover:bg-purple-105 hover:border-brand-purple border-2" },
+                  { emoji: "😔", label: "Không vui", color: "hover:bg-blue-105 hover:border-blue-400 border-2" }
                 ].map((item) => {
                   const isSelected = mood === item.emoji;
                   return (
@@ -310,12 +343,20 @@ export default function HomePage() {
                       onClick={(e) => handleMoodSelect(item.emoji, e)}
                       className={`flex flex-col items-center justify-center p-3 rounded-2xl transition-all cursor-pointer ${
                         isSelected 
-                          ? "bg-brand-purple text-white border-3 border-brand-text scale-105 shadow-pixel-sm font-bold" 
+                          ? "bg-brand-purple text-white border-3 border-brand-outline scale-105 shadow-pixel-sm font-bold" 
                           : `bg-brand-bg text-brand-text border-brand-border ${item.color}`
                       }`}
                     >
-                      <span className="text-3xl sm:text-4xl mb-1.5 filter drop-shadow-sm select-none">{item.emoji}</span>
-                      <span className="text-[10px] sm:text-xs font-semibold leading-none">{item.label}</span>
+                      <div className="relative w-10 h-10 mb-1.5 filter drop-shadow-sm select-none shrink-0">
+                        <Image 
+                          src={MOOD_IMAGES[item.emoji]} 
+                          alt={item.label}
+                          fill
+                          sizes="40px"
+                          className="object-contain image-rendering-pixelated"
+                        />
+                      </div>
+                      <span className="text-[10px] sm:text-xs font-semibold leading-none font-pixel">{item.label}</span>
                     </button>
                   );
                 })}
@@ -323,9 +364,9 @@ export default function HomePage() {
 
               {/* Mood advice pop-up bubble */}
               {mood && (
-                <div className="mt-4 p-3 bg-brand-bg border-2 border-brand-text rounded-2xl relative text-xs text-brand-text/90 font-semibold animate-in fade-in slide-in-from-bottom-2 duration-150">
-                  <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-2 w-3 h-3 rotate-45 bg-brand-bg border-l-2 border-t-2 border-brand-text" />
-                  <p className="text-center">
+                <div className="mt-4 p-3 bg-brand-bg border-2 border-brand-outline rounded-2xl relative text-xs text-brand-text/90 font-semibold animate-in fade-in slide-in-from-bottom-2 duration-150">
+                  <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-2 w-3 h-3 rotate-45 bg-brand-bg border-l-2 border-t-2 border-brand-outline" />
+                  <p className="text-center font-pixel text-[11px] leading-relaxed">
                     {mood === "😍" && "Thật tuyệt! Hãy chia sẻ năng lượng hạnh phúc này bằng cách trò chuyện hoặc giúp đỡ mọi người nhé! 💕"}
                     {mood === "🙂" && "Một ngày bình yên thật tốt. Chúc bạn và gia đình có thêm nhiều tiếng cười tối nay! ☕"}
                     {mood === "😐" && "Mọi chuyện vẫn ổn chứ? Thử rủ người thân uống một cốc trà sữa hay tán gẫu xem sao nha! 🍵"}
@@ -343,7 +384,7 @@ export default function HomePage() {
           
           {/* 4. TODAY'S CHALLENGE WIDGET */}
           {todayChallenge && (
-            <section className="bg-brand-card border-3 border-brand-text p-5 rounded-3xl shadow-pixel flex flex-col justify-between">
+            <section className="bg-brand-card border-3 border-brand-outline p-5 rounded-3xl shadow-pixel flex flex-col justify-between">
               <div>
                 <div className="flex items-center justify-between mb-4 border-b-2 border-brand-border pb-3">
                   <h3 className="font-pixel text-lg font-bold flex items-center gap-1.5">
@@ -401,7 +442,7 @@ export default function HomePage() {
           )}
 
           {/* 5. COMMUNITY WIDGET */}
-          <section className="bg-brand-card border-3 border-brand-text p-5 rounded-3xl shadow-pixel">
+          <section className="bg-brand-card border-3 border-brand-outline p-5 rounded-3xl shadow-pixel">
             <div className="flex items-center justify-between mb-4 border-b-2 border-brand-border pb-3">
               <h3 className="font-pixel text-lg font-bold flex items-center gap-1.5">
                 📸 Khoảnh khắc ấm áp
@@ -415,7 +456,7 @@ export default function HomePage() {
               {moments.slice(0, 2).map((m) => (
                 <div key={m.id} className="border-2 border-brand-border p-3 rounded-2xl bg-brand-bg/50 hover:bg-brand-bg transition-colors">
                   <div className="flex items-center gap-2 mb-2">
-                    <div className="relative w-7 h-7 rounded-full border border-brand-text overflow-hidden bg-brand-purple-light shrink-0">
+                    <div className="relative w-7 h-7 rounded-full border border-brand-outline overflow-hidden bg-brand-purple-light shrink-0">
                       <Image
                         src="/pixel_avatar.png"
                         alt={m.author}

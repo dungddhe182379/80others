@@ -55,24 +55,24 @@ export default function CommunityPage() {
     <div className="max-w-xl mx-auto space-y-6 pb-6 relative">
       
       {/* 1. COMMUNITY HERO */}
-      <section className="bg-brand-card border-3 border-brand-text p-6 rounded-3xl shadow-pixel relative overflow-hidden">
+      <section className="bg-brand-card border-3 border-brand-outline p-6 rounded-3xl shadow-pixel relative overflow-hidden">
         <div className="absolute right-0 top-0 bottom-0 w-24 bg-brand-pink/5 pointer-events-none" 
              style={{ clipPath: "circle(50px at right 40px)" }} />
         <h2 className="font-pixel text-2xl font-bold text-brand-text mb-2 flex items-center gap-2">
           🏡 Khoảnh khắc gia đình
         </h2>
-        <p className="text-xs text-brand-text/75 font-semibold leading-relaxed">
+        <p className="text-xs text-brand-text/75 font-semibold leading-relaxed font-pixel">
           Chia sẻ những câu chuyện ấm áp, bức ảnh pixel đáng yêu và những trải nghiệm rút bài kết nối của gia đình bạn.
         </p>
       </section>
 
       {/* 2. TAB SWITCHER */}
-      <div className="grid grid-cols-2 p-1 bg-brand-border/20 border-2 border-brand-text rounded-2xl">
+      <div className="grid grid-cols-2 p-1 bg-brand-border/20 border-2 border-brand-outline rounded-2xl">
         <button
           onClick={() => setActiveTab("moments")}
           className={`py-2 rounded-xl font-pixel font-bold text-xs transition-all cursor-pointer ${
             activeTab === "moments"
-              ? "bg-brand-purple text-white border-2 border-brand-text shadow-pixel-sm"
+              ? "bg-brand-purple text-white border-2 border-brand-outline shadow-pixel-sm"
               : "text-brand-text border-2 border-transparent"
           }`}
         >
@@ -82,7 +82,7 @@ export default function CommunityPage() {
           onClick={() => setActiveTab("discussions")}
           className={`py-2 rounded-xl font-pixel font-bold text-xs transition-all cursor-pointer ${
             activeTab === "discussions"
-              ? "bg-brand-purple text-white border-2 border-brand-text shadow-pixel-sm"
+              ? "bg-brand-purple text-white border-2 border-brand-outline shadow-pixel-sm"
               : "text-brand-text border-2 border-transparent"
           }`}
         >
@@ -94,7 +94,7 @@ export default function CommunityPage() {
       {!showPostingForm ? (
         <button
           onClick={() => setShowPostingForm(true)}
-          className="w-full py-4 border-3 border-dashed border-brand-text rounded-3xl bg-brand-card hover:bg-brand-bg/40 font-pixel font-bold text-sm text-brand-text/70 transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-pixel-sm"
+          className="w-full py-4 border-3 border-dashed border-brand-outline rounded-3xl bg-brand-card hover:bg-brand-bg/40 font-pixel font-bold text-sm text-brand-text/70 transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-pixel-sm"
         >
           <Plus className="w-5 h-5" />
           Viết câu chuyện của gia đình bạn (+20 ❤️)
@@ -102,14 +102,14 @@ export default function CommunityPage() {
       ) : (
         <form 
           onSubmit={handleCreatePost}
-          className="bg-brand-card border-3 border-brand-text p-5 rounded-3xl shadow-pixel space-y-4 animate-in slide-in-from-top-4 duration-200"
+          className="bg-brand-card border-3 border-brand-outline p-5 rounded-3xl shadow-pixel space-y-4 animate-in slide-in-from-top-4 duration-200"
         >
           <div className="flex items-center justify-between border-b border-brand-border pb-2">
             <span className="font-pixel text-xs font-bold text-brand-text">Đăng khoảnh khắc mới</span>
             <button 
               type="button"
               onClick={() => setShowPostingForm(false)}
-              className="text-xs font-bold text-brand-text/50 hover:text-brand-text"
+              className="text-xs font-bold text-brand-text/50 hover:text-brand-text font-pixel"
             >
               Hủy
             </button>
@@ -120,7 +120,7 @@ export default function CommunityPage() {
             onChange={(e) => setNewPostContent(e.target.value)}
             placeholder="Kể lại bữa tối vui vẻ của bạn, hay một câu trả lời làm cả nhà xúc động..."
             maxLength={300}
-            className="w-full min-h-[90px] p-3 border-2 border-brand-border rounded-xl font-cozy text-xs text-brand-text bg-brand-bg/20 focus:outline-none focus:border-brand-text"
+            className="w-full min-h-[90px] p-3 border-2 border-brand-border rounded-xl font-cozy text-xs text-brand-text bg-brand-bg/20 focus:outline-none focus:border-brand-outline"
           />
 
           {/* Preset image attachment choice */}
@@ -149,11 +149,11 @@ export default function CommunityPage() {
           </div>
 
           <div className="flex justify-between items-center border-t border-brand-border pt-3">
-            <span className="text-[10px] text-brand-text/50 font-semibold">Tối đa 300 ký tự</span>
+            <span className="text-[10px] text-brand-text/50 font-semibold font-pixel">Tối đa 300 ký tự</span>
             <button
               type="submit"
               disabled={!newPostContent.trim()}
-              className={`py-2 px-5 font-pixel font-bold text-xs rounded-xl border-3 border-brand-text shadow-pixel flex items-center gap-1.5 cursor-pointer transition-all ${
+              className={`py-2 px-5 font-pixel font-bold text-xs rounded-xl border-3 border-brand-outline shadow-pixel flex items-center gap-1.5 cursor-pointer transition-all ${
                 newPostContent.trim()
                   ? "bg-brand-purple text-white hover:shadow-pixel-hover hover:-translate-y-0.5"
                   : "bg-brand-bg text-brand-text/30 border-brand-border shadow-none pointer-events-none"
@@ -171,12 +171,12 @@ export default function CommunityPage() {
           {moments.map((m) => (
             <article 
               key={m.id}
-              className="bg-brand-card border-3 border-brand-text p-5 rounded-3xl shadow-pixel space-y-4"
+              className="bg-brand-card border-3 border-brand-outline p-5 rounded-3xl shadow-pixel space-y-4"
             >
               {/* Header profile info */}
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <div className="relative w-10 h-10 rounded-full border-2 border-brand-text overflow-hidden bg-brand-purple-light shadow-pixel-sm shrink-0">
+                  <div className="relative w-10 h-10 rounded-full border-2 border-brand-outline overflow-hidden bg-brand-purple-light shadow-pixel-sm shrink-0">
                     <Image
                       src={m.author === "Tôi & Gia đình" ? "/pixel_avatar.png" : "/pixel_avatar.png"}
                       alt={m.author}
@@ -204,7 +204,7 @@ export default function CommunityPage() {
 
               {/* Photo attachment */}
               {m.photoUrl && (
-                <div className="relative h-48 sm:h-60 w-full rounded-2xl border-3 border-brand-text overflow-hidden shadow-pixel-sm bg-brand-bg">
+                <div className="relative h-48 sm:h-60 w-full rounded-2xl border-3 border-brand-outline overflow-hidden shadow-pixel-sm bg-brand-bg">
                   <Image
                     src={m.photoUrl}
                     alt="Bức ảnh khoảnh khắc gia đình"
@@ -268,7 +268,7 @@ export default function CommunityPage() {
           ].map((topic, i) => (
             <div 
               key={i} 
-              className="bg-brand-card border-3 border-brand-text p-4 rounded-3xl shadow-pixel hover:bg-brand-bg/20 transition-colors cursor-pointer flex justify-between items-center"
+              className="bg-brand-card border-3 border-brand-outline p-4 rounded-3xl shadow-pixel hover:bg-brand-bg/20 transition-colors cursor-pointer flex justify-between items-center"
             >
               <div className="space-y-1">
                 <h4 className="font-cozy font-bold text-xs text-brand-text hover:underline leading-snug">

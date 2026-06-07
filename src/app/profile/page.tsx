@@ -64,18 +64,18 @@ export default function ProfilePage() {
     <div className="max-w-xl mx-auto space-y-6 pb-6">
       
       {/* 1. PROFILE PROFILE CARD */}
-      <section className="bg-brand-card border-3 border-brand-text p-5 rounded-3xl shadow-pixel relative overflow-hidden">
+      <section className="bg-brand-card border-3 border-brand-outline p-5 rounded-3xl shadow-pixel relative overflow-hidden">
         {/* Settings button */}
         <button 
           onClick={(e) => handleActionClick("Cài đặt", e)}
-          className="absolute top-4 right-4 p-1.5 border-2 border-brand-text rounded-lg hover:bg-brand-bg transition-colors"
+          className="absolute top-4 right-4 p-1.5 border-2 border-brand-outline rounded-lg hover:bg-brand-bg transition-colors"
         >
           <Settings className="w-4.5 h-4.5 text-brand-text" />
         </button>
 
         <div className="flex flex-col items-center text-center space-y-3">
           {/* Pixel Avatar */}
-          <div className="relative w-24 h-24 rounded-full border-3 border-brand-text overflow-hidden bg-brand-purple-light shadow-pixel">
+          <div className="relative w-24 h-24 rounded-full border-3 border-brand-outline overflow-hidden bg-brand-purple-light shadow-pixel">
             <Image
               src="/pixel_avatar.png"
               alt="Đỗ Duy Dũng Profile"
@@ -90,7 +90,7 @@ export default function ProfilePage() {
             <h2 className="font-pixel text-xl font-bold text-brand-text flex items-center justify-center gap-1.5">
               Đỗ Duy Dũng
             </h2>
-            <span className="inline-block text-xs font-pixel text-brand-purple-light font-bold bg-brand-text px-2.5 py-0.5 rounded-md">
+            <span className="inline-block text-xs font-pixel text-brand-purple-light font-bold bg-brand-outline px-2.5 py-0.5 rounded-md">
               Lv.5
             </span>
           </div>
@@ -101,9 +101,9 @@ export default function ProfilePage() {
               <span className="text-brand-text/50">XP Kinh nghiệm</span>
               <span>620 / 900 XP</span>
             </div>
-            <div className="h-4 bg-brand-bg border-2 border-brand-text rounded-full overflow-hidden p-0.5 shadow-inner">
+            <div className="h-4 bg-brand-bg border-2 border-brand-outline rounded-full overflow-hidden p-0.5 shadow-inner">
               <div
-                className="h-full bg-brand-purple-light rounded-full border border-brand-text"
+                className="h-full bg-brand-purple-light rounded-full border border-brand-outline"
                 style={{ width: "68.8%" }}
               />
             </div>
@@ -128,19 +128,19 @@ export default function ProfilePage() {
       </section>
 
       {/* 2. HUY HIỆU BADGES DISPLAY */}
-      <section className="bg-brand-card border-3 border-brand-text p-5 rounded-3xl shadow-pixel">
+      <section className="bg-brand-card border-3 border-brand-outline p-5 rounded-3xl shadow-pixel">
         <div className="flex items-center justify-between border-b-2 border-brand-border pb-3 mb-4">
           <h3 className="font-pixel text-base font-bold flex items-center gap-1.5">
             🏆 Huy hiệu của bạn
           </h3>
-          <span className="text-[10px] font-bold text-brand-purple hover:underline cursor-pointer">Xem tất cả</span>
+          <span className="text-[10px] font-bold text-brand-purple hover:underline cursor-pointer font-pixel">Xem tất cả</span>
         </div>
 
         <div className="grid grid-cols-2 gap-3">
           {badgeConfig.map((badge, i) => (
             <div 
               key={i}
-              className={`border-2 border-brand-text p-3 rounded-2xl flex items-center gap-2.5 bg-brand-card shadow-pixel-sm ${badge.color}`}
+              className={`border-2 border-brand-outline p-3 rounded-2xl flex items-center gap-2.5 bg-brand-card shadow-pixel-sm ${badge.color}`}
             >
               <span className="text-2xl filter drop-shadow-sm shrink-0 select-none">{badge.emoji}</span>
               <div className="leading-tight">
@@ -153,7 +153,7 @@ export default function ProfilePage() {
       </section>
 
       {/* 3. FUNCTION MENU LIST */}
-      <section className="bg-brand-card border-3 border-brand-text p-3 rounded-3xl shadow-pixel space-y-1">
+      <section className="bg-brand-card border-3 border-brand-outline p-3 rounded-3xl shadow-pixel space-y-1">
         {menuItems.map((item, i) => {
           const Icon = item.icon;
           return (
