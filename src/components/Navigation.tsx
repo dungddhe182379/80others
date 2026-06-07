@@ -88,7 +88,7 @@ const NavigationContent: React.FC<{ children: React.ReactNode }> = ({ children }
         <Link href="/" className="flex items-center gap-3">
           <div className="relative w-10 h-10 border-2 border-brand-outline rounded-lg overflow-hidden bg-brand-bg flex items-center justify-center shadow-pixel-sm">
             <Image
-              src="/logo.jpg"
+              src="/assets/logo.jpg"
               alt="80others logo"
               fill
               className="object-cover"
@@ -146,7 +146,7 @@ const NavigationContent: React.FC<{ children: React.ReactNode }> = ({ children }
           >
             <div className="relative w-9 h-9 rounded-full border-2 border-brand-outline overflow-hidden bg-brand-purple-light shadow-pixel-sm">
               <Image
-                src="/pixel_avatar.png"
+                src="/assets/avatars/avatar.png"
                 alt="Đỗ Duy Dũng avatar"
                 fill
                 sizes="36px"
@@ -173,7 +173,7 @@ const NavigationContent: React.FC<{ children: React.ReactNode }> = ({ children }
         <Link href="/" className="flex items-center gap-2">
           <div className="relative w-8 h-8 border border-brand-outline rounded-md overflow-hidden bg-brand-bg">
             <Image
-              src="/logo.jpg"
+              src="/assets/logo.jpg"
               alt="80others logo"
               fill
               sizes="32px"
@@ -228,7 +228,7 @@ const NavigationContent: React.FC<{ children: React.ReactNode }> = ({ children }
             <div className="flex items-center gap-3 mb-3">
               <div className="relative w-12 h-12 rounded-full border-2 border-brand-outline overflow-hidden bg-brand-purple-light shadow-pixel-sm shrink-0">
                 <Image
-                  src="/pixel_avatar.png"
+                  src="/assets/avatars/avatar.png"
                   alt="Đỗ Duy Dũng avatar"
                   fill
                   sizes="48px"
@@ -289,7 +289,7 @@ const NavigationContent: React.FC<{ children: React.ReactNode }> = ({ children }
                   <div className="flex items-center gap-2">
                     <div className="relative w-8 h-8 border border-brand-outline rounded-md overflow-hidden bg-brand-bg">
                       <Image
-                        src="/logo.jpg"
+                        src="/assets/logo.jpg"
                         alt="80others logo"
                         fill
                         sizes="32px"

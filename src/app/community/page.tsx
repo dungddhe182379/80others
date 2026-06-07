@@ -129,21 +129,21 @@ export default function CommunityPage() {
             <div className="flex gap-3">
               <button
                 type="button"
-                onClick={() => setSelectedImage(selectedImage === "/pixel_family_dinner.png" ? null : "/pixel_family_dinner.png")}
+                onClick={() => setSelectedImage(selectedImage === "/assets/illustrations/family_dinner.png" ? null : "/assets/illustrations/family_dinner.png")}
                 className={`relative w-16 h-12 rounded-lg border-2 overflow-hidden shrink-0 transition-transform ${
-                  selectedImage === "/pixel_family_dinner.png" ? "border-brand-purple scale-105" : "border-brand-border"
+                  selectedImage === "/assets/illustrations/family_dinner.png" ? "border-brand-purple scale-105" : "border-brand-border"
                 }`}
               >
-                <Image src="/pixel_family_dinner.png" alt="Bàn ăn" fill className="object-cover" sizes="64px" />
+                <Image src="/assets/illustrations/family_dinner.png" alt="Bàn ăn" fill className="object-cover" sizes="64px" />
               </button>
               <button
                 type="button"
-                onClick={() => setSelectedImage(selectedImage === "/pixel_cozy_fireplace.png" ? null : "/pixel_cozy_fireplace.png")}
+                onClick={() => setSelectedImage(selectedImage === "/assets/illustrations/cozy_fireplace.png" ? null : "/assets/illustrations/cozy_fireplace.png")}
                 className={`relative w-16 h-12 rounded-lg border-2 overflow-hidden shrink-0 transition-transform ${
-                  selectedImage === "/pixel_cozy_fireplace.png" ? "border-brand-purple scale-105" : "border-brand-border"
+                  selectedImage === "/assets/illustrations/cozy_fireplace.png" ? "border-brand-purple scale-105" : "border-brand-border"
                 }`}
               >
-                <Image src="/pixel_cozy_fireplace.png" alt="Bếp lửa" fill className="object-cover" sizes="64px" />
+                <Image src="/assets/illustrations/cozy_fireplace.png" alt="Bếp lửa" fill className="object-cover" sizes="64px" />
               </button>
             </div>
           </div>
@@ -178,7 +178,7 @@ export default function CommunityPage() {
                 <div className="flex items-center gap-3">
                   <div className="relative w-10 h-10 rounded-full border-2 border-brand-outline overflow-hidden bg-brand-purple-light shadow-pixel-sm shrink-0">
                     <Image
-                      src={m.author === "Tôi & Gia đình" ? "/pixel_avatar.png" : "/pixel_avatar.png"}
+                      src={m.author === "Tôi & Gia đình" ? "/assets/avatars/avatar.png" : "/assets/avatars/avatar.png"}
                       alt={m.author}
                       fill
                       sizes="40px"

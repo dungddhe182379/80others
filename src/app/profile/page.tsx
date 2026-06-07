@@ -77,7 +77,7 @@ export default function ProfilePage() {
           {/* Pixel Avatar */}
           <div className="relative w-24 h-24 rounded-full border-3 border-brand-outline overflow-hidden bg-brand-purple-light shadow-pixel">
             <Image
-              src="/pixel_avatar.png"
+              src="/assets/avatars/avatar.png"
               alt="Đỗ Duy Dũng Profile"
               fill
               sizes="96px"

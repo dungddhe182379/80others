@@ -78,10 +78,10 @@ const CARD_POOL = [
 ];
 
 const MOOD_IMAGES: Record<string, string> = {
-  "😍": "/mood_love.png?v=2",
-  "🙂": "/mood_nice.png?v=2",
-  "😐": "/mood_okay.png?v=2",
-  "😔": "/mood_sad.png?v=2"
+  "😍": "/assets/moods/love.png?v=2",
+  "🙂": "/assets/moods/nice.png?v=2",
+  "😐": "/assets/moods/okay.png?v=2",
+  "😔": "/assets/moods/sad.png?v=2"
 };
 
 export default function HomePage() {
@@ -191,7 +191,7 @@ export default function HomePage() {
         {/* Pixel banner image on the right */}
         <div className="relative w-full md:w-56 h-28 border-2 border-brand-outline rounded-xl overflow-hidden shrink-0 shadow-pixel-sm bg-brand-bg">
           <Image
-            src="/pixel_cozy_banner.png"
+            src="/assets/illustrations/cozy_banner.png"
             alt="Cozy window banner"
             fill
             sizes="224px"
@@ -271,11 +271,11 @@ export default function HomePage() {
                   <div className="relative w-14 h-14 shrink-0 border-2 border-brand-outline rounded-xl bg-brand-bg flex items-center justify-center shadow-pixel-sm">
                     <img
                       src={
-                        currentCard.deck === "WARM" ? "/deck_warm.png?v=2" :
-                          currentCard.deck === "PLAY" ? "/deck_play.png?v=2" :
-                            currentCard.deck === "BOND" ? "/deck_bond.png?v=2" :
-                              currentCard.deck === "HEART" ? "/deck_heart.png?v=2" :
-                                "/deck_safe.png?v=2"
+                        currentCard.deck === "WARM" ? "/assets/decks/warm.png?v=2" :
+                          currentCard.deck === "PLAY" ? "/assets/decks/play.png?v=2" :
+                            currentCard.deck === "BOND" ? "/assets/decks/bond.png?v=2" :
+                              currentCard.deck === "HEART" ? "/assets/decks/heart.png?v=2" :
+                                "/assets/decks/safe.png?v=2"
                       }
                       alt={currentCard.deck}
                       className="w-full h-full object-contain p-1 image-rendering-pixelated"
@@ -315,7 +315,7 @@ export default function HomePage() {
             <h3 className="font-pixel text-lg font-bold mb-1 flex items-center gap-2 border-b-2 border-brand-border pb-3">
               <div className="relative w-6 h-6 shrink-0">
                 <img
-                  src="/mood_nice.png?v=2"
+                  src="/assets/moods/nice.png?v=2"
                   alt="Smile Face"
                   className="w-full h-full object-contain image-rendering-pixelated"
                 />
@@ -450,7 +450,7 @@ export default function HomePage() {
                   <div className="flex items-center gap-2 mb-2">
                     <div className="relative w-7 h-7 rounded-full border border-brand-outline overflow-hidden bg-brand-purple-light shrink-0">
                       <Image
-                        src="/pixel_avatar.png"
+                        src="/assets/avatars/avatar.png"
                         alt={m.author}
                         fill
                         sizes="28px"

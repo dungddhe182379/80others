@@ -31,8 +31,8 @@ export default function RootLayout({
   return (
     <html lang="vi" className="h-full">
       <head>
-        <link rel="icon" href="/logo.jpg" />
-        <link rel="apple-touch-icon" href="/logo.jpg" />
+        <link rel="icon" href="/assets/logo.jpg" />
+        <link rel="apple-touch-icon" href="/assets/logo.jpg" />
       </head>
       <body className="min-h-full flex flex-col bg-brand-bg antialiased">
         <AppProvider>
