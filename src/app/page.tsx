@@ -87,7 +87,8 @@ export default function HomePage() {
     completedCardIds
   } = useApp();
 
-  const [greeting, setGreeting] = useState("Chào buổi tối! 🌙");
+  const [greetingText, setGreetingText] = useState("Chào buổi tối!");
+  const [greetingIcon, setGreetingIcon] = useState("hn-moon-solid");
   const [currentCard, setCurrentCard] = useState(CARD_POOL[0]);
   const [isFlipped, setIsFlipped] = useState(false);
   const [drawCount, setDrawCount] = useState(0);
@@ -96,11 +97,14 @@ export default function HomePage() {
   useEffect(() => {
     const hours = new Date().getHours();
     if (hours >= 5 && hours < 12) {
-      setGreeting("Chào buổi sáng! ☀️");
+      setGreetingText("Chào buổi sáng!");
+      setGreetingIcon("hn-sun-solid");
     } else if (hours >= 12 && hours < 18) {
-      setGreeting("Chào buổi chiều! 🌤️");
+      setGreetingText("Chào buổi chiều!");
+      setGreetingIcon("hn-sun-solid");
     } else {
-      setGreeting("Chào buổi tối! 🌙");
+      setGreetingText("Chào buổi tối!");
+      setGreetingIcon("hn-moon-solid");
     }
   }, []);
 
@@ -165,14 +169,15 @@ export default function HomePage() {
       <section className="bg-brand-card border-3 border-brand-outline p-6 rounded-3xl shadow-pixel relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-6">
         <div className="space-y-3 flex-grow">
           <h2 className="font-pixel text-2xl md:text-3xl font-bold text-brand-text flex items-center gap-2">
-            {greeting}
+            <i className={`hn ${greetingIcon} text-brand-yellow text-[22px]`} />
+            {greetingText}
           </h2>
           <p className="text-brand-text/80 text-xs md:text-sm font-semibold">
             Cùng 80others kết nối yêu thương và vun đắp tình cảm gia đình mỗi ngày.
           </p>
           {/* Decorative elements */}
           <div className="flex items-center gap-2 bg-brand-bg border-2 border-brand-border px-3 py-1.5 rounded-2xl w-fit shadow-pixel-sm">
-            <span className="animate-pulse text-sm">💡</span>
+            <i className="hn hn-lightbulb-solid text-brand-yellow text-[14px] animate-pulse" />
             <span className="text-[10px] font-bold text-brand-text/80">Mẹo: Hãy bắt đầu bằng các thẻ WARM để khởi động!</span>
           </div>
         </div>
@@ -219,7 +224,8 @@ export default function HomePage() {
           <section className="bg-brand-card border-3 border-brand-outline p-5 rounded-3xl shadow-pixel">
             <div className="flex items-center justify-between mb-4 border-b-2 border-brand-border pb-3">
               <h3 className="font-pixel text-lg font-bold flex items-center gap-2">
-                🃏 Thẻ hôm nay
+                <i className="hn hn-shapes-solid text-brand-purple text-[18px]" />
+                Thẻ hôm nay
               </h3>
               <span className="text-xs font-semibold text-brand-text/50 font-pixel">
                 Đã mở: {completedCardIds.length} / 100 thẻ
@@ -293,7 +299,7 @@ export default function HomePage() {
                   className="w-full py-3.5 px-6 bg-brand-purple text-white font-pixel font-bold rounded-2xl border-3 border-brand-outline shadow-pixel hover:shadow-pixel-hover hover:-translate-y-0.5 active:translate-y-0 transition-all flex items-center justify-center gap-2 text-sm sm:text-base cursor-pointer"
                 >
                   <i className={`hn hn-refresh text-[18px] ${isFlipped ? "animate-spin" : ""}`} />
-                  Rút thẻ khác (+30 ❤️)
+                  Rút thẻ khác (+30 <i className="hn hn-heart-solid text-[14px] text-brand-pink" />)
                 </button>
               </div>
             </div>
@@ -369,7 +375,8 @@ export default function HomePage() {
               <div>
                 <div className="flex items-center justify-between mb-4 border-b-2 border-brand-border pb-3">
                   <h3 className="font-pixel text-lg font-bold flex items-center gap-1.5">
-                    📅 Thử thách hôm nay
+                    <i className="hn hn-calender-solid text-brand-yellow text-[18px]" />
+                    Thử thách hôm nay
                   </h3>
                   <Link href="/challenges" className="text-[10px] font-bold text-brand-purple hover:underline flex items-center">
                     Xem tất cả <i className="hn hn-angle-right-solid text-[10px] ml-0.5" />
@@ -408,7 +415,7 @@ export default function HomePage() {
               {todayChallenge.completed ? (
                 <div className="challenge-done w-full py-2.5 font-bold border-2 rounded-2xl flex items-center justify-center gap-1.5 text-xs">
                   <i className="hn hn-check-circle-solid text-[16px]" />
-                  Đã hoàn thành! (+{todayChallenge.points} ❤️)
+                  Đã hoàn thành! (+{todayChallenge.points} <i className="hn hn-heart-solid text-[14px]" />)
                 </div>
               ) : (
                 <button
@@ -416,7 +423,7 @@ export default function HomePage() {
                   className="w-full py-3 bg-brand-yellow text-brand-text font-pixel font-bold rounded-2xl border-3 border-brand-text shadow-pixel hover:shadow-pixel-hover hover:-translate-y-0.5 active:translate-y-0 transition-all text-xs flex items-center justify-center gap-1.5 cursor-pointer"
                 >
                   <i className="hn hn-check-circle-solid text-[16px]" />
-                  Hoàn thành thử thách (+{todayChallenge.points} ❤️)
+                  Hoàn thành thử thách (+{todayChallenge.points} <i className="hn hn-heart-solid text-[14px]" />)
                 </button>
               )}
             </section>
@@ -426,7 +433,8 @@ export default function HomePage() {
           <section className="bg-brand-card border-3 border-brand-outline p-5 rounded-3xl shadow-pixel">
             <div className="flex items-center justify-between mb-4 border-b-2 border-brand-border pb-3">
               <h3 className="font-pixel text-lg font-bold flex items-center gap-1.5">
-                📸 Khoảnh khắc ấm áp
+                <i className="hn hn-retro-camera-solid text-brand-purple-light text-[18px]" />
+                Khoảnh khắc ấm áp
               </h3>
               <Link href="/community" className="text-[10px] font-bold text-brand-purple hover:underline flex items-center">
                 Xem tất cả <i className="hn hn-angle-right-solid text-[10px] ml-0.5" />

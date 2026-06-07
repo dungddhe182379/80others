@@ -17,25 +17,29 @@ export default function ProfilePage() {
 
   const badgeConfig = [
     {
-      emoji: "🔥",
+      icon: "hn-fire-solid",
+      iconColor: "text-orange-500",
       name: "Khởi đầu",
       desc: "Chơi liên tiếp 1 ngày",
       color: "badge-orange"
     },
     {
-      emoji: "💜",
+      icon: "hn-bolt-solid",
+      iconColor: "text-brand-purple",
       name: "Kết nối đầu",
       desc: "Hoàn thành 5 thẻ WARM",
       color: "badge-purple"
     },
     {
-      emoji: "💌",
+      icon: "hn-heart-solid",
+      iconColor: "text-brand-pink",
       name: "Trái tim ấm",
       desc: "Hoàn thành 5 thẻ HEART",
       color: "badge-pink"
     },
     {
-      emoji: "🏡",
+      icon: "hn-home-solid",
+      iconColor: "text-amber-500",
       name: "Gắn kết",
       desc: "Hoàn thành 3 thử thách ngày",
       color: "badge-yellow"
@@ -119,7 +123,8 @@ export default function ProfilePage() {
       <section className="bg-brand-card border-3 border-brand-outline p-5 rounded-3xl shadow-pixel">
         <div className="flex items-center justify-between border-b-2 border-brand-border pb-3 mb-4">
           <h3 className="font-pixel text-base font-bold flex items-center gap-1.5">
-            🏆 Huy hiệu của bạn
+            <i className="hn hn-trophy-solid text-brand-yellow text-[16px]" />
+            Huy hiệu của bạn
           </h3>
           <span className="text-[10px] font-bold text-brand-purple hover:underline cursor-pointer font-pixel">Xem tất cả</span>
         </div>
@@ -128,9 +133,9 @@ export default function ProfilePage() {
           {badgeConfig.map((badge, i) => (
             <div 
               key={i}
-              className={`border-2 border-brand-outline p-3 rounded-2xl flex items-center gap-2.5 bg-brand-card shadow-pixel-sm ${badge.color}`}
+              className={`border-2 border-brand-outline p-3 rounded-2xl flex items-center gap-2.5 shadow-pixel-sm ${badge.color}`}
             >
-              <span className="text-2xl filter drop-shadow-sm shrink-0 select-none">{badge.emoji}</span>
+              <i className={`hn ${badge.icon} text-[24px] ${badge.iconColor} shrink-0`} />
               <div className="leading-tight">
                 <h4 className="font-pixel text-xs font-bold text-brand-text">{badge.name}</h4>
                 <p className="text-[9px] text-brand-text/60 font-semibold">{badge.desc}</p>

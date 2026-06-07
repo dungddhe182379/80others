@@ -81,7 +81,7 @@ const NavigationContent: React.FC<{ children: React.ReactNode }> = ({ children }
             />
           </div>
           <span className="font-pixel text-2xl font-bold tracking-tight text-brand-text flex items-center gap-1">
-            80others<span className="text-brand-pink text-xs animate-bounce">✨</span>
+            80others<i className="hn hn-sparkles-solid text-brand-pink text-xs animate-bounce" />
           </span>
         </Link>
 
@@ -318,7 +318,9 @@ const NavigationContent: React.FC<{ children: React.ReactNode }> = ({ children }
               {/* Mobile Drawer Footer */}
               <div className="border-t-2 border-brand-border pt-4 text-center">
                 <span className="font-pixel text-[11px] text-brand-text block">80others</span>
-                <span className="text-[9px] text-brand-text/60 font-pixel block">Kết nối gia đình, vun đắp yêu thương ❤️</span>
+                <span className="text-[9px] text-brand-text/60 font-pixel block flex items-center justify-center gap-1">
+                  Kết nối gia đình, vun đắp yêu thương <i className="hn hn-heart-solid text-brand-pink text-[9px]" />
+                </span>
                 <span className="text-[8px] text-brand-text/40 font-mono block mt-2">Phiên bản 1.0.0</span>
               </div>
             </div>

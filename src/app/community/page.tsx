@@ -49,7 +49,8 @@ export default function CommunityPage() {
         <div className="absolute right-0 top-0 bottom-0 w-24 bg-brand-pink/5 pointer-events-none" 
              style={{ clipPath: "circle(50px at right 40px)" }} />
         <h2 className="font-pixel text-2xl font-bold text-brand-text mb-2 flex items-center gap-2">
-          🏡 Khoảnh khắc gia đình
+          <i className="hn hn-home-solid text-brand-pink text-[22px]" />
+          Khoảnh khắc gia đình
         </h2>
         <p className="text-xs text-brand-text/75 font-semibold leading-relaxed font-pixel">
           Chia sẻ những câu chuyện ấm áp, bức ảnh pixel đáng yêu và những trải nghiệm rút bài kết nối của gia đình bạn.
@@ -87,7 +88,7 @@ export default function CommunityPage() {
           className="w-full py-4 border-3 border-dashed border-brand-outline rounded-3xl bg-brand-card hover:bg-brand-bg/40 font-pixel font-bold text-sm text-brand-text/70 transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-pixel-sm"
         >
           <i className="hn hn-plus-solid text-[20px]" />
-          Viết câu chuyện của gia đình bạn (+20 ❤️)
+          Viết câu chuyện của gia đình bạn (+20 <i className="hn hn-heart-solid text-[14px] text-brand-pink" />)
         </button>
       ) : (
         <form 
@@ -261,8 +262,9 @@ export default function CommunityPage() {
               className="bg-brand-card border-3 border-brand-outline p-4 rounded-3xl shadow-pixel hover:bg-brand-bg/20 transition-colors cursor-pointer flex justify-between items-center"
             >
               <div className="space-y-1">
-                <h4 className="font-cozy font-bold text-xs text-brand-text hover:underline leading-snug">
-                  💬 {topic.title}
+                <h4 className="font-cozy font-bold text-xs text-brand-text hover:underline leading-snug flex items-center gap-1.5">
+                  <i className="hn hn-comment-solid text-[12px] text-brand-purple shrink-0" />
+                  {topic.title}
                 </h4>
                 <p className="text-[10px] text-brand-text/60 font-semibold">
                   Đăng bởi {topic.author} • {topic.replies} phản hồi • {topic.views} lượt xem

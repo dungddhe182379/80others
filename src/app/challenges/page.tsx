@@ -32,8 +32,8 @@ export default function ChallengesPage() {
       {/* 1. CHALLENGE HERO */}
       <section className="bg-brand-card border-3 border-brand-outline p-6 rounded-3xl shadow-pixel text-center space-y-3 relative overflow-hidden">
         {/* Background sparkles */}
-        <div className="absolute top-2 right-4 text-xl animate-bounce">✨</div>
-        <div className="absolute bottom-4 left-6 text-lg animate-bounce" style={{ animationDelay: '1s' }}>💖</div>
+        <i className="absolute top-2 right-4 hn hn-sparkles-solid text-brand-yellow text-xl animate-bounce" />
+        <i className="absolute bottom-4 left-6 hn hn-heart-solid text-brand-pink text-lg animate-bounce" style={{ animationDelay: '1s' }} />
         
         <div className="w-16 h-16 rounded-full border-3 border-brand-outline bg-brand-yellow flex items-center justify-center mx-auto shadow-pixel-sm">
           <i className="hn hn-trophy-solid text-2xl text-brand-text" />
@@ -94,7 +94,7 @@ export default function ChallengesPage() {
                   
                   {/* Reward Badge */}
                   <span className="shrink-0 font-pixel text-[10px] font-bold text-brand-pink border-2 border-brand-pink bg-pink-50/50 px-2 py-0.5 rounded-lg flex items-center gap-1 select-none">
-                    ❤️ +{ch.points}
+                    <i className="hn hn-heart-solid text-[10px] text-brand-pink" /> +{ch.points}
                   </span>
                 </div>
 

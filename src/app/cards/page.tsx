@@ -519,7 +519,7 @@ function CardsPageContent() {
                     className="py-3 px-4 bg-brand-pink text-white font-pixel font-bold rounded-2xl border-3 border-brand-outline shadow-pixel hover:shadow-pixel-hover hover:-translate-y-0.5 active:translate-y-0 transition-all text-xs flex items-center justify-center gap-1 cursor-pointer"
                   >
                     <i className="hn hn-check-circle-solid text-[14px]" />
-                    Hoàn thành (+30 ❤️)
+                    Hoàn thành (+30 <i className="hn hn-heart-solid text-[14px]" />)
                   </button>
                 )}
               </div>
