@@ -78,10 +78,10 @@ const CARD_POOL = [
 ];
 
 const MOOD_IMAGES: Record<string, string> = {
-  "😍": "/mood_love.png",
-  "🙂": "/mood_nice.png",
-  "😐": "/mood_okay.png",
-  "😔": "/mood_sad.png"
+  "😍": "/mood_love.png?v=2",
+  "🙂": "/mood_nice.png?v=2",
+  "😐": "/mood_okay.png?v=2",
+  "😔": "/mood_sad.png?v=2"
 };
 
 export default function HomePage() {
@@ -121,11 +121,11 @@ export default function HomePage() {
     triggerHeart(rect.left + rect.width / 2, rect.top, 3);
 
     setIsFlipped(true);
-    
+
     // Select a random card distinct from current
     const index = Math.floor(Math.random() * CARD_POOL.length);
     const selected = CARD_POOL[index];
-    
+
     // Trigger confetti on drawing a new card for additional reward feedback
     setTimeout(() => {
       setCurrentCard(selected);
@@ -146,7 +146,7 @@ export default function HomePage() {
     const rect = e.currentTarget.getBoundingClientRect();
     // Burst of hearts!
     triggerHeart(rect.left + rect.width / 2, rect.top, 5);
-    
+
     // Confetti effect!
     confetti({
       particleCount: 80,
@@ -171,7 +171,7 @@ export default function HomePage() {
 
   return (
     <div className="max-w-4xl mx-auto space-y-6 pb-6">
-      
+
       {/* 1. WELCOME BANNER */}
       <section className="bg-brand-card border-3 border-brand-outline p-6 rounded-3xl shadow-pixel relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-6">
         <div className="space-y-3 flex-grow">
@@ -187,13 +187,13 @@ export default function HomePage() {
             <span className="text-[10px] font-bold text-brand-text/80">Mẹo: Hãy bắt đầu bằng các thẻ WARM để khởi động!</span>
           </div>
         </div>
-        
+
         {/* Pixel banner image on the right */}
         <div className="relative w-full md:w-56 h-28 border-2 border-brand-outline rounded-xl overflow-hidden shrink-0 shadow-pixel-sm bg-brand-bg">
-          <Image 
-            src="/pixel_cozy_banner.png" 
-            alt="Cozy window banner" 
-            fill 
+          <Image
+            src="/pixel_cozy_banner.png"
+            alt="Cozy window banner"
+            fill
             sizes="224px"
             className="object-cover image-rendering-pixelated"
           />
@@ -207,7 +207,7 @@ export default function HomePage() {
           <Flame className="w-8 h-8 text-orange-500 fill-orange-500 shrink-0" />
           <div className="leading-tight">
             <span className="font-pixel text-lg font-bold block">{streak} ngày</span>
-            <span className="text-[10px] text-brand-text/70 font-semibold font-cozy">Chuỗi gia đình 🔥</span>
+            <span className="text-[10px] text-brand-text/70 font-semibold font-cozy">Chuỗi gia đình</span>
           </div>
         </div>
 
@@ -216,16 +216,16 @@ export default function HomePage() {
           <Heart className="w-8 h-8 text-brand-pink fill-brand-pink shrink-0" />
           <div className="leading-tight">
             <span className="font-pixel text-lg font-bold block">{points}</span>
-            <span className="text-[10px] text-brand-text/70 font-semibold font-cozy">Điểm kết nối ❤️</span>
+            <span className="text-[10px] text-brand-text/70 font-semibold font-cozy">Điểm kết nối</span>
           </div>
         </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        
+
         {/* LEFT COLUMN: DRAW CARD (SPANS 2 COLUMNS) */}
         <div className="md:col-span-2 space-y-6">
-          
+
           {/* 2. TODAY'S CARD WIDGET */}
           <section className="bg-brand-card border-3 border-brand-outline p-5 rounded-3xl shadow-pixel">
             <div className="flex items-center justify-between mb-4 border-b-2 border-brand-border pb-3">
@@ -238,19 +238,18 @@ export default function HomePage() {
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-12 gap-5 items-center">
-              
+
               {/* Card visual representation */}
               <div className="sm:col-span-5 flex justify-center py-4">
-                <div 
-                  className={`relative w-44 h-60 rounded-2xl border-3 border-brand-outline bg-brand-purple p-3 flex flex-col justify-between shadow-pixel-lg text-white select-none transition-transform duration-300 ${
-                    isFlipped ? "rotate-y-180 scale-95" : "hover:-translate-y-2 hover:scale-[1.02]"
-                  }`}
+                <div
+                  className={`relative w-44 h-60 rounded-2xl border-3 border-brand-outline bg-brand-purple p-3 flex flex-col justify-between shadow-pixel-lg text-white select-none transition-transform duration-300 ${isFlipped ? "rotate-y-180 scale-95" : "hover:-translate-y-2 hover:scale-[1.02]"
+                    }`}
                 >
                   <div className="flex justify-between items-center">
                     <span className="font-pixel text-xs font-bold bg-white/20 px-2 py-0.5 rounded">80others</span>
                     <Sparkles className="w-4 h-4 text-brand-yellow fill-brand-yellow animate-spin" style={{ animationDuration: '5s' }} />
                   </div>
-                  
+
                   {/* Heart graphic in the middle */}
                   <div className="flex flex-col items-center justify-center py-8">
                     <div className="w-16 h-16 rounded-full bg-white/10 flex items-center justify-center border-2 border-white/20 mb-2 relative animate-float">
@@ -270,29 +269,27 @@ export default function HomePage() {
               <div className="sm:col-span-7 space-y-4">
                 <div className={`p-4 border-3 border-brand-outline rounded-2xl bg-brand-card shadow-pixel-sm transition-opacity duration-300 ${isFlipped ? "opacity-30" : "opacity-100"} flex gap-4 items-start`}>
                   <div className="relative w-14 h-14 shrink-0 border-2 border-brand-outline rounded-xl bg-brand-bg flex items-center justify-center shadow-pixel-sm">
-                    <Image
+                    <img
                       src={
-                        currentCard.deck === "WARM" ? "/deck_warm.png" :
-                        currentCard.deck === "PLAY" ? "/deck_play.png" :
-                        currentCard.deck === "BOND" ? "/deck_bond.png" :
-                        currentCard.deck === "HEART" ? "/deck_heart.png" :
-                        "/deck_safe.png"
+                        currentCard.deck === "WARM" ? "/deck_warm.png?v=2" :
+                          currentCard.deck === "PLAY" ? "/deck_play.png?v=2" :
+                            currentCard.deck === "BOND" ? "/deck_bond.png?v=2" :
+                              currentCard.deck === "HEART" ? "/deck_heart.png?v=2" :
+                                "/deck_safe.png?v=2"
                       }
                       alt={currentCard.deck}
-                      fill
-                      sizes="56px"
-                      className="object-contain p-1 image-rendering-pixelated"
+                      className="w-full h-full object-contain p-1 image-rendering-pixelated"
                     />
                   </div>
                   <div className="space-y-1.5 flex-grow">
                     <span className={`inline-block px-2.5 py-0.5 rounded-full border-2 text-[10px] font-bold mb-1 ${currentCard.color}`}>
                       {currentCard.deckTitle}
                     </span>
-                    
+
                     <h4 className="font-cozy font-bold text-sm md:text-base text-brand-text leading-snug">
                       {currentCard.question}
                     </h4>
-                    
+
                     <div className="space-y-1.5 border-t border-brand-border pt-2 text-xs text-brand-text/70">
                       <p className="flex items-center gap-1.5 font-semibold font-pixel">
                         <Heart className="w-3.5 h-3.5 text-brand-pink fill-brand-pink" />
@@ -317,17 +314,15 @@ export default function HomePage() {
           <section className="bg-brand-card border-3 border-brand-outline p-5 rounded-3xl shadow-pixel">
             <h3 className="font-pixel text-lg font-bold mb-1 flex items-center gap-2 border-b-2 border-brand-border pb-3">
               <div className="relative w-6 h-6 shrink-0">
-                <Image 
-                  src="/mood_nice.png" 
-                  alt="Smile Face" 
-                  fill
-                  sizes="24px"
-                  className="object-contain image-rendering-pixelated"
+                <img
+                  src="/mood_nice.png?v=2"
+                  alt="Smile Face"
+                  className="w-full h-full object-contain image-rendering-pixelated"
                 />
               </div>
               Hôm nay bạn cảm thấy thế nào?
             </h3>
-            
+
             <div className="py-3">
               <div className="grid grid-cols-4 gap-2 sm:gap-4 max-w-md mx-auto">
                 {[
@@ -341,19 +336,16 @@ export default function HomePage() {
                     <button
                       key={item.emoji}
                       onClick={(e) => handleMoodSelect(item.emoji, e)}
-                      className={`flex flex-col items-center justify-center p-3 rounded-2xl transition-all cursor-pointer ${
-                        isSelected 
-                          ? "bg-brand-purple text-white border-3 border-brand-outline scale-105 shadow-pixel-sm font-bold" 
-                          : `bg-brand-bg text-brand-text border-brand-border ${item.color}`
-                      }`}
+                      className={`flex flex-col items-center justify-center p-3 rounded-2xl transition-all cursor-pointer ${isSelected
+                        ? "bg-brand-purple text-white border-3 border-brand-outline scale-105 shadow-pixel-sm font-bold"
+                        : `bg-brand-bg text-brand-text border-brand-border ${item.color}`
+                        }`}
                     >
                       <div className="relative w-10 h-10 mb-1.5 filter drop-shadow-sm select-none shrink-0">
-                        <Image 
-                          src={MOOD_IMAGES[item.emoji]} 
+                        <img
+                          src={MOOD_IMAGES[item.emoji]}
                           alt={item.label}
-                          fill
-                          sizes="40px"
-                          className="object-contain image-rendering-pixelated"
+                          className="w-full h-full object-contain image-rendering-pixelated"
                         />
                       </div>
                       <span className="text-[10px] sm:text-xs font-semibold leading-none font-pixel">{item.label}</span>
@@ -381,7 +373,7 @@ export default function HomePage() {
 
         {/* RIGHT COLUMN: SIDE CHALENGES & FEED */}
         <div className="space-y-6">
-          
+
           {/* 4. TODAY'S CHALLENGE WIDGET */}
           {todayChallenge && (
             <section className="bg-brand-card border-3 border-brand-outline p-5 rounded-3xl shadow-pixel flex flex-col justify-between">
@@ -400,14 +392,14 @@ export default function HomePage() {
                   <div className="absolute right-2 bottom-2 w-14 h-14 opacity-20 bg-brand-purple rounded-full flex items-center justify-center">
                     <Gift className="w-8 h-8 text-brand-text" />
                   </div>
-                  
+
                   <h4 className="font-cozy font-bold text-brand-text leading-tight mb-1 text-sm md:text-base">
                     {todayChallenge.title}
                   </h4>
                   <p className="text-xs text-brand-text/70 mb-4 font-medium">
                     {todayChallenge.description}
                   </p>
-                  
+
                   {/* Progress bar */}
                   <div>
                     <div className="flex justify-between text-[10px] font-bold mb-1">
@@ -415,7 +407,7 @@ export default function HomePage() {
                       <span>{todayChallenge.progress} / {todayChallenge.maxProgress}</span>
                     </div>
                     <div className="h-3 bg-brand-bg border border-brand-text rounded-full overflow-hidden p-0.5 shadow-inner">
-                      <div 
+                      <div
                         className="h-full bg-brand-purple-light rounded-full transition-all duration-300"
                         style={{ width: `${(todayChallenge.progress / todayChallenge.maxProgress) * 100}%` }}
                       />
@@ -473,7 +465,7 @@ export default function HomePage() {
                   <p className="text-[11px] text-brand-text/80 font-medium leading-relaxed mb-2 line-clamp-2">
                     {m.content}
                   </p>
-                  
+
                   {/* Photo thumbnail if exists */}
                   {m.photoUrl && (
                     <div className="relative h-24 w-full rounded-xl border border-brand-border overflow-hidden mb-2">
@@ -489,10 +481,10 @@ export default function HomePage() {
 
                   {/* Quick interact bar */}
                   <div className="flex gap-4 text-[10px] font-bold mt-1 border-t border-brand-border/40 pt-2">
-                    <button 
+                    <button
                       onClick={(e) => {
                         const rect = e.currentTarget.getBoundingClientRect();
-                        triggerHeart(rect.left + rect.width/2, rect.top, 2);
+                        triggerHeart(rect.left + rect.width / 2, rect.top, 2);
                         likeMoment(m.id);
                       }}
                       className={`flex items-center gap-1 ${m.likedByUser ? "text-brand-pink" : "text-brand-text/70"} hover:scale-105 active:scale-95 transition-transform`}

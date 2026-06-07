@@ -376,12 +376,10 @@ function CardsPageContent() {
                 {/* Header of the deck box */}
                 <div className="flex justify-between items-start">
                   <div className="relative w-12 h-12 rounded-2xl border-2 border-brand-outline bg-brand-bg flex items-center justify-center shadow-pixel-sm overflow-hidden shrink-0">
-                    <Image
-                      src={deck.image}
+                    <img
+                      src={`${deck.image}?v=2`}
                       alt={deck.title}
-                      fill
-                      sizes="48px"
-                      className="object-contain p-1.5 image-rendering-pixelated"
+                      className="w-full h-full object-contain p-1.5 image-rendering-pixelated"
                     />
                   </div>
                   <span className="font-pixel text-[10px] font-bold bg-brand-outline text-white px-2 py-0.5 rounded-md">
@@ -462,12 +460,10 @@ function CardsPageContent() {
 
                     <div className="flex flex-col items-center text-center justify-center flex-grow py-4 gap-2">
                       <div className="relative w-16 h-16 shrink-0 border-2 border-brand-outline rounded-xl bg-brand-bg flex items-center justify-center shadow-pixel-sm mb-1">
-                        <Image
-                          src={activeDeck.image}
+                        <img
+                          src={`${activeDeck.image}?v=2`}
                           alt={activeDeck.title}
-                          fill
-                          sizes="64px"
-                          className="object-contain p-1.5 image-rendering-pixelated"
+                          className="w-full h-full object-contain p-1.5 image-rendering-pixelated"
                         />
                       </div>
                       <h4 className="font-cozy font-bold text-sm md:text-base leading-relaxed text-brand-text px-1">

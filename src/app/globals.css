@@ -10,21 +10,21 @@
 }
 
 :root {
-  --color-bg: #F8F5FF;
-  --color-card: #FFFFFF;
-  --color-border: #E9D5FF;
-  --color-text: #2E1065;
-  --color-shadow: #2E1065;
-  --color-outline: #2E1065;
+  --color-brand-bg: #FAF8F5;
+  --color-brand-card: #FFFFFF;
+  --color-brand-border: #F0EDE6;
+  --color-brand-text: #2B1D1D;
+  --color-brand-outline: #2B1D1D;
+  --color-brand-shadow: #2B1D1D;
 }
 
 body.dark {
-  --color-bg: #2E2232;
-  --color-card: #3C2F40;
-  --color-border: #4D3C52;
-  --color-text: #F3E8FF;
-  --color-shadow: #1E1322;
-  --color-outline: #1E1322;
+  --color-brand-bg: #1C1321;
+  --color-brand-card: #2A1E2F;
+  --color-brand-border: #382A3F;
+  --color-brand-text: #F5ECFF;
+  --color-brand-outline: #0F0914;
+  --color-brand-shadow: #0F0914;
 }
 
 @theme {
@@ -32,19 +32,19 @@ body.dark {
   --color-brand-purple-light: #C084FC;
   --color-brand-pink: #F472B6;
   --color-brand-yellow: #FBBF24;
-  --color-brand-bg: var(--color-bg);
-  --color-brand-card: var(--color-card);
-  --color-brand-border: var(--color-border);
-  --color-brand-text: var(--color-text);
-  --color-brand-outline: var(--color-outline);
+  --color-brand-bg: var(--color-brand-bg);
+  --color-brand-card: var(--color-brand-card);
+  --color-brand-border: var(--color-brand-border);
+  --color-brand-text: var(--color-brand-text);
+  --color-brand-outline: var(--color-brand-outline);
   
   --font-pixel: "dearpix", monospace, sans-serif;
   --font-cozy: "Be Vietnam Pro", sans-serif;
   
-  --shadow-pixel: 4px 4px 0px 0px var(--color-shadow);
-  --shadow-pixel-hover: 6px 6px 0px 0px var(--color-shadow);
-  --shadow-pixel-sm: 2px 2px 0px 0px var(--color-shadow);
-  --shadow-pixel-lg: 8px 8px 0px 0px var(--color-shadow);
+  --shadow-pixel: 4px 4px 0px 0px var(--color-brand-shadow);
+  --shadow-pixel-hover: 6px 6px 0px 0px var(--color-brand-shadow);
+  --shadow-pixel-sm: 2px 2px 0px 0px var(--color-brand-shadow);
+  --shadow-pixel-lg: 8px 8px 0px 0px var(--color-brand-shadow);
   --shadow-pixel-color-purple: 4px 4px 0px 0px #C084FC;
   --shadow-pixel-color-yellow: 4px 4px 0px 0px #FBBF24;
   --shadow-pixel-color-pink: 4px 4px 0px 0px #F472B6;
@@ -102,20 +102,20 @@ body.dark {
   width: 10px;
 }
 ::-webkit-scrollbar-track {
-  background: #F8F5FF;
+  background: var(--color-brand-bg);
 }
 ::-webkit-scrollbar-thumb {
-  background: #E9D5FF;
-  border: 2px solid #2E1065;
+  background: var(--color-brand-border);
+  border: 2px solid var(--color-brand-outline);
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #C084FC;
+  background: var(--color-brand-purple-light);
 }
 
 body {
-  background-color: var(--color-bg);
-  color: var(--color-text);
+  background-color: var(--color-brand-bg);
+  color: var(--color-brand-text);
   font-family: var(--font-cozy);
   min-height: 100vh;
   transition: background-color 0.35s ease, color 0.35s ease, border-color 0.35s ease;
@@ -124,7 +124,7 @@ body {
 /* Pixel art corners style */
 .pixel-box {
   image-rendering: pixelated;
-  border: 3px solid var(--color-outline);
+  border: 3px solid var(--color-brand-outline);
   box-shadow: var(--shadow-pixel);
   transition: all 0.2s ease, border-color 0.35s ease, background-color 0.35s ease;
 }
@@ -141,7 +141,7 @@ body {
 
 .pixel-btn {
   font-family: var(--font-pixel);
-  border: 3px solid var(--color-outline);
+  border: 3px solid var(--color-brand-outline);
   box-shadow: var(--shadow-pixel);
   cursor: pointer;
   transition: all 0.15s ease, border-color 0.35s ease, background-color 0.35s ease;
