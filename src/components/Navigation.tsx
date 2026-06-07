@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, Suspense } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { useApp } from "@/context/AppContext";
 import {
   Home,
@@ -23,13 +23,23 @@ import {
 } from "lucide-react";
 
 export const Navigation: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-brand-bg flex items-center justify-center font-pixel text-brand-text">Đang tải...</div>}>
+      <NavigationContent>{children}</NavigationContent>
+    </Suspense>
+  );
+};
+
+const NavigationContent: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const tab = searchParams.get("tab");
   const { points, streak, completedCount } = useApp();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const navItems = [
     { name: "Trang chủ", href: "/", icon: Home },
-    { name: "Thẻ hôm nay", href: "/cards", icon: Layers },
+    { name: "Thẻ", href: "/cards?tab=today", icon: Layers },
     { name: "Thử thách", href: "/challenges", icon: Trophy },
     { name: "Cộng đồng", href: "/community", icon: Users },
     { name: "Hồ sơ", href: "/profile", icon: User },
@@ -37,13 +47,28 @@ export const Navigation: React.FC<{ children: React.ReactNode }> = ({ children }
 
   const sidebarItems = [
     { name: "Trang chủ", href: "/", icon: Home },
-    { name: "Thẻ hôm nay", href: "/cards", icon: Layers },
+    { name: "Thẻ hôm nay", href: "/cards?tab=today", icon: Layers },
     { name: "Thử thách", href: "/challenges", icon: Trophy },
     { name: "Bộ sưu tập", href: "/cards", icon: BookOpen }, // Links to cards as deck library
     { name: "Cộng đồng", href: "/community", icon: Users },
     { name: "Hồ sơ", href: "/profile", icon: User },
     { name: "Cài đặt", href: "/profile", icon: Settings },
   ];
+
+  const getIsActive = (href: string, name: string) => {
+    const basePath = href.split("?")[0];
+    if (pathname !== basePath) return false;
+    
+    if (basePath === "/cards") {
+      if (name === "Thẻ hôm nay" || name === "Thẻ") {
+        return tab === "today";
+      }
+      if (name === "Bộ sưu tập") {
+        return tab !== "today";
+      }
+    }
+    return true;
+  };
 
   return (
     <>
@@ -145,7 +170,7 @@ export const Navigation: React.FC<{ children: React.ReactNode }> = ({ children }
           <div className="space-y-1">
             {sidebarItems.map((item) => {
               const Icon = item.icon;
-              const isActive = pathname === item.href;
+              const isActive = getIsActive(item.href, item.name);
               return (
                 <Link
                   key={item.name}
@@ -157,7 +182,7 @@ export const Navigation: React.FC<{ children: React.ReactNode }> = ({ children }
                   }`}
                 >
                   <Icon className={`w-5 h-5 ${isActive ? "text-white" : "text-brand-text"}`} />
-                  <span className="font-cozy text-sm">{item.name}</span>
+                  <span className="font-pixel text-[13px] tracking-wide font-medium">{item.name}</span>
                 </Link>
               );
             })}
@@ -249,7 +274,7 @@ export const Navigation: React.FC<{ children: React.ReactNode }> = ({ children }
                 <div className="space-y-1">
                   {sidebarItems.map((item) => {
                     const Icon = item.icon;
-                    const isActive = pathname === item.href;
+                    const isActive = getIsActive(item.href, item.name);
                     return (
                       <Link
                         key={item.name}
@@ -262,7 +287,7 @@ export const Navigation: React.FC<{ children: React.ReactNode }> = ({ children }
                         }`}
                       >
                         <Icon className="w-4.5 h-4.5" />
-                        <span className="font-cozy text-xs">{item.name}</span>
+                        <span className="font-pixel text-xs tracking-wide font-medium">{item.name}</span>
                       </Link>
                     );
                   })}
@@ -291,7 +316,7 @@ export const Navigation: React.FC<{ children: React.ReactNode }> = ({ children }
       <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t-3 border-brand-text px-4 py-2.5 flex justify-around items-center z-40">
         {navItems.map((item) => {
           const Icon = item.icon;
-          const isActive = pathname === item.href;
+          const isActive = getIsActive(item.href, item.name);
           return (
             <Link
               key={item.name}
@@ -303,7 +328,7 @@ export const Navigation: React.FC<{ children: React.ReactNode }> = ({ children }
               }`}
             >
               <Icon className="w-5.5 h-5.5 stroke-[2.25]" />
-              <span className="text-[10px] mt-1 font-cozy font-medium">{item.name}</span>
+              <span className="text-[10px] mt-1 font-pixel tracking-wide font-medium">{item.name}</span>
             </Link>
           );
         })}

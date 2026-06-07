@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 import Image from "next/image";
 import { useApp } from "@/context/AppContext";
 import { triggerHeart } from "@/components/HeartRain";
@@ -253,13 +254,42 @@ const DECKS_CONFIG = [
 ];
 
 export default function CardsPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-brand-bg flex items-center justify-center font-pixel text-brand-text">Đang tải...</div>}>
+      <CardsPageContent />
+    </Suspense>
+  );
+}
+
+function CardsPageContent() {
   const { addCompletedCard } = useApp();
+  const searchParams = useSearchParams();
+  const tab = searchParams.get("tab");
+  
   const [activeDeckKey, setActiveDeckKey] = useState<string | null>(null);
   const [currentCard, setCurrentCard] = useState<CardQuestion | null>(null);
   const [isFlipped, setIsFlipped] = useState(false);
   const [isCompleted, setIsCompleted] = useState(false);
 
   const activeDeck = DECKS_CONFIG.find((d) => d.key === activeDeckKey);
+
+  // Automatically open card draw when tab=today query parameter is set
+  useEffect(() => {
+    if (tab === "today") {
+      const randomDecks = ["HEART", "WARM", "PLAY", "BOND"];
+      const randomDeck = randomDecks[Math.floor(Math.random() * randomDecks.length)];
+      const questions = DECK_QUESTIONS[randomDeck];
+      const randomQuestion = questions[Math.floor(Math.random() * questions.length)];
+      
+      setActiveDeckKey(randomDeck);
+      setCurrentCard(randomQuestion);
+      setIsFlipped(false);
+      setIsCompleted(false);
+    } else {
+      setActiveDeckKey(null);
+      setCurrentCard(null);
+    }
+  }, [tab]);
 
   const handleSelectDeck = (deckKey: string, e: React.MouseEvent) => {
     const rect = e.currentTarget.getBoundingClientRect();
