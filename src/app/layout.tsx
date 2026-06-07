@@ -4,6 +4,7 @@ import "@hackernoon/pixel-icon-library/fonts/iconfont.css";
 import { AppProvider } from "@/context/AppContext";
 import { Navigation } from "@/components/Navigation";
 import { HeartRain } from "@/components/HeartRain";
+import { ServiceWorkerRegister } from "@/components/ServiceWorkerRegister";
 
 export const metadata: Metadata = {
   title: "80others - Bộ bài kết nối gia đình",
@@ -43,6 +44,7 @@ export default function RootLayout({
             </Navigation>
           </div>
           <HeartRain />
+          <ServiceWorkerRegister />
         </AppProvider>
       </body>
     </html>

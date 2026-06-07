@@ -1,10 +1,15 @@
 "use client";
 
-import React, { useState, Suspense } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useApp } from "@/context/AppContext";
+
+interface BeforeInstallPromptEvent extends Event {
+  prompt: () => Promise<void>;
+  userChoice: Promise<{ outcome: "accepted" | "dismissed" }>;
+}
 
 export const Navigation: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
@@ -20,6 +25,53 @@ const NavigationContent: React.FC<{ children: React.ReactNode }> = ({ children }
   const tab = searchParams.get("tab");
   const { points, streak, completedCount, theme, toggleTheme } = useApp();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  // PWA install prompt
+  const [installPrompt, setInstallPrompt] = useState<BeforeInstallPromptEvent | null>(null);
+  const [isInstalled, setIsInstalled] = useState(false);
+  const [showInstallGuide, setShowInstallGuide] = useState(false);
+
+  // Detect platform for install instructions
+  const getInstallPlatform = () => {
+    if (typeof navigator === "undefined") return "desktop";
+    const ua = navigator.userAgent;
+    if (/iphone|ipad|ipod/i.test(ua)) return "ios";
+    if (/android/i.test(ua)) return "android";
+    return "desktop";
+  };
+
+  useEffect(() => {
+    // Check if already installed as PWA
+    if (window.matchMedia("(display-mode: standalone)").matches) {
+      setIsInstalled(true);
+      return;
+    }
+    const handler = (e: Event) => {
+      e.preventDefault();
+      setInstallPrompt(e as BeforeInstallPromptEvent);
+    };
+    window.addEventListener("beforeinstallprompt", handler);
+    window.addEventListener("appinstalled", () => {
+      setIsInstalled(true);
+      setInstallPrompt(null);
+    });
+    return () => window.removeEventListener("beforeinstallprompt", handler);
+  }, []);
+
+  const handleInstall = async () => {
+    if (installPrompt) {
+      // Native install (Chrome/Edge)
+      await installPrompt.prompt();
+      const { outcome } = await installPrompt.userChoice;
+      if (outcome === "accepted") {
+        setInstallPrompt(null);
+        setIsInstalled(true);
+      }
+    } else {
+      // No native prompt — show manual instructions
+      setShowInstallGuide(true);
+    }
+  };
 
   const navItems = [
     { name: "Trang chủ", href: "/", icon: "hn-home-solid" },
@@ -110,6 +162,19 @@ const NavigationContent: React.FC<{ children: React.ReactNode }> = ({ children }
             <span className="absolute top-1 right-1 w-2.5 h-2.5 bg-brand-pink rounded-full border border-brand-outline" />
           </button>
 
+          {/* PWA Install Button - Desktop */}
+          {!isInstalled && (
+            <button
+              onClick={handleInstall}
+              id="pwa-install-btn-desktop"
+              className="flex items-center gap-1.5 px-3 py-2 border-2 border-brand-purple rounded-lg bg-brand-purple/10 hover:bg-brand-purple/20 text-brand-purple font-pixel font-bold text-xs shadow-pixel-sm transition-all hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
+              title="Cài đặt ứng dụng"
+            >
+              <i className="hn hn-download-alt-solid text-[16px]" />
+              <span className="hidden lg:inline">Cài đặt</span>
+            </button>
+          )}
+
           {/* Theme Toggle Button */}
           <button 
             onClick={toggleTheme}
@@ -168,6 +233,18 @@ const NavigationContent: React.FC<{ children: React.ReactNode }> = ({ children }
         </Link>
 
         <div className="flex items-center gap-2">
+          {/* PWA Install Button - Mobile */}
+          {!isInstalled && (
+            <button
+              onClick={handleInstall}
+              id="pwa-install-btn-mobile"
+              className="p-2 border-2 border-brand-purple rounded-lg bg-brand-purple/10 hover:bg-brand-purple/20 shadow-pixel-sm active:translate-y-0.5 cursor-pointer flex items-center justify-center"
+              title="Cài đặt ứng dụng"
+            >
+              <i className="hn hn-download-alt-solid text-[18px] text-brand-purple" />
+            </button>
+          )}
+
           {/* Mobile Theme Toggle */}
           <button 
             onClick={toggleTheme}
@@ -355,6 +432,159 @@ const NavigationContent: React.FC<{ children: React.ReactNode }> = ({ children }
           );
         })}
       </nav>
+
+      {/* ================= PWA INSTALL GUIDE MODAL ================= */}
+      {showInstallGuide && (
+        <div className="fixed inset-0 bg-brand-text/60 backdrop-blur-md z-[60] flex items-center justify-center p-4 animate-in fade-in duration-200">
+          <div className="bg-brand-card border-3 border-brand-outline rounded-3xl shadow-pixel max-w-md w-full p-6 relative overflow-hidden animate-in fade-in zoom-in duration-200">
+            {/* Header */}
+            <div className="flex justify-between items-center mb-6">
+              <h3 className="font-pixel text-xl font-bold text-brand-text flex items-center gap-2">
+                <i className="hn hn-download-alt-solid text-brand-purple text-lg" />
+                Cài đặt 80others
+              </h3>
+              <button
+                onClick={() => setShowInstallGuide(false)}
+                className="p-1.5 border-2 border-brand-outline rounded-lg bg-brand-bg hover:bg-brand-border cursor-pointer flex items-center justify-center transition-colors shadow-pixel-sm active:translate-y-0.5 active:translate-x-0.5"
+                aria-label="Đóng"
+              >
+                <i className="hn hn-times-solid text-[16px] text-brand-text" />
+              </button>
+            </div>
+
+            {/* Platform instructions */}
+            <div className="space-y-4 font-cozy text-brand-text mb-6">
+              {getInstallPlatform() === "ios" ? (
+                <>
+                  <p className="text-sm font-semibold text-brand-purple font-pixel">
+                    Hãy làm theo các bước sau để cài đặt ứng dụng trên thiết bị iOS của bạn:
+                  </p>
+                  <ol className="space-y-3.5 text-xs text-brand-text/90 list-none pl-0">
+                    <li className="flex items-start gap-2.5">
+                      <span className="flex-shrink-0 w-6 h-6 border-2 border-brand-outline bg-brand-purple text-white font-pixel font-bold rounded-lg flex items-center justify-center text-xs shadow-pixel-sm">
+                        1
+                      </span>
+                      <span className="pt-0.5">
+                        Mở trang web bằng trình duyệt <strong>Safari</strong> trên iPhone hoặc iPad của bạn.
+                      </span>
+                    </li>
+                    <li className="flex items-start gap-2.5">
+                      <span className="flex-shrink-0 w-6 h-6 border-2 border-brand-outline bg-brand-purple text-white font-pixel font-bold rounded-lg flex items-center justify-center text-xs shadow-pixel-sm">
+                        2
+                      </span>
+                      <span className="pt-0.5 flex items-center gap-1.5 flex-wrap leading-relaxed">
+                        Nhấn vào nút <strong>Chia sẻ</strong>
+                        <span className="inline-flex p-1 border border-brand-outline bg-brand-bg rounded">
+                          <i className="hn hn-share-alt-solid text-xs text-brand-text" />
+                        </span>
+                        ở thanh công cụ của trình duyệt.
+                      </span>
+                    </li>
+                    <li className="flex items-start gap-2.5">
+                      <span className="flex-shrink-0 w-6 h-6 border-2 border-brand-outline bg-brand-purple text-white font-pixel font-bold rounded-lg flex items-center justify-center text-xs shadow-pixel-sm">
+                        3
+                      </span>
+                      <span className="pt-0.5 flex items-center gap-1.5 flex-wrap leading-relaxed">
+                        Chọn <strong>Thêm vào MH chính</strong>
+                        <span className="inline-flex p-1 border border-brand-outline bg-brand-bg rounded">
+                          <i className="hn hn-plus-solid text-xs text-brand-text" />
+                        </span>
+                        từ danh sách các tùy chọn.
+                      </span>
+                    </li>
+                  </ol>
+                </>
+              ) : getInstallPlatform() === "android" ? (
+                <>
+                  <p className="text-sm font-semibold text-brand-purple font-pixel">
+                    Hãy làm theo các bước sau để cài đặt ứng dụng trên thiết bị Android của bạn:
+                  </p>
+                  <ol className="space-y-3.5 text-xs text-brand-text/90 list-none pl-0">
+                    <li className="flex items-start gap-2.5">
+                      <span className="flex-shrink-0 w-6 h-6 border-2 border-brand-outline bg-brand-purple text-white font-pixel font-bold rounded-lg flex items-center justify-center text-xs shadow-pixel-sm">
+                        1
+                      </span>
+                      <span className="pt-0.5">
+                        Mở trang web này bằng trình duyệt <strong>Google Chrome</strong>.
+                      </span>
+                    </li>
+                    <li className="flex items-start gap-2.5">
+                      <span className="flex-shrink-0 w-6 h-6 border-2 border-brand-outline bg-brand-purple text-white font-pixel font-bold rounded-lg flex items-center justify-center text-xs shadow-pixel-sm">
+                        2
+                      </span>
+                      <span className="pt-0.5 flex items-center gap-1.5 flex-wrap leading-relaxed">
+                        Nhấn vào biểu tượng menu <strong>3 chấm</strong>
+                        <span className="inline-flex p-1 border border-brand-outline bg-brand-bg rounded">
+                          <i className="hn hn-ellipses-vertical-solid text-xs text-brand-text" />
+                        </span>
+                        ở góc trên bên phải.
+                      </span>
+                    </li>
+                    <li className="flex items-start gap-2.5">
+                      <span className="flex-shrink-0 w-6 h-6 border-2 border-brand-outline bg-brand-purple text-white font-pixel font-bold rounded-lg flex items-center justify-center text-xs shadow-pixel-sm">
+                        3
+                      </span>
+                      <span className="pt-0.5">
+                        Chọn <strong>Cài đặt ứng dụng</strong> hoặc <strong>Thêm vào Màn hình chính</strong>.
+                      </span>
+                    </li>
+                  </ol>
+                </>
+              ) : (
+                <>
+                  <p className="text-sm font-semibold text-brand-purple font-pixel">
+                    Hãy làm theo các bước sau để cài đặt ứng dụng trên máy tính của bạn:
+                  </p>
+                  <ol className="space-y-3.5 text-xs text-brand-text/90 list-none pl-0">
+                    <li className="flex items-start gap-2.5">
+                      <span className="flex-shrink-0 w-6 h-6 border-2 border-brand-outline bg-brand-purple text-white font-pixel font-bold rounded-lg flex items-center justify-center text-xs shadow-pixel-sm">
+                        1
+                      </span>
+                      <span className="pt-0.5">
+                        Sử dụng trình duyệt <strong>Google Chrome</strong> hoặc <strong>Microsoft Edge</strong>.
+                      </span>
+                    </li>
+                    <li className="flex items-start gap-2.5">
+                      <span className="flex-shrink-0 w-6 h-6 border-2 border-brand-outline bg-brand-purple text-white font-pixel font-bold rounded-lg flex items-center justify-center text-xs shadow-pixel-sm">
+                        2
+                      </span>
+                      <span className="pt-0.5 flex items-center gap-1.5 flex-wrap leading-relaxed">
+                        Nhấp vào biểu tượng <strong>Cài đặt</strong>
+                        <span className="inline-flex p-1 border border-brand-outline bg-brand-bg rounded">
+                          <i className="hn hn-download-alt-solid text-xs text-brand-text" />
+                        </span>
+                        trên thanh địa chỉ ở góc trên cùng bên phải.
+                      </span>
+                    </li>
+                    <li className="flex items-start gap-2.5">
+                      <span className="flex-shrink-0 w-6 h-6 border-2 border-brand-outline bg-brand-purple text-white font-pixel font-bold rounded-lg flex items-center justify-center text-xs shadow-pixel-sm">
+                        3
+                      </span>
+                      <span className="pt-0.5 flex items-center gap-1.5 flex-wrap leading-relaxed">
+                        Hoặc nhấp vào menu <strong>3 chấm</strong>
+                        <span className="inline-flex p-1 border border-brand-outline bg-brand-bg rounded">
+                          <i className="hn hn-ellipses-vertical-solid text-xs text-brand-text" />
+                        </span>
+                        và chọn <strong>Cài đặt 80others...</strong>
+                      </span>
+                    </li>
+                  </ol>
+                </>
+              )}
+            </div>
+
+            {/* Footer buttons */}
+            <div className="flex gap-3 mt-8">
+              <button
+                onClick={() => setShowInstallGuide(false)}
+                className="flex-1 py-2.5 border-2 border-brand-outline rounded-xl bg-brand-bg hover:bg-brand-border text-brand-text font-pixel font-bold text-xs shadow-pixel-sm transition-all hover:-translate-y-0.5 active:translate-y-0 cursor-pointer text-center font-pixel"
+              >
+                Đóng
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 };
