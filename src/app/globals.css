@@ -19,12 +19,12 @@
 }
 
 body.dark {
-  --color-brand-bg: #1C1321;
-  --color-brand-card: #2A1E2F;
-  --color-brand-border: #382A3F;
-  --color-brand-text: #F5ECFF;
-  --color-brand-outline: #0F0914;
-  --color-brand-shadow: #0F0914;
+  --color-brand-bg: #120A18;      /* Deep dark space-purple background */
+  --color-brand-card: #22152B;    /* Elegant rich purple card background */
+  --color-brand-border: #3E244F;  /* Subdued border lines for internal dividers */
+  --color-brand-text: #F5ECFF;    /* Crisp light violet text */
+  --color-brand-outline: #513664; /* Mid-tone purple outline that cleanly separates elements */
+  --color-brand-shadow: #0A050D;  /* Solid deep shadow for 3D depth */
 }
 
 @theme {
