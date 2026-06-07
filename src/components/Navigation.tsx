@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useApp } from "@/context/AppContext";
+import { Share } from "lucide-react";
 
 interface BeforeInstallPromptEvent extends Event {
   prompt: () => Promise<void>;
@@ -480,12 +481,8 @@ const NavigationContent: React.FC<{ children: React.ReactNode }> = ({ children }
                       <span className="flex-shrink-0 w-6 h-6 border-2 border-brand-outline bg-brand-purple text-white font-pixel font-bold rounded-lg flex items-center justify-center text-xs shadow-pixel-sm">
                         2
                       </span>
-                      <span className="pt-0.5 flex items-center gap-1.5 flex-wrap leading-relaxed">
-                        Nhấn vào nút có <strong>hình chữ nhật với mũi tên hướng lên</strong>
-                        <span className="inline-flex p-1 border border-brand-outline bg-brand-bg rounded">
-                          <i className="hn hn-share-alt-solid text-xs text-brand-text" />
-                        </span>
-                        ở thanh công cụ của trình duyệt.
+                      <span className="pt-0.5">
+                        Chạm vào biểu tượng chia sẻ <Share className="w-4 h-4 inline text-blue-500 mx-0.5" /> ở cuối Safari.
                       </span>
                     </li>
                     <li className="flex items-start gap-2.5">
