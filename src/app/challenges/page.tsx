@@ -38,7 +38,7 @@ export default function ChallengesPage() {
     <div className="max-w-xl mx-auto space-y-6 pb-6">
       
       {/* 1. CHALLENGE HERO */}
-      <section className="bg-white border-3 border-brand-text p-6 rounded-3xl shadow-pixel text-center space-y-3 relative overflow-hidden">
+      <section className="bg-brand-card border-3 border-brand-text p-6 rounded-3xl shadow-pixel text-center space-y-3 relative overflow-hidden">
         {/* Background sparkles */}
         <div className="absolute top-2 right-4 text-xl animate-bounce">✨</div>
         <div className="absolute bottom-4 left-6 text-lg animate-bounce" style={{ animationDelay: '1s' }}>💖</div>
@@ -63,7 +63,7 @@ export default function ChallengesPage() {
           className={`py-2.5 rounded-xl font-pixel font-bold text-sm transition-all cursor-pointer ${
             activeTab === "daily"
               ? "bg-brand-purple text-white border-2 border-brand-text shadow-pixel-sm"
-              : "text-brand-text hover:bg-white/50 border-2 border-transparent"
+              : "text-brand-text hover:bg-brand-card/50 border-2 border-transparent"
           }`}
         >
           Hôm nay
@@ -73,7 +73,7 @@ export default function ChallengesPage() {
           className={`py-2.5 rounded-xl font-pixel font-bold text-sm transition-all cursor-pointer ${
             activeTab === "weekly"
               ? "bg-brand-purple text-white border-2 border-brand-text shadow-pixel-sm"
-              : "text-brand-text hover:bg-white/50 border-2 border-transparent"
+              : "text-brand-text hover:bg-brand-card/50 border-2 border-transparent"
           }`}
         >
           Thử thách tuần
@@ -88,7 +88,7 @@ export default function ChallengesPage() {
             return (
               <div
                 key={ch.id}
-                className="bg-white border-3 border-brand-text p-5 rounded-3xl shadow-pixel flex flex-col justify-between gap-4"
+                className="bg-brand-card border-3 border-brand-text p-5 rounded-3xl shadow-pixel flex flex-col justify-between gap-4"
               >
                 <div className="flex justify-between items-start gap-4">
                   <div className="space-y-1">
@@ -153,7 +153,7 @@ export default function ChallengesPage() {
             );
           })
         ) : (
-          <div className="bg-white border-3 border-brand-text p-8 rounded-3xl shadow-pixel text-center text-brand-text/50 text-xs font-semibold">
+          <div className="bg-brand-card border-3 border-brand-text p-8 rounded-3xl shadow-pixel text-center text-brand-text/50 text-xs font-semibold">
             Không tìm thấy thử thách nào.
           </div>
         )}

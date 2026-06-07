@@ -51,6 +51,8 @@ interface AppContextType {
   addMoment: (content: string, author?: string) => void;
   likeMoment: (id: string) => void;
   addCompletedCard: (cardId: string) => void;
+  theme: "light" | "dark";
+  toggleTheme: () => void;
 }
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
@@ -154,9 +156,15 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   ]);
 
   const [completedCardIds, setCompletedCardIds] = useState<string[]>([]);
+  const [theme, setThemeState] = useState<"light" | "dark">("dark");
 
   // Load from LocalStorage
   useEffect(() => {
+    const savedTheme = localStorage.getItem("80others_theme") as "light" | "dark" | null;
+    const finalTheme = savedTheme || "dark";
+    setThemeState(finalTheme);
+    document.body.classList.toggle("dark", finalTheme === "dark");
+
     const savedPoints = localStorage.getItem("80others_points");
     const savedStreak = localStorage.getItem("80others_streak");
     const savedCompletedCount = localStorage.getItem("80others_completedCount");
@@ -301,6 +309,15 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     });
   };
 
+  const toggleTheme = () => {
+    setThemeState((prev) => {
+      const newTheme = prev === "light" ? "dark" : "light";
+      localStorage.setItem("80others_theme", newTheme);
+      document.body.classList.toggle("dark", newTheme === "dark");
+      return newTheme;
+    });
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -317,6 +334,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         addMoment,
         likeMoment,
         addCompletedCard,
+        theme,
+        toggleTheme,
       }}
     >
       {children}

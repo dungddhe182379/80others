@@ -64,7 +64,7 @@ export default function ProfilePage() {
     <div className="max-w-xl mx-auto space-y-6 pb-6">
       
       {/* 1. PROFILE PROFILE CARD */}
-      <section className="bg-white border-3 border-brand-text p-5 rounded-3xl shadow-pixel relative overflow-hidden">
+      <section className="bg-brand-card border-3 border-brand-text p-5 rounded-3xl shadow-pixel relative overflow-hidden">
         {/* Settings button */}
         <button 
           onClick={(e) => handleActionClick("Cài đặt", e)}
@@ -128,7 +128,7 @@ export default function ProfilePage() {
       </section>
 
       {/* 2. HUY HIỆU BADGES DISPLAY */}
-      <section className="bg-white border-3 border-brand-text p-5 rounded-3xl shadow-pixel">
+      <section className="bg-brand-card border-3 border-brand-text p-5 rounded-3xl shadow-pixel">
         <div className="flex items-center justify-between border-b-2 border-brand-border pb-3 mb-4">
           <h3 className="font-pixel text-base font-bold flex items-center gap-1.5">
             🏆 Huy hiệu của bạn
@@ -140,7 +140,7 @@ export default function ProfilePage() {
           {badgeConfig.map((badge, i) => (
             <div 
               key={i}
-              className={`border-2 border-brand-text p-3 rounded-2xl flex items-center gap-2.5 bg-white shadow-pixel-sm ${badge.color}`}
+              className={`border-2 border-brand-text p-3 rounded-2xl flex items-center gap-2.5 bg-brand-card shadow-pixel-sm ${badge.color}`}
             >
               <span className="text-2xl filter drop-shadow-sm shrink-0 select-none">{badge.emoji}</span>
               <div className="leading-tight">
@@ -153,7 +153,7 @@ export default function ProfilePage() {
       </section>
 
       {/* 3. FUNCTION MENU LIST */}
-      <section className="bg-white border-3 border-brand-text p-3 rounded-3xl shadow-pixel space-y-1">
+      <section className="bg-brand-card border-3 border-brand-text p-3 rounded-3xl shadow-pixel space-y-1">
         {menuItems.map((item, i) => {
           const Icon = item.icon;
           return (

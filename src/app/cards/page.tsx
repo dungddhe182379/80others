@@ -349,7 +349,7 @@ function CardsPageContent() {
     <div className="max-w-4xl mx-auto space-y-6 pb-6">
       
       {/* 1. DECK TITLE */}
-      <section className="bg-white border-3 border-brand-text p-6 rounded-3xl shadow-pixel">
+      <section className="bg-brand-card border-3 border-brand-text p-6 rounded-3xl shadow-pixel">
         <h2 className="font-pixel text-2xl font-bold text-brand-text mb-2 flex items-center gap-2">
           🗂️ Khám phá các bộ bài
         </h2>
@@ -366,7 +366,7 @@ function CardsPageContent() {
             <div
               key={deck.key}
               onClick={(e) => handleSelectDeck(deck.key, e)}
-              className={`bg-white border-3 border-brand-text p-5 rounded-3xl cursor-pointer transition-all transform hover:-translate-y-1.5 active:translate-y-0 shadow-pixel ${deck.shadowColor} flex flex-col justify-between h-72`}
+              className={`bg-brand-card border-3 border-brand-text p-5 rounded-3xl cursor-pointer transition-all transform hover:-translate-y-1.5 active:translate-y-0 shadow-pixel ${deck.shadowColor} flex flex-col justify-between h-72`}
             >
               <div className="space-y-4">
                 {/* Header of the deck box */}
@@ -415,7 +415,7 @@ function CardsPageContent() {
               initial={{ scale: 0.9, y: 20 }}
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.9, y: 20 }}
-              className="bg-white border-3 border-brand-text p-6 rounded-3xl shadow-pixel-lg max-w-md w-full relative space-y-6"
+              className="bg-brand-card border-3 border-brand-text p-6 rounded-3xl shadow-pixel-lg max-w-md w-full relative space-y-6"
             >
               {/* Header inside modal */}
               <div className="flex items-center justify-between border-b-2 border-brand-border pb-3">

@@ -1,23 +1,39 @@
 @import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800&family=Pixelify+Sans:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 
+:root {
+  --color-bg: #F8F5FF;
+  --color-card: #FFFFFF;
+  --color-border: #E9D5FF;
+  --color-text: #2E1065;
+  --color-shadow: #2E1065;
+}
+
+body.dark {
+  --color-bg: #110924;
+  --color-card: #1B0F33;
+  --color-border: #331D54;
+  --color-text: #F1E4FF;
+  --color-shadow: #F1E4FF;
+}
+
 @theme {
   --color-brand-purple: #8B5CF6;
   --color-brand-purple-light: #C084FC;
   --color-brand-pink: #F472B6;
   --color-brand-yellow: #FBBF24;
-  --color-brand-bg: #F8F5FF;
-  --color-brand-card: #FFFFFF;
-  --color-brand-border: #E9D5FF;
-  --color-brand-text: #2E1065;
+  --color-brand-bg: var(--color-bg);
+  --color-brand-card: var(--color-card);
+  --color-brand-border: var(--color-border);
+  --color-brand-text: var(--color-text);
   
   --font-pixel: "Pixelify Sans", monospace, sans-serif;
   --font-cozy: "Be Vietnam Pro", sans-serif;
   
-  --shadow-pixel: 4px 4px 0px 0px #2E1065;
-  --shadow-pixel-hover: 6px 6px 0px 0px #2E1065;
-  --shadow-pixel-sm: 2px 2px 0px 0px #2E1065;
-  --shadow-pixel-lg: 8px 8px 0px 0px #2E1065;
+  --shadow-pixel: 4px 4px 0px 0px var(--color-shadow);
+  --shadow-pixel-hover: 6px 6px 0px 0px var(--color-shadow);
+  --shadow-pixel-sm: 2px 2px 0px 0px var(--color-shadow);
+  --shadow-pixel-lg: 8px 8px 0px 0px var(--color-shadow);
   --shadow-pixel-color-purple: 4px 4px 0px 0px #C084FC;
   --shadow-pixel-color-yellow: 4px 4px 0px 0px #FBBF24;
   --shadow-pixel-color-pink: 4px 4px 0px 0px #F472B6;
@@ -87,18 +103,19 @@
 }
 
 body {
-  background-color: #F8F5FF;
-  color: #2E1065;
+  background-color: var(--color-bg);
+  color: var(--color-text);
   font-family: var(--font-cozy);
   min-height: 100vh;
+  transition: background-color 0.35s ease, color 0.35s ease, border-color 0.35s ease;
 }
 
 /* Pixel art corners style */
 .pixel-box {
   image-rendering: pixelated;
-  border: 3px solid #2E1065;
+  border: 3px solid var(--color-text);
   box-shadow: var(--shadow-pixel);
-  transition: all 0.2s ease;
+  transition: all 0.2s ease, border-color 0.35s ease, background-color 0.35s ease;
 }
 
 .pixel-box:hover {
@@ -113,10 +130,10 @@ body {
 
 .pixel-btn {
   font-family: var(--font-pixel);
-  border: 3px solid #2E1065;
+  border: 3px solid var(--color-text);
   box-shadow: var(--shadow-pixel);
   cursor: pointer;
-  transition: all 0.15s ease;
+  transition: all 0.15s ease, border-color 0.35s ease, background-color 0.35s ease;
 }
 
 .pixel-btn:hover {

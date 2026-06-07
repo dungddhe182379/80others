@@ -166,24 +166,30 @@ export default function HomePage() {
     <div className="max-w-4xl mx-auto space-y-6 pb-6">
       
       {/* 1. WELCOME BANNER */}
-      <section className="bg-white border-3 border-brand-text p-6 rounded-3xl shadow-pixel relative overflow-hidden flex flex-col md:flex-row md:items-center justify-between gap-4">
-        {/* Pixel style night background graphic overlay on right */}
-        <div className="absolute right-0 top-0 bottom-0 w-1/3 bg-brand-purple-light/10 pointer-events-none hidden md:block" 
-             style={{ clipPath: "polygon(20% 0%, 100% 0%, 100% 100%, 0% 100%)" }} />
-             
-        <div className="space-y-2 relative z-10">
+      <section className="bg-brand-card border-3 border-brand-text p-6 rounded-3xl shadow-pixel relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="space-y-3 flex-grow">
           <h2 className="font-pixel text-2xl md:text-3xl font-bold text-brand-text flex items-center gap-2">
             {greeting}
           </h2>
-          <p className="text-brand-text/80 text-sm md:text-base font-semibold">
+          <p className="text-brand-text/80 text-xs md:text-sm font-semibold">
             Cùng 80others kết nối yêu thương và vun đắp tình cảm gia đình mỗi ngày.
           </p>
+          {/* Decorative elements */}
+          <div className="flex items-center gap-2 bg-brand-bg border-2 border-brand-border px-3 py-1.5 rounded-2xl w-fit shadow-pixel-sm">
+            <span className="animate-pulse text-sm">💡</span>
+            <span className="text-[10px] font-bold text-brand-text/80">Mẹo: Hãy bắt đầu bằng các thẻ WARM để khởi động!</span>
+          </div>
         </div>
         
-        {/* Decorative elements */}
-        <div className="flex items-center gap-2 bg-brand-bg border-2 border-brand-border px-3 py-1.5 rounded-2xl relative z-10 w-fit self-start md:self-auto shadow-pixel-sm">
-          <span className="animate-pulse">💡</span>
-          <span className="text-xs font-semibold text-brand-text/80">Mẹo: Hãy bắt đầu bằng các thẻ WARM để khởi động!</span>
+        {/* Pixel banner image on the right */}
+        <div className="relative w-full md:w-56 h-28 border-2 border-brand-text rounded-xl overflow-hidden shrink-0 shadow-pixel-sm bg-brand-bg">
+          <Image 
+            src="/pixel_cozy_banner.png" 
+            alt="Cozy window banner" 
+            fill 
+            sizes="224px"
+            className="object-cover image-rendering-pixelated"
+          />
         </div>
       </section>
 
@@ -214,7 +220,7 @@ export default function HomePage() {
         <div className="md:col-span-2 space-y-6">
           
           {/* 2. TODAY'S CARD WIDGET */}
-          <section className="bg-white border-3 border-brand-text p-5 rounded-3xl shadow-pixel">
+          <section className="bg-brand-card border-3 border-brand-text p-5 rounded-3xl shadow-pixel">
             <div className="flex items-center justify-between mb-4 border-b-2 border-brand-border pb-3">
               <h3 className="font-pixel text-lg font-bold flex items-center gap-2">
                 🃏 Thẻ hôm nay
@@ -284,7 +290,7 @@ export default function HomePage() {
           </section>
 
           {/* 3. EMOTION CHECK-IN */}
-          <section className="bg-white border-3 border-brand-text p-5 rounded-3xl shadow-pixel">
+          <section className="bg-brand-card border-3 border-brand-text p-5 rounded-3xl shadow-pixel">
             <h3 className="font-pixel text-lg font-bold mb-1 flex items-center gap-1.5 border-b-2 border-brand-border pb-3">
               😊 Hôm nay bạn cảm thấy thế nào?
             </h3>
@@ -337,7 +343,7 @@ export default function HomePage() {
           
           {/* 4. TODAY'S CHALLENGE WIDGET */}
           {todayChallenge && (
-            <section className="bg-white border-3 border-brand-text p-5 rounded-3xl shadow-pixel flex flex-col justify-between">
+            <section className="bg-brand-card border-3 border-brand-text p-5 rounded-3xl shadow-pixel flex flex-col justify-between">
               <div>
                 <div className="flex items-center justify-between mb-4 border-b-2 border-brand-border pb-3">
                   <h3 className="font-pixel text-lg font-bold flex items-center gap-1.5">
@@ -367,7 +373,7 @@ export default function HomePage() {
                       <span className="text-brand-purple">Tiến trình</span>
                       <span>{todayChallenge.progress} / {todayChallenge.maxProgress}</span>
                     </div>
-                    <div className="h-3 bg-white border border-brand-text rounded-full overflow-hidden p-0.5 shadow-inner">
+                    <div className="h-3 bg-brand-bg border border-brand-text rounded-full overflow-hidden p-0.5 shadow-inner">
                       <div 
                         className="h-full bg-brand-purple-light rounded-full transition-all duration-300"
                         style={{ width: `${(todayChallenge.progress / todayChallenge.maxProgress) * 100}%` }}
@@ -395,7 +401,7 @@ export default function HomePage() {
           )}
 
           {/* 5. COMMUNITY WIDGET */}
-          <section className="bg-white border-3 border-brand-text p-5 rounded-3xl shadow-pixel">
+          <section className="bg-brand-card border-3 border-brand-text p-5 rounded-3xl shadow-pixel">
             <div className="flex items-center justify-between mb-4 border-b-2 border-brand-border pb-3">
               <h3 className="font-pixel text-lg font-bold flex items-center gap-1.5">
                 📸 Khoảnh khắc ấm áp

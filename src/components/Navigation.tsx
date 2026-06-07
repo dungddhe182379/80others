@@ -34,7 +34,7 @@ const NavigationContent: React.FC<{ children: React.ReactNode }> = ({ children }
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const tab = searchParams.get("tab");
-  const { points, streak, completedCount } = useApp();
+  const { points, streak, completedCount, theme, toggleTheme } = useApp();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const navItems = [
@@ -115,6 +115,19 @@ const NavigationContent: React.FC<{ children: React.ReactNode }> = ({ children }
             <span className="absolute top-1 right-1 w-2.5 h-2.5 bg-brand-pink rounded-full border border-brand-text" />
           </button>
 
+          {/* Theme Toggle Button */}
+          <button 
+            onClick={toggleTheme}
+            className="p-2 border-2 border-brand-text rounded-lg bg-brand-bg hover:bg-brand-border transition-colors shadow-pixel-sm active:translate-y-0.5 active:translate-x-0.5 cursor-pointer"
+            aria-label="Toggle theme"
+          >
+            {theme === "dark" ? (
+              <span className="text-base select-none">☀️</span>
+            ) : (
+              <span className="text-base select-none">🌙</span>
+            )}
+          </button>
+
           {/* User Widget header */}
           <Link
             href="/profile"
@@ -159,9 +172,20 @@ const NavigationContent: React.FC<{ children: React.ReactNode }> = ({ children }
           <span className="font-pixel text-lg font-bold tracking-tight text-brand-text">80others</span>
         </Link>
 
-        <button className="p-2 border-2 border-brand-text rounded-lg bg-brand-bg shadow-pixel-sm active:translate-y-0.5">
-          <Bell className="w-5 h-5 text-brand-text" />
-        </button>
+        <div className="flex items-center gap-2">
+          {/* Mobile Theme Toggle */}
+          <button 
+            onClick={toggleTheme}
+            className="p-2 border-2 border-brand-text rounded-lg bg-brand-bg shadow-pixel-sm active:translate-y-0.5 cursor-pointer"
+            aria-label="Toggle theme"
+          >
+            {theme === "dark" ? "☀️" : "🌙"}
+          </button>
+          
+          <button className="p-2 border-2 border-brand-text rounded-lg bg-brand-bg shadow-pixel-sm active:translate-y-0.5">
+            <Bell className="w-5 h-5 text-brand-text" />
+          </button>
+        </div>
       </header>
 
       <div className="flex flex-1">
