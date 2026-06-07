@@ -2,6 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { useApp } from "@/context/AppContext";
 import { triggerHeart } from "@/components/HeartRain";
 
@@ -126,7 +127,9 @@ export default function ProfilePage() {
             <i className="hn hn-trophy-solid text-brand-yellow text-[16px]" />
             Huy hiệu của bạn
           </h3>
-          <span className="text-[10px] font-bold text-brand-purple hover:underline cursor-pointer font-pixel">Xem tất cả</span>
+          <Link href="/badges" className="text-[10px] font-bold text-brand-purple hover:underline font-pixel">
+            Xem tất cả
+          </Link>
         </div>
 
         <div className="grid grid-cols-2 gap-3">

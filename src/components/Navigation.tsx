@@ -97,6 +97,7 @@ const NavigationContent: React.FC<{ children: React.ReactNode }> = ({ children }
     { name: "Thẻ hôm nay", href: "/cards?tab=today", icon: "hn-grid-solid" },
     { name: "Thử thách", href: "/challenges", icon: "hn-trophy-solid" },
     { name: "Bộ sưu tập", href: "/cards", icon: "hn-book-bookmark-solid" }, // Links to cards as deck library
+    { name: "Huy hiệu", href: "/badges", icon: "hn-crown-solid" },
     { name: "Cộng đồng", href: "/community", icon: "hn-users-solid" },
     { name: "Hồ sơ", href: "/profile", icon: "hn-user-solid" },
     { name: "Gây quỹ cho nhóm", href: "#", icon: "hn-heart-solid" },

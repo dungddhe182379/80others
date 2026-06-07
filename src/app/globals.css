@@ -232,3 +232,17 @@ body.dark .badge-yellow {
   color: #FBBF24;
 }
 
+@keyframes goldGlow {
+  0%, 100% {
+    box-shadow: 0 0 8px rgba(251, 191, 36, 0.3), var(--shadow-pixel);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(251, 191, 36, 0.7), var(--shadow-pixel);
+  }
+}
+
+.unlocked-glow {
+  animation: goldGlow 2s infinite ease-in-out;
+}
+
+
