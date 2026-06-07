@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
+import "@hackernoon/pixel-icon-library/fonts/iconfont.css";
 import { AppProvider } from "@/context/AppContext";
 import { Navigation } from "@/components/Navigation";
 import { HeartRain } from "@/components/HeartRain";

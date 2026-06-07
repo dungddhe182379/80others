@@ -5,17 +5,7 @@ import Image from "next/image";
 import { useApp } from "@/context/AppContext";
 import { triggerHeart } from "@/components/HeartRain";
 import confetti from "canvas-confetti";
-import { 
-  Users, 
-  Heart, 
-  MessageSquare, 
-  Image as ImageIcon,
-  Send,
-  Sparkles,
-  Bookmark,
-  Plus,
-  ChevronRight
-} from "lucide-react";
+
 
 export default function CommunityPage() {
   const { moments, addMoment, likeMoment } = useApp();
@@ -96,7 +86,7 @@ export default function CommunityPage() {
           onClick={() => setShowPostingForm(true)}
           className="w-full py-4 border-3 border-dashed border-brand-outline rounded-3xl bg-brand-card hover:bg-brand-bg/40 font-pixel font-bold text-sm text-brand-text/70 transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-pixel-sm"
         >
-          <Plus className="w-5 h-5" />
+          <i className="hn hn-plus-solid text-[20px]" />
           Viết câu chuyện của gia đình bạn (+20 ❤️)
         </button>
       ) : (
@@ -159,7 +149,7 @@ export default function CommunityPage() {
                   : "bg-brand-bg text-brand-text/30 border-brand-border shadow-none pointer-events-none"
               }`}
             >
-              <Send className="w-3.5 h-3.5" /> Chia sẻ
+              <i className="hn hn-share-solid text-[16px]" /> Chia sẻ
             </button>
           </div>
         </form>
@@ -192,8 +182,8 @@ export default function CommunityPage() {
                 </div>
                 
                 {/* Save icon */}
-                <button className="text-brand-text/40 hover:text-brand-purple p-1">
-                  <Bookmark className="w-4 h-4" />
+                <button className="text-brand-text/40 hover:text-brand-purple p-1 flex items-center justify-center">
+                  <i className="hn hn-bookmark-solid text-[16px]" />
                 </button>
               </div>
 
@@ -225,13 +215,13 @@ export default function CommunityPage() {
                       m.likedByUser ? "text-brand-pink" : "text-brand-text/70"
                     }`}
                   >
-                    <Heart className={`w-4 h-4 transition-colors ${m.likedByUser ? "fill-brand-pink text-brand-pink" : ""}`} />
+                    <i className={`hn hn-heart-solid text-[18px] transition-colors ${m.likedByUser ? "text-brand-pink" : ""}`} />
                     <span>{m.likes}</span>
                   </button>
 
                   {/* Comment */}
                   <button className="flex items-center gap-1.5 text-xs font-bold text-brand-text/70 hover:text-brand-purple">
-                    <MessageSquare className="w-4 h-4" />
+                    <i className="hn hn-comment-solid text-[18px]" />
                     <span>{m.comments}</span>
                   </button>
                 </div>
@@ -278,7 +268,7 @@ export default function CommunityPage() {
                   Đăng bởi {topic.author} • {topic.replies} phản hồi • {topic.views} lượt xem
                 </p>
               </div>
-              <ChevronRight className="w-4 h-4 text-brand-text/40 shrink-0" />
+              <i className="hn hn-angle-right-solid text-[16px] text-brand-text/40 shrink-0" />
             </div>
           ))}
         </div>

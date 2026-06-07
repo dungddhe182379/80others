@@ -7,18 +7,7 @@ import { useApp } from "@/context/AppContext";
 import { triggerHeart } from "@/components/HeartRain";
 import confetti from "canvas-confetti";
 import { motion, AnimatePresence } from "framer-motion";
-import { 
-  Coffee, 
-  Dices, 
-  Camera, 
-  Heart, 
-  ShieldAlert, 
-  ArrowLeft, 
-  RotateCw, 
-  CheckCircle,
-  Sparkles,
-  HelpCircle
-} from "lucide-react";
+
 
 interface CardQuestion {
   id: string;
@@ -196,7 +185,7 @@ const DECKS_CONFIG = [
     title: "WARM CARDS",
     subtitle: "Khởi động",
     desc: "Những câu hỏi nhẹ nhàng để mở lời và làm ấm bầu không khí.",
-    icon: Coffee,
+    icon: "hn-lightbulb-solid",
     emoji: "☕",
     image: "/assets/decks/warm.png",
     cardCount: 20,
@@ -209,7 +198,7 @@ const DECKS_CONFIG = [
     title: "PLAY CARDS",
     subtitle: "Tương tác",
     desc: "Các thử thách tương tác vui nhộn mang lại tiếng cười cho cả nhà.",
-    icon: Dices,
+    icon: "hn-play-solid",
     emoji: "🎲",
     image: "/assets/decks/play.png",
     cardCount: 20,
@@ -222,7 +211,7 @@ const DECKS_CONFIG = [
     title: "BOND CARDS",
     subtitle: "Thấu hiểu",
     desc: "Nhớ lại kỷ niệm và cùng nhau thấu hiểu sâu sắc hơn về nhau.",
-    icon: Camera,
+    icon: "hn-retro-camera-solid",
     emoji: "📸",
     image: "/assets/decks/bond.png",
     cardCount: 20,
@@ -235,7 +224,7 @@ const DECKS_CONFIG = [
     title: "HEART CARDS",
     subtitle: "Yêu thương",
     desc: "Bộc lộ những cảm xúc sâu kín và gửi lời yêu thương ngọt ngào.",
-    icon: Heart,
+    icon: "hn-heart-solid",
     emoji: "💌",
     image: "/assets/decks/heart.png",
     cardCount: 20,
@@ -248,7 +237,7 @@ const DECKS_CONFIG = [
     title: "SAFE CARDS",
     subtitle: "Quyền im lặng",
     desc: "Khi ai đó cần không gian riêng, tạo cảm giác an toàn tuyệt đối.",
-    icon: ShieldAlert,
+    icon: "hn-lock-solid",
     emoji: "🛡️",
     image: "/assets/decks/safe.png",
     cardCount: 10,
@@ -429,9 +418,9 @@ function CardsPageContent() {
               <div className="flex items-center justify-between border-b-2 border-brand-border pb-3">
                 <button
                   onClick={handleClose}
-                  className="flex items-center gap-1 text-xs font-bold text-brand-text/60 hover:text-brand-text font-pixel"
+                  className="flex items-center gap-1 text-xs font-bold text-brand-text/60 hover:text-brand-text font-pixel cursor-pointer"
                 >
-                  <ArrowLeft className="w-4 h-4" /> Quay lại
+                  <i className="hn hn-angle-left-solid text-[16px]" /> Quay lại
                 </button>
                 <span className="font-pixel text-xs font-bold bg-brand-outline text-white px-2 py-0.5 rounded">
                   {activeDeck.subtitle}
@@ -448,7 +437,7 @@ function CardsPageContent() {
                 >
                   {/* CARD FRONT SIDE (Question card) */}
                   <div 
-                    className={`absolute inset-0 backface-hidden rounded-2xl border-3 border-brand-outline p-4 flex flex-col justify-between bg-white text-brand-text overflow-hidden ${
+                    className={`absolute inset-0 backface-hidden rounded-2xl border-3 border-brand-outline p-4 flex flex-col justify-between bg-brand-card text-brand-text overflow-hidden ${
                       isFlipped ? "pointer-events-none" : ""
                     }`}
                   >
@@ -485,12 +474,12 @@ function CardsPageContent() {
                   >
                     <div className="flex justify-between items-center">
                       <span className="font-pixel text-xs font-bold">80others</span>
-                      <Sparkles className="w-4 h-4 text-brand-yellow fill-brand-yellow" />
+                      <i className="hn hn-sparkles-solid text-[16px] text-brand-yellow" />
                     </div>
                     
                     <div className="flex flex-col items-center justify-center py-12">
                       <div className="w-14 h-14 rounded-full bg-white/20 flex items-center justify-center border-2 border-white/25 mb-1.5 animate-pulse">
-                        <Heart className="w-8 h-8 text-brand-pink fill-brand-pink" />
+                        <i className="hn hn-heart-solid text-[32px] text-brand-pink" />
                       </div>
                       <span className="font-pixel text-[10px] font-semibold text-white/70 tracking-widest">FAMILY TIME</span>
                     </div>
@@ -515,12 +504,13 @@ function CardsPageContent() {
                   onClick={handleDrawNext}
                   className="py-3 px-4 bg-brand-bg text-brand-text font-pixel font-bold rounded-2xl border-3 border-brand-outline shadow-pixel hover:shadow-pixel-hover hover:-translate-y-0.5 active:translate-y-0 transition-all text-xs flex items-center justify-center gap-1.5 cursor-pointer"
                 >
-                  <RotateCw className="w-4 h-4" />
+                  <i className="hn hn-refresh text-[14px]" />
                   Rút thẻ khác
                 </button>
 
                 {isCompleted ? (
-                  <div className="py-3 px-4 bg-green-50 text-green-700 font-bold border-2 border-green-500 rounded-2xl flex items-center justify-center gap-1 text-xs font-pixel">
+                  <div className="challenge-done py-3 px-4 font-bold border-2 rounded-2xl flex items-center justify-center gap-1 text-xs font-pixel">
+                    <i className="hn hn-check-circle-solid text-[14px]" />
                     Đã hoàn thành!
                   </div>
                 ) : (
@@ -528,7 +518,7 @@ function CardsPageContent() {
                     onClick={handleCompleteCard}
                     className="py-3 px-4 bg-brand-pink text-white font-pixel font-bold rounded-2xl border-3 border-brand-outline shadow-pixel hover:shadow-pixel-hover hover:-translate-y-0.5 active:translate-y-0 transition-all text-xs flex items-center justify-center gap-1 cursor-pointer"
                   >
-                    <CheckCircle className="w-4 h-4" />
+                    <i className="hn hn-check-circle-solid text-[14px]" />
                     Hoàn thành (+30 ❤️)
                   </button>
                 )}

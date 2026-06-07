@@ -4,15 +4,7 @@ import React, { useState } from "react";
 import { useApp, Challenge } from "@/context/AppContext";
 import { triggerHeart } from "@/components/HeartRain";
 import confetti from "canvas-confetti";
-import { 
-  Trophy, 
-  Calendar, 
-  Clock, 
-  CheckCircle,
-  HelpCircle,
-  Flame,
-  Award
-} from "lucide-react";
+
 
 export default function ChallengesPage() {
   const { challenges, completeChallenge, points } = useApp();
@@ -44,7 +36,7 @@ export default function ChallengesPage() {
         <div className="absolute bottom-4 left-6 text-lg animate-bounce" style={{ animationDelay: '1s' }}>💖</div>
         
         <div className="w-16 h-16 rounded-full border-3 border-brand-outline bg-brand-yellow flex items-center justify-center mx-auto shadow-pixel-sm">
-          <Trophy className="w-8 h-8 text-brand-text" />
+          <i className="hn hn-trophy-solid text-2xl text-brand-text" />
         </div>
         <div className="space-y-1">
           <h2 className="font-pixel text-2xl font-bold text-brand-text">
@@ -122,8 +114,8 @@ export default function ChallengesPage() {
 
                 {/* Check action button */}
                 {ch.completed ? (
-                  <div className="w-full py-2.5 bg-green-50 text-green-700 font-bold border-2 border-green-500 rounded-2xl flex items-center justify-center gap-1.5 text-xs font-pixel">
-                    <CheckCircle className="w-4 h-4 text-green-600 fill-green-100" />
+                  <div className="challenge-done w-full py-2.5 font-bold border-2 rounded-2xl flex items-center justify-center gap-1.5 text-xs font-pixel">
+                    <i className="hn hn-check-circle-solid text-base" />
                     Đã hoàn thành!
                   </div>
                 ) : (
@@ -138,12 +130,12 @@ export default function ChallengesPage() {
                   >
                     {ch.type === "weekly" ? (
                       <>
-                        <Clock className="w-4 h-4" />
+                        <i className="hn hn-clock-solid text-sm" />
                         Tự động hoàn thành theo tiến trình
                       </>
                     ) : (
                       <>
-                        <CheckCircle className="w-4.5 h-4.5" />
+                        <i className="hn hn-check-circle-solid text-sm" />
                         Đánh dấu hoàn thành
                       </>
                     )}

@@ -6,18 +6,7 @@ import Image from "next/image";
 import { useApp, Challenge, Moment } from "@/context/AppContext";
 import { triggerHeart } from "@/components/HeartRain";
 import confetti from "canvas-confetti";
-import {
-  Flame,
-  Heart,
-  RotateCw,
-  CheckCircle2,
-  ChevronRight,
-  Smile,
-  Compass,
-  Sparkles,
-  MessageSquare,
-  Gift
-} from "lucide-react";
+
 
 const CARD_POOL = [
   {
@@ -203,19 +192,19 @@ export default function HomePage() {
       {/* MOBILE ONLY QUICK STATS */}
       <div className="grid grid-cols-2 gap-3 md:hidden">
         {/* Streak 🔥 */}
-        <div className="flex items-center gap-3 bg-orange-50 border-3 border-brand-outline p-3 rounded-2xl shadow-pixel">
-          <Flame className="w-8 h-8 text-orange-500 fill-orange-500 shrink-0" />
+        <div className="stat-card-streak flex items-center gap-3 border-3 border-brand-outline p-3 rounded-2xl shadow-pixel">
+          <i className="hn hn-fire-solid text-[32px] text-orange-500 shrink-0 animate-pulse" />
           <div className="leading-tight">
-            <span className="font-pixel text-lg font-bold block">{streak} ngày</span>
+            <span className="font-pixel text-lg font-bold block text-brand-text">{streak} ngày</span>
             <span className="text-[10px] text-brand-text/70 font-semibold font-cozy">Chuỗi gia đình</span>
           </div>
         </div>
 
         {/* Connection Points ❤️ */}
-        <div className="flex items-center gap-3 bg-pink-50 border-3 border-brand-outline p-3 rounded-2xl shadow-pixel">
-          <Heart className="w-8 h-8 text-brand-pink fill-brand-pink shrink-0" />
+        <div className="stat-card-points flex items-center gap-3 border-3 border-brand-outline p-3 rounded-2xl shadow-pixel">
+          <i className="hn hn-heart-solid text-[32px] text-brand-pink shrink-0 animate-pulse" />
           <div className="leading-tight">
-            <span className="font-pixel text-lg font-bold block">{points}</span>
+            <span className="font-pixel text-lg font-bold block text-brand-text">{points}</span>
             <span className="text-[10px] text-brand-text/70 font-semibold font-cozy">Điểm kết nối</span>
           </div>
         </div>
@@ -247,13 +236,13 @@ export default function HomePage() {
                 >
                   <div className="flex justify-between items-center">
                     <span className="font-pixel text-xs font-bold bg-white/20 px-2 py-0.5 rounded">80others</span>
-                    <Sparkles className="w-4 h-4 text-brand-yellow fill-brand-yellow animate-spin" style={{ animationDuration: '5s' }} />
+                    <i className="hn hn-sparkles-solid text-[16px] text-brand-yellow animate-spin" style={{ animationDuration: '5s' }} />
                   </div>
 
                   {/* Heart graphic in the middle */}
                   <div className="flex flex-col items-center justify-center py-8">
                     <div className="w-16 h-16 rounded-full bg-white/10 flex items-center justify-center border-2 border-white/20 mb-2 relative animate-float">
-                      <Heart className="w-9 h-9 text-brand-pink fill-brand-pink" />
+                      <i className="hn hn-heart-solid text-[32px] text-brand-pink" />
                     </div>
                     <span className="font-pixel text-xs font-semibold tracking-wider text-white/80">FAMILY CARDS</span>
                   </div>
@@ -292,7 +281,7 @@ export default function HomePage() {
 
                     <div className="space-y-1.5 border-t border-brand-border pt-2 text-xs text-brand-text/70">
                       <p className="flex items-center gap-1.5 font-semibold font-pixel">
-                        <Heart className="w-3.5 h-3.5 text-brand-pink fill-brand-pink" />
+                        <i className="hn hn-heart-solid text-brand-pink text-[14px]" />
                         <span>{currentCard.listenTip}</span>
                       </p>
                     </div>
@@ -303,7 +292,7 @@ export default function HomePage() {
                   onClick={handleDrawCard}
                   className="w-full py-3.5 px-6 bg-brand-purple text-white font-pixel font-bold rounded-2xl border-3 border-brand-outline shadow-pixel hover:shadow-pixel-hover hover:-translate-y-0.5 active:translate-y-0 transition-all flex items-center justify-center gap-2 text-sm sm:text-base cursor-pointer"
                 >
-                  <RotateCw className={`w-5 h-5 ${isFlipped ? "animate-spin" : ""}`} />
+                  <i className={`hn hn-refresh text-[18px] ${isFlipped ? "animate-spin" : ""}`} />
                   Rút thẻ khác (+30 ❤️)
                 </button>
               </div>
@@ -383,14 +372,14 @@ export default function HomePage() {
                     📅 Thử thách hôm nay
                   </h3>
                   <Link href="/challenges" className="text-[10px] font-bold text-brand-purple hover:underline flex items-center">
-                    Xem tất cả <ChevronRight className="w-3 h-3" />
+                    Xem tất cả <i className="hn hn-angle-right-solid text-[10px] ml-0.5" />
                   </Link>
                 </div>
 
                 <div className="bg-brand-bg border-2 border-brand-border p-4 rounded-2xl relative overflow-hidden mb-4">
                   {/* Decorative package ribbon styled visual indicator */}
                   <div className="absolute right-2 bottom-2 w-14 h-14 opacity-20 bg-brand-purple rounded-full flex items-center justify-center">
-                    <Gift className="w-8 h-8 text-brand-text" />
+                    <i className="hn hn-box-heart-solid text-[32px] text-brand-text" />
                   </div>
 
                   <h4 className="font-cozy font-bold text-brand-text leading-tight mb-1 text-sm md:text-base">
@@ -417,8 +406,8 @@ export default function HomePage() {
               </div>
 
               {todayChallenge.completed ? (
-                <div className="w-full py-2.5 bg-green-50 text-green-700 font-bold border-2 border-green-500 rounded-2xl flex items-center justify-center gap-1.5 text-xs">
-                  <CheckCircle2 className="w-4 h-4 text-green-600 fill-green-100" />
+                <div className="challenge-done w-full py-2.5 font-bold border-2 rounded-2xl flex items-center justify-center gap-1.5 text-xs">
+                  <i className="hn hn-check-circle-solid text-[16px]" />
                   Đã hoàn thành! (+{todayChallenge.points} ❤️)
                 </div>
               ) : (
@@ -426,7 +415,7 @@ export default function HomePage() {
                   onClick={(e) => handleCompleteChallenge(todayChallenge.id, e)}
                   className="w-full py-3 bg-brand-yellow text-brand-text font-pixel font-bold rounded-2xl border-3 border-brand-text shadow-pixel hover:shadow-pixel-hover hover:-translate-y-0.5 active:translate-y-0 transition-all text-xs flex items-center justify-center gap-1.5 cursor-pointer"
                 >
-                  <CheckCircle2 className="w-4.5 h-4.5" />
+                  <i className="hn hn-check-circle-solid text-[16px]" />
                   Hoàn thành thử thách (+{todayChallenge.points} ❤️)
                 </button>
               )}
@@ -440,7 +429,7 @@ export default function HomePage() {
                 📸 Khoảnh khắc ấm áp
               </h3>
               <Link href="/community" className="text-[10px] font-bold text-brand-purple hover:underline flex items-center">
-                Xem tất cả <ChevronRight className="w-3 h-3" />
+                Xem tất cả <i className="hn hn-angle-right-solid text-[10px] ml-0.5" />
               </Link>
             </div>
 
@@ -489,11 +478,11 @@ export default function HomePage() {
                       }}
                       className={`flex items-center gap-1 ${m.likedByUser ? "text-brand-pink" : "text-brand-text/70"} hover:scale-105 active:scale-95 transition-transform`}
                     >
-                      <Heart className={`w-3.5 h-3.5 ${m.likedByUser ? "fill-brand-pink text-brand-pink" : ""}`} />
+                      <i className={`hn hn-heart-solid text-[14px] ${m.likedByUser ? "text-brand-pink" : "text-brand-text/70"}`} />
                       <span>{m.likes}</span>
                     </button>
                     <div className="flex items-center gap-1 text-brand-text/70">
-                      <MessageSquare className="w-3.5 h-3.5" />
+                      <i className="hn hn-comment-solid text-[14px] text-brand-text/70" />
                       <span>{m.comments}</span>
                     </div>
                   </div>

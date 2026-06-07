@@ -156,3 +156,79 @@ body {
   transform: translate(0px, 0px);
   box-shadow: var(--shadow-pixel);
 }
+
+/* Themed stat cards — light/dark aware */
+.stat-card-streak {
+  background-color: #FFF7ED;
+  transition: background-color 0.35s ease;
+}
+body.dark .stat-card-streak {
+  background-color: #2C1A10;
+}
+
+.stat-card-points {
+  background-color: #FDF2F8;
+  transition: background-color 0.35s ease;
+}
+body.dark .stat-card-points {
+  background-color: #261020;
+}
+
+/* Completed challenge pill — light/dark aware */
+.challenge-done {
+  background-color: #F0FDF4;
+  color: #15803D;
+  border-color: #22C55E;
+  transition: background-color 0.35s ease, color 0.35s ease;
+}
+body.dark .challenge-done {
+  background-color: #0D2E1A;
+  color: #4ADE80;
+  border-color: #16A34A;
+}
+
+/* Badge colors — light/dark aware */
+.badge-orange {
+  background-color: #FFF7ED;
+  border-color: #F97316;
+  color: #EA580C;
+}
+body.dark .badge-orange {
+  background-color: #2C1A10;
+  border-color: #C2410C;
+  color: #FB923C;
+}
+
+.badge-purple {
+  background-color: #F5F3FF;
+  border-color: #C084FC;
+  color: #8B5CF6;
+}
+body.dark .badge-purple {
+  background-color: #1E1333;
+  border-color: #A855F7;
+  color: #C084FC;
+}
+
+.badge-pink {
+  background-color: #FDF2F8;
+  border-color: #F472B6;
+  color: #EC4899;
+}
+body.dark .badge-pink {
+  background-color: #261020;
+  border-color: #DB2777;
+  color: #F472B6;
+}
+
+.badge-yellow {
+  background-color: #FFFBEB;
+  border-color: #FBBF24;
+  color: #D97706;
+}
+body.dark .badge-yellow {
+  background-color: #261D08;
+  border-color: #D97706;
+  color: #FBBF24;
+}
+

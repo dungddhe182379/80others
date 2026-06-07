@@ -4,19 +4,7 @@ import React from "react";
 import Image from "next/image";
 import { useApp } from "@/context/AppContext";
 import { triggerHeart } from "@/components/HeartRain";
-import { 
-  Flame, 
-  Heart, 
-  Layers, 
-  Users, 
-  ChevronRight, 
-  Settings, 
-  Award,
-  Sparkles,
-  LogOut,
-  History,
-  FolderHeart
-} from "lucide-react";
+
 
 export default function ProfilePage() {
   const { points, streak, completedCount } = useApp();
@@ -32,32 +20,32 @@ export default function ProfilePage() {
       emoji: "🔥",
       name: "Khởi đầu",
       desc: "Chơi liên tiếp 1 ngày",
-      color: "bg-orange-50 border-orange-400 text-orange-600"
+      color: "badge-orange"
     },
     {
       emoji: "💜",
       name: "Kết nối đầu",
       desc: "Hoàn thành 5 thẻ WARM",
-      color: "bg-purple-50 border-brand-purple-light text-brand-purple"
+      color: "badge-purple"
     },
     {
       emoji: "💌",
       name: "Trái tim ấm",
       desc: "Hoàn thành 5 thẻ HEART",
-      color: "bg-pink-50 border-brand-pink text-brand-pink"
+      color: "badge-pink"
     },
     {
       emoji: "🏡",
       name: "Gắn kết",
       desc: "Hoàn thành 3 thử thách ngày",
-      color: "bg-yellow-50 border-brand-yellow text-amber-600"
+      color: "badge-yellow"
     }
   ];
 
   const menuItems = [
-    { name: "Gia đình của tôi", icon: Users },
-    { name: "Nhật ký kết nối", icon: History },
-    { name: "Lưu trữ thẻ", icon: FolderHeart },
+    { name: "Gia đình của tôi", icon: "hn-users-solid" },
+    { name: "Nhật ký kết nối", icon: "hn-history-solid" },
+    { name: "Lưu trữ thẻ", icon: "hn-folder-solid" },
   ];
 
   return (
@@ -70,7 +58,7 @@ export default function ProfilePage() {
           onClick={(e) => handleActionClick("Cài đặt", e)}
           className="absolute top-4 right-4 p-1.5 border-2 border-brand-outline rounded-lg hover:bg-brand-bg transition-colors"
         >
-          <Settings className="w-4.5 h-4.5 text-brand-text" />
+          <i className="hn hn-settings-solid text-base text-brand-text" />
         </button>
 
         <div className="flex flex-col items-center text-center space-y-3">
@@ -155,7 +143,6 @@ export default function ProfilePage() {
       {/* 3. FUNCTION MENU LIST */}
       <section className="bg-brand-card border-3 border-brand-outline p-3 rounded-3xl shadow-pixel space-y-1">
         {menuItems.map((item, i) => {
-          const Icon = item.icon;
           return (
             <button
               key={i}
@@ -163,10 +150,10 @@ export default function ProfilePage() {
               className="w-full flex items-center justify-between p-3.5 rounded-2xl hover:bg-brand-bg transition-colors text-left text-xs sm:text-sm font-bold text-brand-text group cursor-pointer"
             >
               <div className="flex items-center gap-3">
-                <Icon className="w-5 h-5 text-brand-text/70" />
+                <i className={`hn ${item.icon} text-base text-brand-text/70`} />
                 <span className="font-cozy">{item.name}</span>
               </div>
-              <ChevronRight className="w-4 h-4 text-brand-text/40 group-hover:translate-x-0.5 transition-transform shrink-0" />
+              <i className="hn hn-arrow-right-solid text-sm text-brand-text/40 group-hover:translate-x-0.5 transition-transform shrink-0" />
             </button>
           );
         })}
@@ -176,10 +163,10 @@ export default function ProfilePage() {
           className="w-full flex items-center justify-between p-3.5 rounded-2xl hover:bg-red-50 hover:text-red-600 transition-colors text-left text-xs sm:text-sm font-bold text-brand-text/80 cursor-pointer"
         >
           <div className="flex items-center gap-3">
-            <LogOut className="w-5 h-5 text-red-500" />
+            <i className="hn hn-logout-solid text-base text-red-500" />
             <span className="font-cozy">Đăng xuất</span>
           </div>
-          <ChevronRight className="w-4 h-4 text-brand-text/30 shrink-0" />
+          <i className="hn hn-arrow-right-solid text-sm text-brand-text/30 shrink-0" />
         </button>
       </section>
 

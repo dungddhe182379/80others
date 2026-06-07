@@ -5,22 +5,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useApp } from "@/context/AppContext";
-import {
-  Home,
-  Layers,
-  Trophy,
-  Users,
-  User,
-  Settings,
-  Bell,
-  Menu,
-  X,
-  Flame,
-  Heart,
-  BookOpen,
-  HelpCircle,
-  Gift
-} from "lucide-react";
 
 export const Navigation: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
@@ -38,21 +22,21 @@ const NavigationContent: React.FC<{ children: React.ReactNode }> = ({ children }
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const navItems = [
-    { name: "Trang chủ", href: "/", icon: Home },
-    { name: "Thẻ", href: "/cards?tab=today", icon: Layers },
-    { name: "Thử thách", href: "/challenges", icon: Trophy },
-    { name: "Cộng đồng", href: "/community", icon: Users },
-    { name: "Hồ sơ", href: "/profile", icon: User },
+    { name: "Trang chủ", href: "/", icon: "hn-home-solid" },
+    { name: "Thẻ", href: "/cards?tab=today", icon: "hn-grid-solid" },
+    { name: "Thử thách", href: "/challenges", icon: "hn-trophy-solid" },
+    { name: "Cộng đồng", href: "/community", icon: "hn-users-solid" },
+    { name: "Hồ sơ", href: "/profile", icon: "hn-user-solid" },
   ];
 
   const sidebarItems = [
-    { name: "Trang chủ", href: "/", icon: Home },
-    { name: "Thẻ hôm nay", href: "/cards?tab=today", icon: Layers },
-    { name: "Thử thách", href: "/challenges", icon: Trophy },
-    { name: "Bộ sưu tập", href: "/cards", icon: BookOpen }, // Links to cards as deck library
-    { name: "Cộng đồng", href: "/community", icon: Users },
-    { name: "Hồ sơ", href: "/profile", icon: User },
-    { name: "Cài đặt", href: "/profile", icon: Settings },
+    { name: "Trang chủ", href: "/", icon: "hn-home-solid" },
+    { name: "Thẻ hôm nay", href: "/cards?tab=today", icon: "hn-grid-solid" },
+    { name: "Thử thách", href: "/challenges", icon: "hn-trophy-solid" },
+    { name: "Bộ sưu tập", href: "/cards", icon: "hn-book-bookmark-solid" }, // Links to cards as deck library
+    { name: "Cộng đồng", href: "/community", icon: "hn-users-solid" },
+    { name: "Hồ sơ", href: "/profile", icon: "hn-user-solid" },
+    { name: "Cài đặt", href: "/profile", icon: "hn-cog-solid" },
   ];
 
   const getIsActive = (href: string, name: string) => {
@@ -103,39 +87,39 @@ const NavigationContent: React.FC<{ children: React.ReactNode }> = ({ children }
 
         <div className="flex items-center gap-6">
           {/* Streak 🔥 */}
-          <div className="flex items-center gap-2 bg-orange-50 border-2 border-brand-outline px-3 py-1.5 rounded-lg shadow-pixel-sm">
-            <Flame className="w-5 h-5 text-orange-500 fill-orange-500 animate-pulse" />
+          <div className="stat-card-streak flex items-center gap-2 border-2 border-brand-outline px-3 py-1.5 rounded-lg shadow-pixel-sm">
+            <i className="hn hn-fire-solid text-[20px] text-orange-500 animate-pulse" />
             <div className="text-left leading-none">
-              <span className="font-pixel text-sm font-bold block">{streak}</span>
+              <span className="font-pixel text-sm font-bold block text-brand-text">{streak}</span>
               <span className="text-[10px] text-brand-text/75 font-semibold font-pixel">Chuỗi gia đình</span>
             </div>
           </div>
 
           {/* Connection Points ❤️ */}
-          <div className="flex items-center gap-2 bg-pink-50 border-2 border-brand-outline px-3 py-1.5 rounded-lg shadow-pixel-sm">
-            <Heart className="w-5 h-5 text-brand-pink fill-brand-pink animate-pulse" />
+          <div className="stat-card-points flex items-center gap-2 border-2 border-brand-outline px-3 py-1.5 rounded-lg shadow-pixel-sm">
+            <i className="hn hn-heart-solid text-[20px] text-brand-pink animate-pulse" />
             <div className="text-left leading-none">
-              <span className="font-pixel text-sm font-bold block">{points.toLocaleString("vi-VN")}</span>
+              <span className="font-pixel text-sm font-bold block text-brand-text">{points.toLocaleString("vi-VN")}</span>
               <span className="text-[10px] text-brand-text/75 font-semibold font-pixel">Điểm kết nối</span>
             </div>
           </div>
 
           {/* Notifications Bell */}
           <button className="relative p-2 border-2 border-brand-outline rounded-lg bg-brand-bg hover:bg-brand-border transition-colors shadow-pixel-sm active:translate-y-0.5 active:translate-x-0.5">
-            <Bell className="w-5 h-5 text-brand-text" />
+            <i className="hn hn-bell-solid text-[20px] text-brand-text" />
             <span className="absolute top-1 right-1 w-2.5 h-2.5 bg-brand-pink rounded-full border border-brand-outline" />
           </button>
 
           {/* Theme Toggle Button */}
           <button 
             onClick={toggleTheme}
-            className="p-2 border-2 border-brand-outline rounded-lg bg-brand-bg hover:bg-brand-border transition-colors shadow-pixel-sm active:translate-y-0.5 active:translate-x-0.5 cursor-pointer"
+            className="p-2 border-2 border-brand-outline rounded-lg bg-brand-bg hover:bg-brand-border transition-colors shadow-pixel-sm active:translate-y-0.5 active:translate-x-0.5 cursor-pointer flex items-center justify-center"
             aria-label="Toggle theme"
           >
             {theme === "dark" ? (
-              <span className="text-base select-none">☀️</span>
+              <i className="hn hn-sun-solid text-[20px] text-brand-yellow" />
             ) : (
-              <span className="text-base select-none">🌙</span>
+              <i className="hn hn-moon-solid text-[20px] text-brand-purple" />
             )}
           </button>
 
@@ -165,9 +149,9 @@ const NavigationContent: React.FC<{ children: React.ReactNode }> = ({ children }
       <header className="flex md:hidden items-center justify-between px-4 py-3.5 bg-brand-card border-b-3 border-brand-outline sticky top-0 z-40">
         <button
           onClick={() => setIsMobileMenuOpen(true)}
-          className="p-2 border-2 border-brand-outline rounded-lg bg-brand-bg shadow-pixel-sm active:translate-y-0.5"
+          className="p-2 border-2 border-brand-outline rounded-lg bg-brand-bg shadow-pixel-sm active:translate-y-0.5 flex items-center justify-center"
         >
-          <Menu className="w-5 h-5 text-brand-text" />
+          <i className="hn hn-bars-solid text-[20px] text-brand-text" />
         </button>
 
         <Link href="/" className="flex items-center gap-2">
@@ -187,14 +171,18 @@ const NavigationContent: React.FC<{ children: React.ReactNode }> = ({ children }
           {/* Mobile Theme Toggle */}
           <button 
             onClick={toggleTheme}
-            className="p-2 border-2 border-brand-outline rounded-lg bg-brand-bg shadow-pixel-sm active:translate-y-0.5 cursor-pointer"
+            className="p-2 border-2 border-brand-outline rounded-lg bg-brand-bg shadow-pixel-sm active:translate-y-0.5 cursor-pointer flex items-center justify-center"
             aria-label="Toggle theme"
           >
-            {theme === "dark" ? "☀️" : "🌙"}
+            {theme === "dark" ? (
+              <i className="hn hn-sun-solid text-[18px] text-brand-yellow" />
+            ) : (
+              <i className="hn hn-moon-solid text-[18px] text-brand-purple" />
+            )}
           </button>
           
-          <button className="p-2 border-2 border-brand-outline rounded-lg bg-brand-bg shadow-pixel-sm active:translate-y-0.5">
-            <Bell className="w-5 h-5 text-brand-text" />
+          <button className="p-2 border-2 border-brand-outline rounded-lg bg-brand-bg shadow-pixel-sm active:translate-y-0.5 flex items-center justify-center">
+            <i className="hn hn-bell-solid text-[20px] text-brand-text" />
           </button>
         </div>
       </header>
@@ -204,7 +192,6 @@ const NavigationContent: React.FC<{ children: React.ReactNode }> = ({ children }
         <aside className="hidden md:flex flex-col w-64 bg-brand-bg border-r-3 border-brand-outline p-4 justify-between h-[calc(100vh-77px)] sticky top-[77px] z-30 shrink-0">
           <div className="space-y-1">
             {sidebarItems.map((item) => {
-              const Icon = item.icon;
               const isActive = getIsActive(item.href, item.name);
               return (
                 <Link
@@ -216,7 +203,7 @@ const NavigationContent: React.FC<{ children: React.ReactNode }> = ({ children }
                       : "bg-transparent text-brand-text border-transparent hover:bg-brand-border/40 hover:border-brand-border"
                   }`}
                 >
-                  <Icon className={`w-5 h-5 ${isActive ? "text-white" : "text-brand-text"}`} />
+                  <i className={`hn ${item.icon} ${isActive ? "text-white" : "text-brand-text"} text-[18px]`} />
                   <span className="font-pixel text-[13px] tracking-wide font-medium">{item.name}</span>
                 </Link>
               );
@@ -300,15 +287,14 @@ const NavigationContent: React.FC<{ children: React.ReactNode }> = ({ children }
                   </div>
                   <button
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className="p-1 border border-brand-outline rounded bg-brand-bg"
+                    className="p-1 border border-brand-outline rounded bg-brand-bg flex items-center justify-center"
                   >
-                    <X className="w-5 h-5 text-brand-text" />
+                    <i className="hn hn-times-solid text-[18px] text-brand-text" />
                   </button>
                 </div>
 
                 <div className="space-y-1">
                   {sidebarItems.map((item) => {
-                    const Icon = item.icon;
                     const isActive = getIsActive(item.href, item.name);
                     return (
                       <Link
@@ -321,7 +307,7 @@ const NavigationContent: React.FC<{ children: React.ReactNode }> = ({ children }
                             : "bg-transparent text-brand-text border-transparent hover:bg-brand-border/40"
                         }`}
                       >
-                        <Icon className="w-4.5 h-4.5" />
+                        <i className={`hn ${item.icon} text-[16px]`} />
                         <span className="font-pixel text-xs tracking-wide font-medium">{item.name}</span>
                       </Link>
                     );
@@ -350,7 +336,6 @@ const NavigationContent: React.FC<{ children: React.ReactNode }> = ({ children }
       {/* ================= MOBILE BOTTOM NAVIGATION ================= */}
       <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-brand-card border-t-3 border-brand-outline px-4 py-2.5 flex justify-around items-center z-40">
         {navItems.map((item) => {
-          const Icon = item.icon;
           const isActive = getIsActive(item.href, item.name);
           return (
             <Link
@@ -362,7 +347,7 @@ const NavigationContent: React.FC<{ children: React.ReactNode }> = ({ children }
                   : "text-brand-text/60 hover:text-brand-text"
               }`}
             >
-              <Icon className="w-5.5 h-5.5 stroke-[2.25]" />
+              <i className={`hn ${item.icon} ${isActive ? "text-brand-purple text-[22px]" : "text-brand-text/60 text-[20px]"} transition-all`} />
               <span className="text-[10px] mt-1 font-pixel tracking-wide font-medium">{item.name}</span>
             </Link>
           );
