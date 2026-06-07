@@ -481,7 +481,7 @@ const NavigationContent: React.FC<{ children: React.ReactNode }> = ({ children }
                         2
                       </span>
                       <span className="pt-0.5 flex items-center gap-1.5 flex-wrap leading-relaxed">
-                        Nhấn vào nút <strong>Chia sẻ</strong>
+                        Nhấn vào nút có <strong>hình chữ nhật với mũi tên hướng lên</strong>
                         <span className="inline-flex p-1 border border-brand-outline bg-brand-bg rounded">
                           <i className="hn hn-share-alt-solid text-xs text-brand-text" />
                         </span>
