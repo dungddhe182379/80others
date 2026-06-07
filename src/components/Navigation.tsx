@@ -328,19 +328,18 @@ const NavigationContent: React.FC<{ children: React.ReactNode }> = ({ children }
               </div>
             </div>
 
-            {/* Little stats */}
             <div className="grid grid-cols-3 gap-1 border-t-2 border-brand-border pt-3 text-center text-xs">
               <div>
-                <span className="block font-pixel font-bold text-brand-purple-light text-sm">{points}</span>
-                <span className="text-[8px] text-brand-text/70 uppercase font-bold font-pixel">Điểm</span>
+                <span className="block font-pixel font-bold text-brand-purple-light text-base">{points}</span>
+                <span className="text-[10px] text-brand-text/70 uppercase font-bold font-pixel">Điểm</span>
               </div>
               <div>
-                <span className="block font-pixel font-bold text-orange-500 text-sm">{streak}</span>
-                <span className="text-[8px] text-brand-text/70 uppercase font-bold font-pixel">Chuỗi</span>
+                <span className="block font-pixel font-bold text-orange-500 text-base">{streak}</span>
+                <span className="text-[10px] text-brand-text/70 uppercase font-bold font-pixel">Chuỗi</span>
               </div>
               <div>
-                <span className="block font-pixel font-bold text-brand-pink text-sm">{completedCount}</span>
-                <span className="text-[8px] text-brand-text/70 uppercase font-bold font-pixel">Thẻ</span>
+                <span className="block font-pixel font-bold text-brand-pink text-base">{completedCount}</span>
+                <span className="text-[10px] text-brand-text/70 uppercase font-bold font-pixel">Thẻ</span>
               </div>
             </div>
 
