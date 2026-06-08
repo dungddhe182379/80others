@@ -7,6 +7,8 @@ import { usePathname, useSearchParams } from "next/navigation";
 import { useApp } from "@/context/AppContext";
 import { Share } from "lucide-react";
 import { DailyMessageModal } from "@/components/DailyMessageModal";
+import { NotificationGuideModal } from "@/components/NotificationGuideModal";
+import { warmQuotes } from "@/constants/quotes";
 
 interface BeforeInstallPromptEvent extends Event {
   prompt: () => Promise<void>;
@@ -34,6 +36,12 @@ const NavigationContent: React.FC<{ children: React.ReactNode }> = ({ children }
   const [installPrompt, setInstallPrompt] = useState<BeforeInstallPromptEvent | null>(null);
   const [isInstalled, setIsInstalled] = useState(false);
   const [showInstallGuide, setShowInstallGuide] = useState(false);
+
+  // Notification Guide modal
+  const [notiGuide, setNotiGuide] = useState<{ isOpen: boolean; type: "unsupported" | "denied" }>({
+    isOpen: false,
+    type: "unsupported",
+  });
 
   // Detect platform for install instructions
   const getInstallPlatform = () => {
@@ -87,50 +95,41 @@ const NavigationContent: React.FC<{ children: React.ReactNode }> = ({ children }
 
   const handleNotificationBellClick = async () => {
     if (typeof window === "undefined" || !("Notification" in window)) {
-      const ua = typeof navigator !== "undefined" ? navigator.userAgent.toLowerCase() : "";
-      const isIOS = /iphone|ipad|ipod/.test(ua);
-      const isAndroid = /android/.test(ua);
-
-      if (isIOS) {
-        alert(
-          "Thiết bị iOS yêu cầu bạn thêm ứng dụng vào Màn hình chính để sử dụng thông báo.\nHướng dẫn: Nhấn biểu tượng Chia sẻ (Share) trên Safari -> chọn 'Thêm vào MH chính' (Add to Home Screen). Sau đó, hãy mở ứng dụng từ màn hình chính để nhận thông điệp nhé!"
-        );
-      } else if (isAndroid) {
-        alert(
-          "Trình duyệt di động này không hỗ trợ nhận thông báo trực tiếp. Hãy tải ứng dụng 80others bằng cách nhấn biểu tượng 3 chấm ở góc trình duyệt Chrome và chọn 'Cài đặt ứng dụng' (Install App) để bật nhận thông báo nhé!"
-        );
-      } else {
-        alert(
-          "Trình duyệt của bạn không hỗ trợ tính năng thông báo. Hãy cài đặt ứng dụng 80others bằng cách nhấn biểu tượng tải xuống (Install) trên thanh địa chỉ trình duyệt để nhận thông điệp nhé!"
-        );
-      }
+      setNotiGuide({ isOpen: true, type: "unsupported" });
       return;
     }
 
     try {
       const permission = await Notification.requestPermission();
       if (permission === "granted") {
-        const { warmQuotes } = await import("@/constants/quotes");
-        const randomIndex = Math.floor(Math.random() * warmQuotes.length);
-        const quote = warmQuotes[randomIndex];
+        setTimeout(() => {
+          const randomIndex = Math.floor(Math.random() * warmQuotes.length);
+          const quote = warmQuotes[randomIndex];
 
-        const title = "Thông điệp yêu thương từ 80others ❤️";
-        const options = {
-          body: quote,
-          icon: "/assets/logo_pixel.png",
-          badge: "/assets/logo_pixel.png",
-          tag: "bell-notification-" + Date.now(),
-        };
+          const title = "Thông điệp yêu thương từ 80others ❤️";
+          const options = {
+            body: quote,
+            icon: "/assets/logo_pixel.png",
+            badge: "/assets/logo_pixel.png",
+            tag: "bell-notification-" + Date.now(),
+          };
 
-        if ("serviceWorker" in navigator) {
-          navigator.serviceWorker.ready.then((reg) => {
-            reg.showNotification(title, options);
-          });
-        } else {
-          new Notification(title, options);
-        }
+          try {
+            // Try standard desktop notification first
+            new Notification(title, options);
+          } catch (e) {
+            // Fallback to service worker showNotification (for iOS/mobile)
+            if ("serviceWorker" in navigator) {
+              navigator.serviceWorker.getRegistration().then((reg) => {
+                if (reg && "showNotification" in reg) {
+                  reg.showNotification(title, options);
+                }
+              });
+            }
+          }
+        }, 250);
       } else if (permission === "denied") {
-        alert("Bạn đã chặn quyền thông báo. Hãy cho phép trong cài đặt trình duyệt để nhận thông điệp nhé!");
+        setNotiGuide({ isOpen: true, type: "denied" });
       }
     } catch (error) {
       console.error("Lỗi khi yêu cầu thông báo:", error);
@@ -677,6 +676,13 @@ const NavigationContent: React.FC<{ children: React.ReactNode }> = ({ children }
 
       {/* ================= DAILY MESSAGE MODAL ================= */}
       <DailyMessageModal />
+
+      {/* ================= NOTIFICATION GUIDE MODAL ================= */}
+      <NotificationGuideModal
+        isOpen={notiGuide.isOpen}
+        onClose={() => setNotiGuide({ ...notiGuide, isOpen: false })}
+        type={notiGuide.type}
+      />
     </>
   );
 };
