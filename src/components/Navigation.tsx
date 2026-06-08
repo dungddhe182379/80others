@@ -87,7 +87,23 @@ const NavigationContent: React.FC<{ children: React.ReactNode }> = ({ children }
 
   const handleNotificationBellClick = async () => {
     if (typeof window === "undefined" || !("Notification" in window)) {
-      alert("Trình duyệt của bạn không hỗ trợ tính năng thông báo.");
+      const ua = typeof navigator !== "undefined" ? navigator.userAgent.toLowerCase() : "";
+      const isIOS = /iphone|ipad|ipod/.test(ua);
+      const isAndroid = /android/.test(ua);
+
+      if (isIOS) {
+        alert(
+          "Thiết bị iOS yêu cầu bạn thêm ứng dụng vào Màn hình chính để sử dụng thông báo.\nHướng dẫn: Nhấn biểu tượng Chia sẻ (Share) trên Safari -> chọn 'Thêm vào MH chính' (Add to Home Screen). Sau đó, hãy mở ứng dụng từ màn hình chính để nhận thông điệp nhé!"
+        );
+      } else if (isAndroid) {
+        alert(
+          "Trình duyệt di động này không hỗ trợ nhận thông báo trực tiếp. Hãy tải ứng dụng 80others bằng cách nhấn biểu tượng 3 chấm ở góc trình duyệt Chrome và chọn 'Cài đặt ứng dụng' (Install App) để bật nhận thông báo nhé!"
+        );
+      } else {
+        alert(
+          "Trình duyệt của bạn không hỗ trợ tính năng thông báo. Hãy cài đặt ứng dụng 80others bằng cách nhấn biểu tượng tải xuống (Install) trên thanh địa chỉ trình duyệt để nhận thông điệp nhé!"
+        );
+      }
       return;
     }
 
