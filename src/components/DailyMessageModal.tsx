@@ -111,67 +111,69 @@ export function DailyMessageModal() {
     setIsOpen(false);
   };
 
-  if (!isOpen) return null;
+  if (!isOpen && !notiGuide.isOpen) return null;
 
   return (
     <>
-      <div className="fixed inset-0 bg-brand-text/60 backdrop-blur-md z-[100] flex items-center justify-center p-4 animate-in fade-in duration-200">
-        <div className="bg-brand-card border-3 border-brand-outline rounded-3xl shadow-pixel max-w-md w-full p-6 relative overflow-hidden animate-in fade-in zoom-in duration-200 text-center">
-          {/* Heart Decor */}
-          <div className="flex justify-center mb-4">
-            <div className="w-12 h-12 border-2 border-brand-outline bg-brand-pink/15 rounded-full flex items-center justify-center animate-pulse shadow-pixel-sm">
-              <i className="hn hn-heart-solid text-brand-pink text-2xl" />
+      {isOpen && (
+        <div className="fixed inset-0 bg-brand-text/60 backdrop-blur-md z-[100] flex items-center justify-center p-4 animate-in fade-in duration-200">
+          <div className="bg-brand-card border-3 border-brand-outline rounded-3xl shadow-pixel max-w-md w-full p-6 relative overflow-hidden animate-in fade-in zoom-in duration-200 text-center">
+            {/* Heart Decor */}
+            <div className="flex justify-center mb-4">
+              <div className="w-12 h-12 border-2 border-brand-outline bg-brand-pink/15 rounded-full flex items-center justify-center animate-pulse shadow-pixel-sm">
+                <i className="hn hn-heart-solid text-brand-pink text-2xl" />
+              </div>
             </div>
-          </div>
 
-          {/* Modal Header */}
-          <h3 className="font-pixel text-lg sm:text-xl font-bold text-brand-text mb-3 flex items-center justify-center gap-1.5">
-            Thông điệp ấm áp hôm nay
-            <i className="hn hn-sparkles-solid text-brand-yellow text-xs animate-bounce" />
-          </h3>
+            {/* Modal Header */}
+            <h3 className="font-pixel text-lg sm:text-xl font-bold text-brand-text mb-3 flex items-center justify-center gap-1.5">
+              Thông điệp ấm áp hôm nay
+              <i className="hn hn-sparkles-solid text-brand-yellow text-xs animate-bounce" />
+            </h3>
 
-          {/* Quote Card */}
-          <div className="bg-brand-bg border-3 border-brand-outline rounded-2xl p-4 sm:p-5 mb-5 shadow-inner relative overflow-hidden">
-            <p className="font-pixel text-xs sm:text-sm text-brand-text leading-relaxed font-semibold italic">
-              &ldquo;{quote}&rdquo;
-            </p>
-          </div>
+            {/* Quote Card */}
+            <div className="bg-brand-bg border-3 border-brand-outline rounded-2xl p-4 sm:p-5 mb-5 shadow-inner relative overflow-hidden">
+              <p className="font-pixel text-xs sm:text-sm text-brand-text leading-relaxed font-semibold italic">
+                &ldquo;{quote}&rdquo;
+              </p>
+            </div>
 
-          {/* Question */}
-          {notificationStatus !== "granted" && (
-            <p className="text-xs text-brand-text/80 font-cozy leading-relaxed mb-6">
-              Bạn có muốn nhận thông điệp gia đình yêu thương mỗi ngày để vun đắp và kết nối tình cảm không?
-            </p>
-          )}
+            {/* Question */}
+            {notificationStatus !== "granted" && (
+              <p className="text-xs text-brand-text/80 font-cozy leading-relaxed mb-6">
+                Bạn có muốn nhận thông điệp gia đình yêu thương mỗi ngày để vun đắp và kết nối tình cảm không?
+              </p>
+            )}
 
-          {/* Footer Actions */}
-          <div className="flex flex-col sm:flex-row gap-3">
-            {notificationStatus !== "granted" ? (
-              <>
-                <button
-                  onClick={requestNotificationPermission}
-                  className="flex-1 py-2.5 border-2 border-brand-outline rounded-xl bg-brand-purple text-white font-pixel font-bold text-xs shadow-pixel-sm hover:brightness-105 active:translate-y-0.5 active:translate-x-0.5 transition-all cursor-pointer"
-                >
-                  Nhận mỗi ngày
-                </button>
+            {/* Footer Actions */}
+            <div className="flex flex-col sm:flex-row gap-3">
+              {notificationStatus !== "granted" ? (
+                <>
+                  <button
+                    onClick={requestNotificationPermission}
+                    className="flex-1 py-2.5 border-2 border-brand-outline rounded-xl bg-brand-purple text-white font-pixel font-bold text-xs shadow-pixel-sm hover:brightness-105 active:translate-y-0.5 active:translate-x-0.5 transition-all cursor-pointer"
+                  >
+                    Nhận mỗi ngày
+                  </button>
+                  <button
+                    onClick={() => setIsOpen(false)}
+                    className="flex-1 py-2.5 border-2 border-brand-outline rounded-xl bg-brand-bg hover:bg-brand-border text-brand-text font-pixel font-bold text-xs shadow-pixel-sm active:translate-y-0.5 active:translate-x-0.5 transition-colors cursor-pointer"
+                  >
+                    Đóng
+                  </button>
+                </>
+              ) : (
                 <button
                   onClick={() => setIsOpen(false)}
-                  className="flex-1 py-2.5 border-2 border-brand-outline rounded-xl bg-brand-bg hover:bg-brand-border text-brand-text font-pixel font-bold text-xs shadow-pixel-sm active:translate-y-0.5 active:translate-x-0.5 transition-colors cursor-pointer"
+                  className="w-full py-2.5 border-2 border-brand-outline rounded-xl bg-brand-purple text-white font-pixel font-bold text-xs shadow-pixel-sm hover:brightness-105 active:translate-y-0.5 active:translate-x-0.5 transition-all cursor-pointer"
                 >
-                  Đóng
+                  Chúc một ngày ấm áp!
                 </button>
-              </>
-            ) : (
-              <button
-                onClick={() => setIsOpen(false)}
-                className="w-full py-2.5 border-2 border-brand-outline rounded-xl bg-brand-purple text-white font-pixel font-bold text-xs shadow-pixel-sm hover:brightness-105 active:translate-y-0.5 active:translate-x-0.5 transition-all cursor-pointer"
-              >
-                Chúc một ngày ấm áp!
-              </button>
-            )}
+              )}
+            </div>
           </div>
         </div>
-      </div>
+      )}
 
       <NotificationGuideModal
         isOpen={notiGuide.isOpen}
