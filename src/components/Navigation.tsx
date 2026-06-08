@@ -6,6 +6,7 @@ import Image from "next/image";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useApp } from "@/context/AppContext";
 import { Share } from "lucide-react";
+import { DailyMessageModal } from "@/components/DailyMessageModal";
 
 interface BeforeInstallPromptEvent extends Event {
   prompt: () => Promise<void>;
@@ -81,6 +82,42 @@ const NavigationContent: React.FC<{ children: React.ReactNode }> = ({ children }
     } else {
       // No native prompt — show manual instructions
       setShowInstallGuide(true);
+    }
+  };
+
+  const handleNotificationBellClick = async () => {
+    if (typeof window === "undefined" || !("Notification" in window)) {
+      alert("Trình duyệt của bạn không hỗ trợ tính năng thông báo.");
+      return;
+    }
+
+    try {
+      const permission = await Notification.requestPermission();
+      if (permission === "granted") {
+        const { warmQuotes } = await import("@/constants/quotes");
+        const randomIndex = Math.floor(Math.random() * warmQuotes.length);
+        const quote = warmQuotes[randomIndex];
+
+        const title = "Thông điệp yêu thương từ 80others ❤️";
+        const options = {
+          body: quote,
+          icon: "/assets/logo_pixel.png",
+          badge: "/assets/logo_pixel.png",
+          tag: "bell-notification-" + Date.now(),
+        };
+
+        if ("serviceWorker" in navigator) {
+          navigator.serviceWorker.ready.then((reg) => {
+            reg.showNotification(title, options);
+          });
+        } else {
+          new Notification(title, options);
+        }
+      } else if (permission === "denied") {
+        alert("Bạn đã chặn quyền thông báo. Hãy cho phép trong cài đặt trình duyệt để nhận thông điệp nhé!");
+      }
+    } catch (error) {
+      console.error("Lỗi khi yêu cầu thông báo:", error);
     }
   };
 
@@ -160,7 +197,11 @@ const NavigationContent: React.FC<{ children: React.ReactNode }> = ({ children }
           </div>
 
           {/* Notifications Bell */}
-          <button className="relative p-2 border-2 border-brand-outline rounded-lg bg-brand-bg hover:bg-brand-border transition-colors shadow-pixel-sm active:translate-y-0.5 active:translate-x-0.5">
+          <button
+            onClick={handleNotificationBellClick}
+            className="relative p-2 border-2 border-brand-outline rounded-lg bg-brand-bg hover:bg-brand-border transition-colors shadow-pixel-sm active:translate-y-0.5 active:translate-x-0.5 cursor-pointer"
+            title="Nhận thông điệp ngẫu nhiên"
+          >
             <i className="hn hn-bell-solid text-[20px] text-brand-text" />
             <span className="absolute top-1 right-1 w-2.5 h-2.5 bg-brand-pink rounded-full border border-brand-outline" />
           </button>
@@ -261,7 +302,11 @@ const NavigationContent: React.FC<{ children: React.ReactNode }> = ({ children }
             )}
           </button>
 
-          <button className="p-2 border-2 border-brand-outline rounded-lg bg-brand-bg shadow-pixel-sm active:translate-y-0.5 flex items-center justify-center">
+          <button
+            onClick={handleNotificationBellClick}
+            className="p-2 border-2 border-brand-outline rounded-lg bg-brand-bg shadow-pixel-sm active:translate-y-0.5 flex items-center justify-center cursor-pointer"
+            title="Nhận thông điệp ngẫu nhiên"
+          >
             <i className="hn hn-bell-solid text-[20px] text-brand-text" />
           </button>
         </div>
@@ -613,6 +658,9 @@ const NavigationContent: React.FC<{ children: React.ReactNode }> = ({ children }
           </div>
         </div>
       )}
+
+      {/* ================= DAILY MESSAGE MODAL ================= */}
+      <DailyMessageModal />
     </>
   );
 };
