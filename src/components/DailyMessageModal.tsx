@@ -56,6 +56,15 @@ export function DailyMessageModal() {
   }, []);
 
   const requestNotificationPermission = async () => {
+    const isStandalone = typeof window !== "undefined" && 
+      (window.matchMedia("(display-mode: standalone)").matches || (navigator as any).standalone);
+
+    if (!isStandalone) {
+      setNotiGuide({ isOpen: true, type: "unsupported" });
+      setIsOpen(false);
+      return;
+    }
+
     if (!("Notification" in window)) {
       setNotiGuide({ isOpen: true, type: "unsupported" });
       setIsOpen(false);

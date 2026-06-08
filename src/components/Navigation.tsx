@@ -94,6 +94,14 @@ const NavigationContent: React.FC<{ children: React.ReactNode }> = ({ children }
   };
 
   const handleNotificationBellClick = async () => {
+    const isStandalone = typeof window !== "undefined" && 
+      (window.matchMedia("(display-mode: standalone)").matches || (navigator as any).standalone);
+
+    if (!isStandalone) {
+      setNotiGuide({ isOpen: true, type: "unsupported" });
+      return;
+    }
+
     if (typeof window === "undefined" || !("Notification" in window)) {
       setNotiGuide({ isOpen: true, type: "unsupported" });
       return;
