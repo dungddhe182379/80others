@@ -110,7 +110,7 @@ const NavigationContent: React.FC<{ children: React.ReactNode }> = ({ children }
     try {
       const permission = await Notification.requestPermission();
       if (permission === "granted") {
-        setTimeout(() => {
+        setTimeout(async () => {
           const randomIndex = Math.floor(Math.random() * warmQuotes.length);
           const quote = warmQuotes[randomIndex];
 
@@ -122,18 +122,25 @@ const NavigationContent: React.FC<{ children: React.ReactNode }> = ({ children }
             tag: "bell-notification-" + Date.now(),
           };
 
+          if ("serviceWorker" in navigator) {
+            try {
+              const reg = await Promise.race([
+                navigator.serviceWorker.ready,
+                new Promise<null>((resolve) => setTimeout(() => resolve(null), 1500))
+              ]);
+              if (reg && "showNotification" in reg) {
+                await reg.showNotification(title, options);
+                return;
+              }
+            } catch (e) {
+              console.warn("SW showNotification error:", e);
+            }
+          }
+
           try {
-            // Try standard desktop notification first
             new Notification(title, options);
           } catch (e) {
-            // Fallback to service worker showNotification (for iOS/mobile)
-            if ("serviceWorker" in navigator) {
-              navigator.serviceWorker.getRegistration().then((reg) => {
-                if (reg && "showNotification" in reg) {
-                  reg.showNotification(title, options);
-                }
-              });
-            }
+            console.error("Standard Notification constructor failed:", e);
           }
         }, 250);
       } else if (permission === "denied") {

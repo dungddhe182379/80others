@@ -78,7 +78,7 @@ export function DailyMessageModal() {
       if (permission === "granted") {
         localStorage.setItem("80others_notifications_subscribed", "true");
 
-        setTimeout(() => {
+        setTimeout(async () => {
           // Trigger a demo notification using service worker or fallback
           const title = "Cảm ơn bạn đã kết nối! ❤️";
           const options = {
@@ -88,18 +88,25 @@ export function DailyMessageModal() {
             tag: "daily-message-welcome",
           };
 
+          if ("serviceWorker" in navigator) {
+            try {
+              const reg = await Promise.race([
+                navigator.serviceWorker.ready,
+                new Promise<null>((resolve) => setTimeout(() => resolve(null), 1500))
+              ]);
+              if (reg && "showNotification" in reg) {
+                await reg.showNotification(title, options);
+                return;
+              }
+            } catch (e) {
+              console.warn("SW showNotification error:", e);
+            }
+          }
+
           try {
-            // Try standard desktop notification first
             new Notification(title, options);
           } catch (e) {
-            // Fallback to service worker showNotification (for iOS/mobile)
-            if ("serviceWorker" in navigator) {
-              navigator.serviceWorker.getRegistration().then((reg) => {
-                if (reg && "showNotification" in reg) {
-                  reg.showNotification(title, options);
-                }
-              });
-            }
+            console.error("Standard Notification constructor failed:", e);
           }
         }, 250);
       } else {
