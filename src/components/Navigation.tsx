@@ -301,59 +301,20 @@ const NavigationContent: React.FC<{ children: React.ReactNode }> = ({ children }
           </div>
 
           {/* Desktop Sidebar Profile Info Card Widget */}
-          <div className="bg-brand-card border-3 border-brand-outline p-4 rounded-2xl shadow-pixel relative overflow-hidden mt-6">
-            <div className="flex items-center gap-3 mb-3">
-              <div className="relative w-12 h-12 rounded-full border-2 border-brand-outline overflow-hidden bg-brand-purple-light shadow-pixel-sm shrink-0">
-                <Image
-                  src="/assets/avatars/avatar.png"
-                  alt="Charlie Puth avatar"
-                  fill
-                  sizes="48px"
-                  className="object-cover"
-                />
-              </div>
-              <div className="leading-tight">
-                <h4 className="font-pixel font-bold text-sm text-brand-text">Charlie Puth</h4>
-                <span className="text-[10px] font-pixel text-brand-purple-light font-bold bg-brand-outline px-1.5 py-0.2 rounded">Lv.5</span>
-              </div>
-            </div>
-
-            {/* XP progress */}
-            <div className="mb-4">
-              <div className="flex justify-between text-[10px] font-bold mb-1 font-pixel">
-                <span>XP</span>
-                <span>620 / 900 XP</span>
-              </div>
-              <div className="h-3.5 bg-brand-bg border-2 border-brand-outline rounded-full overflow-hidden p-0.5">
-                <div
-                  className="h-full bg-brand-purple-light rounded-full border border-brand-outline"
-                  style={{ width: "68.8%" }}
-                />
-              </div>
-            </div>
-
-            <div className="grid grid-cols-3 gap-1 border-t-2 border-brand-border pt-3 text-center text-xs">
-              <div>
-                <span className="block font-pixel font-bold text-brand-purple-light text-base">{points}</span>
-                <span className="text-[10px] text-brand-text/70 uppercase font-bold font-pixel">Điểm</span>
-              </div>
-              <div>
-                <span className="block font-pixel font-bold text-orange-500 text-base">{streak}</span>
-                <span className="text-[10px] text-brand-text/70 uppercase font-bold font-pixel">Chuỗi</span>
-              </div>
-              <div>
-                <span className="block font-pixel font-bold text-brand-pink text-base">{completedCount}</span>
-                <span className="text-[10px] text-brand-text/70 uppercase font-bold font-pixel">Thẻ</span>
-              </div>
-            </div>
-
-            <Link
-              href="/profile"
-              className="mt-3.5 flex items-center justify-center w-full py-1.5 border-2 border-brand-outline rounded-xl bg-brand-purple-light/20 text-brand-text font-pixel font-bold text-xs hover:bg-brand-purple-light/40 transition-colors active:translate-y-0.5"
-            >
-              Xem chi tiết hồ sơ →
-            </Link>
-          </div>
+          {/* Desktop Sidebar Cozy Fireplace Widget (Links to Profile) */}
+          <Link
+            href="/profile"
+            className="block -mx-4 overflow-hidden relative aspect-square mt-6 hover:brightness-105 active:translate-y-0.5 active:translate-x-0.5 transition-all cursor-pointer"
+          >
+            <Image
+              src={theme === "dark" ? "/assets/fireplace_night.png" : "/assets/fireplace_morning.png"}
+              alt="Cozy Fireplace"
+              fill
+              sizes="256px"
+              className="object-cover"
+              priority
+            />
+          </Link>
         </aside>
 
         {/* ================= MOBILE NAV DRAWER (SIDEBAR HAMBURGER MENU) ================= */}
