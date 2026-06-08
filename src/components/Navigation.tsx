@@ -88,6 +88,7 @@ const NavigationContent: React.FC<{ children: React.ReactNode }> = ({ children }
     { name: "Trang chủ", href: "/", icon: "hn-home-solid" },
     { name: "Thẻ", href: "/cards?tab=today", icon: "hn-grid-solid" },
     { name: "Thử thách", href: "/challenges", icon: "hn-trophy-solid" },
+    { name: "Huy hiệu", href: "/badges", icon: "hn-crown-solid" },
     { name: "Cộng đồng", href: "/community", icon: "hn-users-solid" },
     { name: "Hồ sơ", href: "/profile", icon: "hn-user-solid" },
   ];
