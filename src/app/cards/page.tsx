@@ -643,6 +643,7 @@ function CardsPageContent() {
   const [gameState, setGameState] = useState<"setup" | "playing" | "summary">("setup");
   const [gameMode, setGameMode] = useState<"level" | "free">("level");
   const [currentLevel, setCurrentLevel] = useState<number>(1); // For level mode, level 1 to 4
+  const [showGuideModal, setShowGuideModal] = useState(false);
   
   // Players list state
   const [players, setPlayers] = useState<Player[]>([
@@ -877,19 +878,28 @@ function CardsPageContent() {
       
       {/* HEADER BAR */}
       <section className="bg-brand-card border-3 border-brand-outline p-6 rounded-3xl shadow-pixel">
-        <div className="flex items-center justify-between">
-          <h2 className="font-pixel text-2xl font-bold text-brand-text flex items-center gap-2">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <h2 className="font-pixel text-xl sm:text-2xl font-bold text-brand-text flex items-center gap-2">
             <i className="hn hn-grid-solid text-brand-purple text-[22px]" />
             80others - Game Kết Nối Gia Đình
           </h2>
-          {gameState === "playing" && (
+          <div className="flex items-center gap-2 shrink-0">
             <button
-              onClick={() => setGameState("summary")}
-              className="py-1.5 px-3 border-2 border-brand-outline bg-red-100 hover:bg-red-200 text-red-700 font-pixel font-bold text-xs rounded-xl shadow-pixel-sm active:translate-y-0.5 cursor-pointer"
+              onClick={() => setShowGuideModal(true)}
+              className="py-1.5 px-3 border-2 border-brand-outline bg-amber-100 hover:bg-amber-200 text-amber-700 font-pixel font-bold text-xs rounded-xl shadow-pixel-sm active:translate-y-0.5 cursor-pointer flex items-center gap-1"
             >
-              Dừng chơi
+              <i className="hn hn-lightbulb-solid text-sm" />
+              Hướng dẫn
             </button>
-          )}
+            {gameState === "playing" && (
+              <button
+                onClick={() => setGameState("summary")}
+                className="py-1.5 px-3 border-2 border-brand-outline bg-red-100 hover:bg-red-200 text-red-700 font-pixel font-bold text-xs rounded-xl shadow-pixel-sm active:translate-y-0.5 cursor-pointer"
+              >
+                Dừng chơi
+              </button>
+            )}
+          </div>
         </div>
         <p className="text-brand-text/80 text-xs sm:text-sm font-semibold mt-2">
           Bộ bài chia sẻ chân thành, lắng nghe thấu hiểu không phán xét, kết nối yêu thương gia đình Việt Nam.
@@ -1367,6 +1377,122 @@ function CardsPageContent() {
 
         </div>
       )}
+
+      {/* ================= RULES GUIDE MODAL ================= */}
+      <AnimatePresence>
+        {showGuideModal && (
+          <div className="fixed inset-0 bg-brand-text/60 backdrop-blur-sm z-[100] flex items-center justify-center p-4">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              transition={{ duration: 0.2 }}
+              className="bg-brand-card border-3 border-brand-outline rounded-3xl shadow-pixel max-w-2xl w-full max-h-[85vh] flex flex-col relative overflow-hidden"
+            >
+              {/* Header */}
+              <div className="flex justify-between items-center p-5 border-b-2 border-brand-border bg-brand-card shrink-0">
+                <h3 className="font-pixel text-lg sm:text-xl font-bold text-brand-text flex items-center gap-2">
+                  <i className="hn hn-lightbulb-solid text-brand-yellow text-lg animate-pulse" />
+                  Hướng dẫn chơi Game kết nối
+                </h3>
+                <button
+                  onClick={() => setShowGuideModal(false)}
+                  className="p-1.5 border-2 border-brand-outline rounded-lg bg-brand-bg hover:bg-brand-border cursor-pointer flex items-center justify-center transition-colors shadow-pixel-sm active:translate-y-0.5 active:translate-x-0.5"
+                  aria-label="Đóng"
+                >
+                  <i className="hn hn-times-solid text-[16px] text-brand-text" />
+                </button>
+              </div>
+
+              {/* Scrollable Content */}
+              <div className="p-6 overflow-y-auto space-y-6 font-cozy text-brand-text text-sm">
+                
+                {/* 1. Play Setup */}
+                <div className="space-y-2">
+                  <h4 className="font-pixel text-xs sm:text-sm font-bold text-brand-purple flex items-center gap-1.5 uppercase">
+                    <span className="w-5 h-5 rounded-full bg-brand-purple text-white text-[10px] flex items-center justify-center font-pixel">1</span>
+                    Thiết lập người chơi & vai trò
+                  </h4>
+                  <p className="leading-relaxed font-semibold text-brand-text/90 pl-6">
+                    Mọi người thêm tên các thành viên và chọn đúng vai trò tương ứng (**Bố/Mẹ, Con cái, Ông/Bà**).
+                  </p>
+                  <div className="bg-brand-bg border border-brand-border p-3.5 rounded-2xl text-xs leading-relaxed text-brand-text/85 font-semibold space-y-1.5 ml-6">
+                    <span className="font-bold text-brand-purple block"><i className="hn hn-grid-solid text-[13px] inline mr-1" />Hệ thống tự động lọc bài thông minh:</span>
+                    <span>Tùy thuộc vào những vai trò tham gia, game sẽ tự động ẩn các lá bài không phù hợp (ví dụ: lá bài <strong>Anh/chị/em (ACE)</strong> chỉ xuất hiện khi có từ 2 Con cái chơi).</span>
+                  </div>
+                </div>
+
+                {/* 2. Turn Flow */}
+                <div className="space-y-3">
+                  <h4 className="font-pixel text-xs sm:text-sm font-bold text-brand-purple flex items-center gap-1.5 uppercase">
+                    <span className="w-5 h-5 rounded-full bg-brand-purple text-white text-[10px] flex items-center justify-center font-pixel">2</span>
+                    Quy trình 3 bước cho mỗi lượt
+                  </h4>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-3 pl-6">
+                    <div className="border-2 border-brand-outline rounded-2xl p-3 bg-brand-bg shadow-pixel-sm text-center space-y-1">
+                      <span className="font-pixel text-[10px] font-bold text-brand-pink block uppercase">Bước 1: RÚT BÀI</span>
+                      <p className="text-[11px] font-semibold text-brand-text/80 leading-relaxed">
+                        Lá bài sẽ hiển thị úp. Nhấn <strong>LẬT BÀI</strong> để xem thử thách.
+                      </p>
+                    </div>
+                    <div className="border-2 border-brand-outline rounded-2xl p-3 bg-brand-bg shadow-pixel-sm text-center space-y-1">
+                      <span className="font-pixel text-[10px] font-bold text-brand-purple block uppercase">Bước 2: THỰC HIỆN</span>
+                      <p className="text-[11px] font-semibold text-brand-text/80 leading-relaxed">
+                        Đọc to và trả lời/thực hiện yêu cầu. Nhấn <strong>Đã thực hiện xong</strong> để tiếp tục.
+                      </p>
+                    </div>
+                    <div className="border-2 border-brand-outline rounded-2xl p-3 bg-brand-bg shadow-pixel-sm text-center space-y-1">
+                      <span className="font-pixel text-[10px] font-bold text-brand-yellow block uppercase">Bước 3: PHẢN HỒI</span>
+                      <p className="text-[11px] font-semibold text-brand-text/80 leading-relaxed">
+                        Cả nhà lắng nghe và tính điểm dựa trên checklist chấm điểm chân thành.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* 3. Safety Card */}
+                <div className="space-y-2">
+                  <h4 className="font-pixel text-xs sm:text-sm font-bold text-brand-pink flex items-center gap-1.5 uppercase">
+                    <span className="w-5 h-5 rounded-full bg-brand-pink text-white text-[10px] flex items-center justify-center font-pixel">3</span>
+                    Thẻ An Toàn cảm xúc (AT)
+                  </h4>
+                  <p className="leading-relaxed font-semibold text-brand-text/90 pl-6">
+                    Trong bất cứ lượt chơi nào, nếu cảm thấy chưa sẵn sàng trả lời hoặc không thoải mái, người chơi có thể nhấn nút <strong>Kích hoạt Thẻ An Toàn</strong>.
+                  </p>
+                  <div className="bg-red-50 border border-red-200 p-3.5 rounded-2xl text-xs leading-relaxed text-red-900 font-semibold space-y-1 ml-6">
+                    <span className="font-bold text-red-700 block"><i className="hn hn-lock-solid text-[13px] inline mr-1" />Nguyên tắc an toàn tối thượng:</span>
+                    <span>Cả nhà tuyệt đối tôn trọng quyền giữ im lặng hoặc trao cho nhau một cái ôm ấm áp thay cho câu trả lời. Tránh chất vấn hay phán xét.</span>
+                  </div>
+                </div>
+
+                {/* 4. Golden Rules */}
+                <div className="space-y-2">
+                  <h4 className="font-pixel text-xs sm:text-sm font-bold text-brand-yellow flex items-center gap-1.5 uppercase">
+                    <span className="w-5 h-5 rounded-full bg-brand-yellow text-brand-outline text-[10px] flex items-center justify-center font-pixel">4</span>
+                    Nguyên tắc vàng khi chơi
+                  </h4>
+                  <ul className="list-disc pl-10 space-y-1.5 text-xs text-brand-text/90 font-semibold leading-relaxed">
+                    <li><strong>Lắng nghe sâu sắc:</strong> Tập trung lắng nghe trọn vẹn lời chia sẻ, không phán xét, không tranh cãi.</li>
+                    <li><strong>Phản hồi tích cực:</strong> Sau khi một thành viên chia sẻ, hãy cảm ơn vì họ đã nói thật lòng.</li>
+                    <li><strong>Tuyệt đối không chất vấn:</strong> Không gặng hỏi sâu hơn về quá khứ hoặc những chuyện buồn gây căng thẳng.</li>
+                  </ul>
+                </div>
+
+              </div>
+
+              {/* Footer */}
+              <div className="p-4 border-t-2 border-brand-border bg-brand-card shrink-0 flex justify-end">
+                <button
+                  onClick={() => setShowGuideModal(false)}
+                  className="w-full sm:w-auto py-2.5 px-6 border-2 border-brand-outline rounded-xl bg-brand-purple text-white font-pixel font-bold text-xs shadow-pixel-sm hover:brightness-105 active:translate-y-0.5 cursor-pointer text-center"
+                >
+                  Tôi đã hiểu, Bắt đầu chơi thôi!
+                </button>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
 
     </div>
   );
