@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800&family=Comfortaa:wght@300..700&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
 @import "tailwindcss";
 
 @font-face {
@@ -38,7 +38,7 @@ body.dark {
   --color-brand-text: var(--color-brand-text);
   --color-brand-outline: var(--color-brand-outline);
   
-  --font-pixel: "dearpix", monospace, sans-serif;
+  --font-pixel: "Nunito", var(--font-cozy);
   --font-cozy: "Be Vietnam Pro", sans-serif;
   
   --shadow-pixel: 4px 4px 0px 0px var(--color-brand-shadow);

@@ -167,6 +167,7 @@ const NavigationContent: React.FC<{ children: React.ReactNode }> = ({ children }
     { name: "Huy hiệu", href: "/badges", icon: "hn-crown-solid" },
     { name: "Cộng đồng", href: "/community", icon: "hn-users-solid" },
     { name: "Hồ sơ", href: "/profile", icon: "hn-user-solid" },
+    { name: "Facebook nhóm", href: "https://www.facebook.com/profile.php?id=61590436627631", icon: "hn-facebook-round", isExternal: true },
     { name: "Gây quỹ cho nhóm", href: "#", icon: "hn-heart-solid" },
   ];
 
@@ -360,6 +361,20 @@ const NavigationContent: React.FC<{ children: React.ReactNode }> = ({ children }
                   </button>
                 );
               }
+              if ('isExternal' in item && item.isExternal) {
+                return (
+                  <a
+                    key={item.name}
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-3 px-4 py-3 rounded-xl border-2 transition-all font-semibold bg-transparent text-brand-text border-transparent hover:bg-brand-border/40 hover:border-brand-border w-full text-left cursor-pointer"
+                  >
+                    <i className={`hn ${item.icon} text-brand-text text-[18px]`} />
+                    <span className="font-pixel text-[13px] tracking-wide font-medium">{item.name}</span>
+                  </a>
+                );
+              }
               return (
                 <Link
                   key={item.name}
@@ -437,6 +452,21 @@ const NavigationContent: React.FC<{ children: React.ReactNode }> = ({ children }
                         </button>
                       );
                     }
+                    if ('isExternal' in item && item.isExternal) {
+                      return (
+                        <a
+                          key={item.name}
+                          href={item.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={() => setIsMobileMenuOpen(false)}
+                          className="flex items-center gap-3 px-4 py-2.5 rounded-xl border-2 transition-all font-semibold bg-transparent text-brand-text border-transparent hover:bg-brand-border/40 w-full text-left cursor-pointer"
+                        >
+                          <i className={`hn ${item.icon} text-[16px]`} />
+                          <span className="font-pixel text-xs tracking-wide font-medium">{item.name}</span>
+                        </a>
+                      );
+                    }
                     return (
                       <Link
                         key={item.name}
@@ -456,11 +486,19 @@ const NavigationContent: React.FC<{ children: React.ReactNode }> = ({ children }
               </div>
 
               {/* Mobile Drawer Footer */}
-              <div className="border-t-2 border-brand-border pt-4 text-center">
+              <div className="border-t-2 border-brand-border pt-4 text-center flex flex-col items-center">
                 <span className="font-pixel text-[11px] text-brand-text block">80others</span>
                 <span className="text-[9px] text-brand-text/60 font-pixel block flex items-center justify-center gap-1">
                   Kết nối gia đình, vun đắp yêu thương <i className="hn hn-heart-solid text-brand-pink text-[9px]" />
                 </span>
+                <a
+                  href="https://www.facebook.com/profile.php?id=61590436627631"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 mt-2 text-[10px] text-brand-purple hover:text-brand-purple-light font-pixel font-bold hover:underline transition-colors"
+                >
+                  <i className="hn hn-facebook-round text-xs" /> Facebook nhóm
+                </a>
                 <span className="text-[8px] text-brand-text/40 font-mono block mt-2">Phiên bản 1.0.0</span>
               </div>
             </div>

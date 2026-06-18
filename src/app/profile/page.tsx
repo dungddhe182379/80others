@@ -51,6 +51,7 @@ export default function ProfilePage() {
     { name: "Gia đình của tôi", icon: "hn-users-solid" },
     { name: "Nhật ký kết nối", icon: "hn-history-solid" },
     { name: "Lưu trữ thẻ", icon: "hn-folder-solid" },
+    { name: "Facebook nhóm", icon: "hn-facebook-round", href: "https://www.facebook.com/profile.php?id=61590436627631", isExternal: true },
   ];
 
   return (
@@ -172,17 +173,37 @@ export default function ProfilePage() {
       {/* 3. FUNCTION MENU LIST */}
       <section className="bg-brand-card border-3 border-brand-outline p-3 rounded-3xl shadow-pixel space-y-1">
         {menuItems.map((item, i) => {
+          const content = (
+            <>
+              <div className="flex items-center gap-3">
+                <i className={`hn ${item.icon} text-base text-brand-text/70`} />
+                <span className="font-cozy">{item.name}</span>
+              </div>
+              <i className="hn hn-arrow-right-solid text-sm text-brand-text/40 group-hover:translate-x-0.5 transition-transform shrink-0" />
+            </>
+          );
+
+          if ('isExternal' in item && item.isExternal && item.href) {
+            return (
+              <a
+                key={i}
+                href={item.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full flex items-center justify-between p-3.5 rounded-2xl hover:bg-brand-bg transition-colors text-left text-xs sm:text-sm font-bold text-brand-text group cursor-pointer"
+              >
+                {content}
+              </a>
+            );
+          }
+
           return (
             <button
               key={i}
               onClick={(e) => handleActionClick(item.name, e)}
               className="w-full flex items-center justify-between p-3.5 rounded-2xl hover:bg-brand-bg transition-colors text-left text-xs sm:text-sm font-bold text-brand-text group cursor-pointer"
             >
-              <div className="flex items-center gap-3">
-                <i className={`hn ${item.icon} text-base text-brand-text/70`} />
-                <span className="font-cozy">{item.name}</span>
-              </div>
-              <i className="hn hn-arrow-right-solid text-sm text-brand-text/40 group-hover:translate-x-0.5 transition-transform shrink-0" />
+              {content}
             </button>
           );
         })}
