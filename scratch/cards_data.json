@@ -1,0 +1,464 @@
+[
+  {
+    "id": "c1",
+    "category": "WARM",
+    "symbol": "BT",
+    "frontImage": "/assets/5cards/1. KHỞI ĐỘNG/BT/card_front card KĐ 1-17.png",
+    "backImage": "/assets/5cards/1. KHỞI ĐỘNG/BT/mat_sau.png"
+  },
+  {
+    "id": "c2",
+    "category": "WARM",
+    "symbol": "BT",
+    "frontImage": "/assets/5cards/1. KHỞI ĐỘNG/BT/card_front card KĐ 1-21.png",
+    "backImage": "/assets/5cards/1. KHỞI ĐỘNG/BT/mat_sau.png"
+  },
+  {
+    "id": "c3",
+    "category": "WARM",
+    "symbol": "BT",
+    "frontImage": "/assets/5cards/1. KHỞI ĐỘNG/BT/card_front card KĐ 1-23.png",
+    "backImage": "/assets/5cards/1. KHỞI ĐỘNG/BT/mat_sau.png"
+  },
+  {
+    "id": "c4",
+    "category": "WARM",
+    "symbol": "BT",
+    "frontImage": "/assets/5cards/1. KHỞI ĐỘNG/BT/card_front card KĐ 1-24.png",
+    "backImage": "/assets/5cards/1. KHỞI ĐỘNG/BT/mat_sau.png"
+  },
+  {
+    "id": "c5",
+    "category": "WARM",
+    "symbol": "BT",
+    "frontImage": "/assets/5cards/1. KHỞI ĐỘNG/BT/card_front card KĐ 1-25.png",
+    "backImage": "/assets/5cards/1. KHỞI ĐỘNG/BT/mat_sau.png"
+  },
+  {
+    "id": "c6",
+    "category": "WARM",
+    "symbol": "GD",
+    "frontImage": "/assets/5cards/1. KHỞI ĐỘNG/GD/card-02.png",
+    "backImage": "/assets/5cards/1. KHỞI ĐỘNG/GD/mat_sau.png"
+  },
+  {
+    "id": "c7",
+    "category": "WARM",
+    "symbol": "GD",
+    "frontImage": "/assets/5cards/1. KHỞI ĐỘNG/GD/card_front card KĐ 1-15.png",
+    "backImage": "/assets/5cards/1. KHỞI ĐỘNG/GD/mat_sau.png"
+  },
+  {
+    "id": "c8",
+    "category": "WARM",
+    "symbol": "GD",
+    "frontImage": "/assets/5cards/1. KHỞI ĐỘNG/GD/card_front card KĐ 1-16.png",
+    "backImage": "/assets/5cards/1. KHỞI ĐỘNG/GD/mat_sau.png"
+  },
+  {
+    "id": "c9",
+    "category": "WARM",
+    "symbol": "GD",
+    "frontImage": "/assets/5cards/1. KHỞI ĐỘNG/GD/card_front card KĐ 1-18.png",
+    "backImage": "/assets/5cards/1. KHỞI ĐỘNG/GD/mat_sau.png"
+  },
+  {
+    "id": "c10",
+    "category": "WARM",
+    "symbol": "GD",
+    "frontImage": "/assets/5cards/1. KHỞI ĐỘNG/GD/card_front card KĐ 1-19.png",
+    "backImage": "/assets/5cards/1. KHỞI ĐỘNG/GD/mat_sau.png"
+  },
+  {
+    "id": "c11",
+    "category": "WARM",
+    "symbol": "GD",
+    "frontImage": "/assets/5cards/1. KHỞI ĐỘNG/GD/card_front card KĐ 1-20.png",
+    "backImage": "/assets/5cards/1. KHỞI ĐỘNG/GD/mat_sau.png"
+  },
+  {
+    "id": "c12",
+    "category": "WARM",
+    "symbol": "GD",
+    "frontImage": "/assets/5cards/1. KHỞI ĐỘNG/GD/card_front card KĐ 1-22.png",
+    "backImage": "/assets/5cards/1. KHỞI ĐỘNG/GD/mat_sau.png"
+  },
+  {
+    "id": "c13",
+    "category": "WARM",
+    "symbol": "GD",
+    "frontImage": "/assets/5cards/1. KHỞI ĐỘNG/GD/card_front card KĐ 1-26.png",
+    "backImage": "/assets/5cards/1. KHỞI ĐỘNG/GD/mat_sau.png"
+  },
+  {
+    "id": "c14",
+    "category": "WARM",
+    "symbol": "GD",
+    "frontImage": "/assets/5cards/1. KHỞI ĐỘNG/GD/card_front card KĐ 1-27.png",
+    "backImage": "/assets/5cards/1. KHỞI ĐỘNG/GD/mat_sau.png"
+  },
+  {
+    "id": "c15",
+    "category": "WARM",
+    "symbol": "GD",
+    "frontImage": "/assets/5cards/1. KHỞI ĐỘNG/GD/card_front card KĐ 1-28.png",
+    "backImage": "/assets/5cards/1. KHỞI ĐỘNG/GD/mat_sau.png"
+  },
+  {
+    "id": "c16",
+    "category": "PLAY",
+    "symbol": "ACE",
+    "frontImage": "/assets/5cards/2. TƯƠNG TÁC/ACE/card_front card TT 1-36.png",
+    "backImage": "/assets/5cards/2. TƯƠNG TÁC/ACE/mat_sau.png"
+  },
+  {
+    "id": "c17",
+    "category": "PLAY",
+    "symbol": "ACE",
+    "frontImage": "/assets/5cards/2. TƯƠNG TÁC/ACE/card_front card TT 1-37.png",
+    "backImage": "/assets/5cards/2. TƯƠNG TÁC/ACE/mat_sau.png"
+  },
+  {
+    "id": "c18",
+    "category": "PLAY",
+    "symbol": "BM-C",
+    "frontImage": "/assets/5cards/2. TƯƠNG TÁC/BMC/card_front card TT 1-33.png",
+    "backImage": "/assets/5cards/2. TƯƠNG TÁC/BMC/mat_sau.png"
+  },
+  {
+    "id": "c19",
+    "category": "PLAY",
+    "symbol": "BM-C",
+    "frontImage": "/assets/5cards/2. TƯƠNG TÁC/BMC/card_front card TT 1-34.png",
+    "backImage": "/assets/5cards/2. TƯƠNG TÁC/BMC/mat_sau.png"
+  },
+  {
+    "id": "c20",
+    "category": "PLAY",
+    "symbol": "BM-C",
+    "frontImage": "/assets/5cards/2. TƯƠNG TÁC/BMC/card_front card TT 1-35.png",
+    "backImage": "/assets/5cards/2. TƯƠNG TÁC/BMC/mat_sau.png"
+  },
+  {
+    "id": "c21",
+    "category": "PLAY",
+    "symbol": "BT",
+    "frontImage": "/assets/5cards/2. TƯƠNG TÁC/BT/card_front card TT 1-30.png",
+    "backImage": "/assets/5cards/2. TƯƠNG TÁC/BT/mat_sau.png"
+  },
+  {
+    "id": "c22",
+    "category": "PLAY",
+    "symbol": "BT",
+    "frontImage": "/assets/5cards/2. TƯƠNG TÁC/BT/card_front card TT 1-32.png",
+    "backImage": "/assets/5cards/2. TƯƠNG TÁC/BT/mat_sau.png"
+  },
+  {
+    "id": "c23",
+    "category": "PLAY",
+    "symbol": "GD",
+    "frontImage": "/assets/5cards/2. TƯƠNG TÁC/GD/card-04.png",
+    "backImage": "/assets/5cards/2. TƯƠNG TÁC/GD/mat_sau.png"
+  },
+  {
+    "id": "c24",
+    "category": "PLAY",
+    "symbol": "GD",
+    "frontImage": "/assets/5cards/2. TƯƠNG TÁC/GD/card_front card TT 1-29.png",
+    "backImage": "/assets/5cards/2. TƯƠNG TÁC/GD/mat_sau.png"
+  },
+  {
+    "id": "c25",
+    "category": "PLAY",
+    "symbol": "GD",
+    "frontImage": "/assets/5cards/2. TƯƠNG TÁC/GD/card_front card TT 1-31.png",
+    "backImage": "/assets/5cards/2. TƯƠNG TÁC/GD/mat_sau.png"
+  },
+  {
+    "id": "c26",
+    "category": "PLAY",
+    "symbol": "GD",
+    "frontImage": "/assets/5cards/2. TƯƠNG TÁC/GD/card_front card TT 1-39.png",
+    "backImage": "/assets/5cards/2. TƯƠNG TÁC/GD/mat_sau.png"
+  },
+  {
+    "id": "c27",
+    "category": "PLAY",
+    "symbol": "GD",
+    "frontImage": "/assets/5cards/2. TƯƠNG TÁC/GD/card_front card TT 1-40.png",
+    "backImage": "/assets/5cards/2. TƯƠNG TÁC/GD/mat_sau.png"
+  },
+  {
+    "id": "c28",
+    "category": "PLAY",
+    "symbol": "GD",
+    "frontImage": "/assets/5cards/2. TƯƠNG TÁC/GD/card_front card TT 1-41.png",
+    "backImage": "/assets/5cards/2. TƯƠNG TÁC/GD/mat_sau.png"
+  },
+  {
+    "id": "c29",
+    "category": "PLAY",
+    "symbol": "OB-C",
+    "frontImage": "/assets/5cards/2. TƯƠNG TÁC/OBC/card_front card TT 1-38.png",
+    "backImage": "/assets/5cards/2. TƯƠNG TÁC/OBC/mat_sau.png"
+  },
+  {
+    "id": "c30",
+    "category": "PLAY",
+    "symbol": "TH",
+    "frontImage": "/assets/5cards/2. TƯƠNG TÁC/TH/card_front card TT 1-42.png",
+    "backImage": "/assets/5cards/2. TƯƠNG TÁC/TH/card_back card TT-48.png"
+  },
+  {
+    "id": "c31",
+    "category": "BOND",
+    "symbol": "ACE",
+    "frontImage": "/assets/5cards/3. THẤU HIỂU/thấu hiểu/ACE/Asset 5@4x.png",
+    "backImage": "/assets/5cards/3. THẤU HIỂU/thấu hiểu/ACE/mat_sau.png"
+  },
+  {
+    "id": "c32",
+    "category": "BOND",
+    "symbol": "ACE",
+    "frontImage": "/assets/5cards/3. THẤU HIỂU/thấu hiểu/ACE/Asset 6@4x.png",
+    "backImage": "/assets/5cards/3. THẤU HIỂU/thấu hiểu/ACE/mat_sau.png"
+  },
+  {
+    "id": "c33",
+    "category": "BOND",
+    "symbol": "BM-C",
+    "frontImage": "/assets/5cards/3. THẤU HIỂU/thấu hiểu/BM-C/Asset 10@4x.png",
+    "backImage": "/assets/5cards/3. THẤU HIỂU/thấu hiểu/BM-C/mat_sau.png"
+  },
+  {
+    "id": "c34",
+    "category": "BOND",
+    "symbol": "BM-C",
+    "frontImage": "/assets/5cards/3. THẤU HIỂU/thấu hiểu/BM-C/Asset 7@4x.png",
+    "backImage": "/assets/5cards/3. THẤU HIỂU/thấu hiểu/BM-C/mat_sau.png"
+  },
+  {
+    "id": "c35",
+    "category": "BOND",
+    "symbol": "BM-C",
+    "frontImage": "/assets/5cards/3. THẤU HIỂU/thấu hiểu/BM-C/Asset 8@4x.png",
+    "backImage": "/assets/5cards/3. THẤU HIỂU/thấu hiểu/BM-C/mat_sau.png"
+  },
+  {
+    "id": "c36",
+    "category": "BOND",
+    "symbol": "BM-C",
+    "frontImage": "/assets/5cards/3. THẤU HIỂU/thấu hiểu/BM-C/Asset 9@4x.png",
+    "backImage": "/assets/5cards/3. THẤU HIỂU/thấu hiểu/BM-C/mat_sau.png"
+  },
+  {
+    "id": "c37",
+    "category": "BOND",
+    "symbol": "BT",
+    "frontImage": "/assets/5cards/3. THẤU HIỂU/thấu hiểu/BT/Asset 12@4x.png",
+    "backImage": "/assets/5cards/3. THẤU HIỂU/thấu hiểu/BT/mat_sau.png"
+  },
+  {
+    "id": "c38",
+    "category": "BOND",
+    "symbol": "BT",
+    "frontImage": "/assets/5cards/3. THẤU HIỂU/thấu hiểu/BT/Asset 13@4x.png",
+    "backImage": "/assets/5cards/3. THẤU HIỂU/thấu hiểu/BT/mat_sau.png"
+  },
+  {
+    "id": "c39",
+    "category": "BOND",
+    "symbol": "BT",
+    "frontImage": "/assets/5cards/3. THẤU HIỂU/thấu hiểu/BT/Asset 14@4x.png",
+    "backImage": "/assets/5cards/3. THẤU HIỂU/thấu hiểu/BT/mat_sau.png"
+  },
+  {
+    "id": "c40",
+    "category": "BOND",
+    "symbol": "BT",
+    "frontImage": "/assets/5cards/3. THẤU HIỂU/thấu hiểu/BT/Asset 15@4x.png",
+    "backImage": "/assets/5cards/3. THẤU HIỂU/thấu hiểu/BT/mat_sau.png"
+  },
+  {
+    "id": "c41",
+    "category": "BOND",
+    "symbol": "BT",
+    "frontImage": "/assets/5cards/3. THẤU HIỂU/thấu hiểu/BT/Asset 16@4x.png",
+    "backImage": "/assets/5cards/3. THẤU HIỂU/thấu hiểu/BT/mat_sau.png"
+  },
+  {
+    "id": "c42",
+    "category": "BOND",
+    "symbol": "BT",
+    "frontImage": "/assets/5cards/3. THẤU HIỂU/thấu hiểu/BT/Asset 17@4x.png",
+    "backImage": "/assets/5cards/3. THẤU HIỂU/thấu hiểu/BT/mat_sau.png"
+  },
+  {
+    "id": "c43",
+    "category": "BOND",
+    "symbol": "BT",
+    "frontImage": "/assets/5cards/3. THẤU HIỂU/thấu hiểu/BT/Asset 18@4x.png",
+    "backImage": "/assets/5cards/3. THẤU HIỂU/thấu hiểu/BT/mat_sau.png"
+  },
+  {
+    "id": "c44",
+    "category": "BOND",
+    "symbol": "BT",
+    "frontImage": "/assets/5cards/3. THẤU HIỂU/thấu hiểu/BT/Asset 2@4x.png",
+    "backImage": "/assets/5cards/3. THẤU HIỂU/thấu hiểu/BT/mat_sau.png"
+  },
+  {
+    "id": "c45",
+    "category": "BOND",
+    "symbol": "BT",
+    "frontImage": "/assets/5cards/3. THẤU HIỂU/thấu hiểu/BT/the-1.png",
+    "backImage": "/assets/5cards/3. THẤU HIỂU/thấu hiểu/BT/mat_sau.png"
+  },
+  {
+    "id": "c46",
+    "category": "BOND",
+    "symbol": "GD",
+    "frontImage": "/assets/5cards/3. THẤU HIỂU/thấu hiểu/GD/Asset 11@4x.png",
+    "backImage": "/assets/5cards/3. THẤU HIỂU/thấu hiểu/GD/mat_sau.png"
+  },
+  {
+    "id": "c47",
+    "category": "BOND",
+    "symbol": "OB-C",
+    "frontImage": "/assets/5cards/3. THẤU HIỂU/thấu hiểu/OB-C/Asset 3@4x.png",
+    "backImage": "/assets/5cards/3. THẤU HIỂU/thấu hiểu/OB-C/mat_sau.png"
+  },
+  {
+    "id": "c48",
+    "category": "BOND",
+    "symbol": "OB-C",
+    "frontImage": "/assets/5cards/3. THẤU HIỂU/thấu hiểu/OB-C/Asset 4@4x.png",
+    "backImage": "/assets/5cards/3. THẤU HIỂU/thấu hiểu/OB-C/mat_sau.png"
+  },
+  {
+    "id": "c49",
+    "category": "HEART",
+    "symbol": "ACE",
+    "frontImage": "/assets/5cards/4. YÊU THƯƠNG/yêu thương/ACE/Asset 3@4x.png",
+    "backImage": "/assets/5cards/4. YÊU THƯƠNG/yêu thương/ACE/mat_sau.png"
+  },
+  {
+    "id": "c50",
+    "category": "HEART",
+    "symbol": "BM-C",
+    "frontImage": "/assets/5cards/4. YÊU THƯƠNG/yêu thương/BM-C/Asset 4@4x.png",
+    "backImage": "/assets/5cards/4. YÊU THƯƠNG/yêu thương/BM-C/mat_sau.png"
+  },
+  {
+    "id": "c51",
+    "category": "HEART",
+    "symbol": "BM-C",
+    "frontImage": "/assets/5cards/4. YÊU THƯƠNG/yêu thương/BM-C/Asset 7@4x.png",
+    "backImage": "/assets/5cards/4. YÊU THƯƠNG/yêu thương/BM-C/mat_sau.png"
+  },
+  {
+    "id": "c52",
+    "category": "HEART",
+    "symbol": "BT",
+    "frontImage": "/assets/5cards/4. YÊU THƯƠNG/yêu thương/BT/Asset 10@4x.png",
+    "backImage": "/assets/5cards/4. YÊU THƯƠNG/yêu thương/BT/mat_sau.png"
+  },
+  {
+    "id": "c53",
+    "category": "HEART",
+    "symbol": "BT",
+    "frontImage": "/assets/5cards/4. YÊU THƯƠNG/yêu thương/BT/Asset 11@4x.png",
+    "backImage": "/assets/5cards/4. YÊU THƯƠNG/yêu thương/BT/mat_sau.png"
+  },
+  {
+    "id": "c54",
+    "category": "HEART",
+    "symbol": "BT",
+    "frontImage": "/assets/5cards/4. YÊU THƯƠNG/yêu thương/BT/Asset 12@4x.png",
+    "backImage": "/assets/5cards/4. YÊU THƯƠNG/yêu thương/BT/mat_sau.png"
+  },
+  {
+    "id": "c55",
+    "category": "HEART",
+    "symbol": "BT",
+    "frontImage": "/assets/5cards/4. YÊU THƯƠNG/yêu thương/BT/Asset 13@4x.png",
+    "backImage": "/assets/5cards/4. YÊU THƯƠNG/yêu thương/BT/mat_sau.png"
+  },
+  {
+    "id": "c56",
+    "category": "HEART",
+    "symbol": "BT",
+    "frontImage": "/assets/5cards/4. YÊU THƯƠNG/yêu thương/BT/Asset 14@4x.png",
+    "backImage": "/assets/5cards/4. YÊU THƯƠNG/yêu thương/BT/mat_sau.png"
+  },
+  {
+    "id": "c57",
+    "category": "HEART",
+    "symbol": "BT",
+    "frontImage": "/assets/5cards/4. YÊU THƯƠNG/yêu thương/BT/Asset 5@4x.png",
+    "backImage": "/assets/5cards/4. YÊU THƯƠNG/yêu thương/BT/mat_sau.png"
+  },
+  {
+    "id": "c58",
+    "category": "HEART",
+    "symbol": "BT",
+    "frontImage": "/assets/5cards/4. YÊU THƯƠNG/yêu thương/BT/Asset 6@4x.png",
+    "backImage": "/assets/5cards/4. YÊU THƯƠNG/yêu thương/BT/mat_sau.png"
+  },
+  {
+    "id": "c59",
+    "category": "HEART",
+    "symbol": "BT",
+    "frontImage": "/assets/5cards/4. YÊU THƯƠNG/yêu thương/BT/Asset 8@4x.png",
+    "backImage": "/assets/5cards/4. YÊU THƯƠNG/yêu thương/BT/mat_sau.png"
+  },
+  {
+    "id": "c60",
+    "category": "HEART",
+    "symbol": "BT",
+    "frontImage": "/assets/5cards/4. YÊU THƯƠNG/yêu thương/BT/Asset 9@4x.png",
+    "backImage": "/assets/5cards/4. YÊU THƯƠNG/yêu thương/BT/mat_sau.png"
+  },
+  {
+    "id": "c61",
+    "category": "HEART",
+    "symbol": "GD",
+    "frontImage": "/assets/5cards/4. YÊU THƯƠNG/yêu thương/GD/Asset 1@4x.png",
+    "backImage": "/assets/5cards/4. YÊU THƯƠNG/yêu thương/GD/mat_sau.png"
+  },
+  {
+    "id": "c62",
+    "category": "HEART",
+    "symbol": "OB-C",
+    "frontImage": "/assets/5cards/4. YÊU THƯƠNG/yêu thương/OB-C/Asset 2@4x.png",
+    "backImage": "/assets/5cards/4. YÊU THƯƠNG/yêu thương/OB-C/mat_sau.png"
+  },
+  {
+    "id": "c63",
+    "category": "SAFE",
+    "symbol": "AT",
+    "frontImage": "/assets/5cards/5. AN TOÀN_/card-10.png",
+    "backImage": "/assets/5cards/5. AN TOÀN_/mat_sau.png"
+  },
+  {
+    "id": "c64",
+    "category": "SAFE",
+    "symbol": "AT",
+    "frontImage": "/assets/5cards/5. AN TOÀN_/card_front card AT 1-12.png",
+    "backImage": "/assets/5cards/5. AN TOÀN_/mat_sau.png"
+  },
+  {
+    "id": "c65",
+    "category": "SAFE",
+    "symbol": "AT",
+    "frontImage": "/assets/5cards/5. AN TOÀN_/card_front card AT 1-13.png",
+    "backImage": "/assets/5cards/5. AN TOÀN_/mat_sau.png"
+  },
+  {
+    "id": "c66",
+    "category": "SAFE",
+    "symbol": "AT",
+    "frontImage": "/assets/5cards/5. AN TOÀN_/card_front card AT 1-14.png",
+    "backImage": "/assets/5cards/5. AN TOÀN_/mat_sau.png"
+  }
+]
