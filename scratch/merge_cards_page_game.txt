@@ -1,10 +1,4 @@
-const fs = require('fs');
-const path = require('path');
-
-const cardsJson = fs.readFileSync(path.join(__dirname, 'cards_data.json'), 'utf8');
-const cards = JSON.parse(cardsJson);
-
-const code = `"use client";
+"use client";
 
 import React, { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
@@ -28,7 +22,7 @@ interface Player {
   score: number;
 }
 
-const CARDS_DATA: Card[] = ${JSON.stringify(cards, null, 2)};
+// CARDS_DATA_PLACEHOLDER
 
 const SYMBOL_DETAILS: Record<string, { name: string; desc: string; tip: string }> = {
   "GD": {
@@ -910,7 +904,3 @@ function CardsPageContent() {
     </div>
   );
 }
-`;
-
-fs.writeFileSync(path.join(__dirname, '..', 'src', 'app', 'cards', 'page.tsx'), code);
-console.log("Successfully wrote pages.tsx");

@@ -156,12 +156,12 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   ]);
 
   const [completedCardIds, setCompletedCardIds] = useState<string[]>([]);
-  const [theme, setThemeState] = useState<"light" | "dark">("dark");
+  const [theme, setThemeState] = useState<"light" | "dark">("light");
 
   // Load from LocalStorage
   useEffect(() => {
     const savedTheme = localStorage.getItem("80others_theme") as "light" | "dark" | null;
-    const finalTheme = savedTheme || "dark";
+    const finalTheme = savedTheme || "light";
     setThemeState(finalTheme);
     document.body.classList.toggle("dark", finalTheme === "dark");
 

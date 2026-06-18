@@ -1,4 +1,11 @@
-"use client";
+const fs = require('fs');
+const path = require('path');
+
+// Read the card database
+const cardsJson = fs.readFileSync(path.join(__dirname, 'cards_data.json'), 'utf8');
+const cards = JSON.parse(cardsJson);
+
+const pageContent = `"use client";
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
@@ -16,474 +23,7 @@ interface Card {
   description?: string;
 }
 
-const CARDS_DATA: Card[] = [
-  {
-    "id": "c1",
-    "category": "WARM",
-    "symbol": "BT",
-    "frontImage": "/assets/5cards/1. KHỞI ĐỘNG/BT/card_front card KĐ 1-17.png",
-    "backImage": "/assets/5cards/1. KHỞI ĐỘNG/BT/mat_sau.png"
-  },
-  {
-    "id": "c2",
-    "category": "WARM",
-    "symbol": "BT",
-    "frontImage": "/assets/5cards/1. KHỞI ĐỘNG/BT/card_front card KĐ 1-21.png",
-    "backImage": "/assets/5cards/1. KHỞI ĐỘNG/BT/mat_sau.png"
-  },
-  {
-    "id": "c3",
-    "category": "WARM",
-    "symbol": "BT",
-    "frontImage": "/assets/5cards/1. KHỞI ĐỘNG/BT/card_front card KĐ 1-23.png",
-    "backImage": "/assets/5cards/1. KHỞI ĐỘNG/BT/mat_sau.png"
-  },
-  {
-    "id": "c4",
-    "category": "WARM",
-    "symbol": "BT",
-    "frontImage": "/assets/5cards/1. KHỞI ĐỘNG/BT/card_front card KĐ 1-24.png",
-    "backImage": "/assets/5cards/1. KHỞI ĐỘNG/BT/mat_sau.png"
-  },
-  {
-    "id": "c5",
-    "category": "WARM",
-    "symbol": "BT",
-    "frontImage": "/assets/5cards/1. KHỞI ĐỘNG/BT/card_front card KĐ 1-25.png",
-    "backImage": "/assets/5cards/1. KHỞI ĐỘNG/BT/mat_sau.png"
-  },
-  {
-    "id": "c6",
-    "category": "WARM",
-    "symbol": "GD",
-    "frontImage": "/assets/5cards/1. KHỞI ĐỘNG/GD/card-02.png",
-    "backImage": "/assets/5cards/1. KHỞI ĐỘNG/GD/mat_sau.png"
-  },
-  {
-    "id": "c7",
-    "category": "WARM",
-    "symbol": "GD",
-    "frontImage": "/assets/5cards/1. KHỞI ĐỘNG/GD/card_front card KĐ 1-15.png",
-    "backImage": "/assets/5cards/1. KHỞI ĐỘNG/GD/mat_sau.png"
-  },
-  {
-    "id": "c8",
-    "category": "WARM",
-    "symbol": "GD",
-    "frontImage": "/assets/5cards/1. KHỞI ĐỘNG/GD/card_front card KĐ 1-16.png",
-    "backImage": "/assets/5cards/1. KHỞI ĐỘNG/GD/mat_sau.png"
-  },
-  {
-    "id": "c9",
-    "category": "WARM",
-    "symbol": "GD",
-    "frontImage": "/assets/5cards/1. KHỞI ĐỘNG/GD/card_front card KĐ 1-18.png",
-    "backImage": "/assets/5cards/1. KHỞI ĐỘNG/GD/mat_sau.png"
-  },
-  {
-    "id": "c10",
-    "category": "WARM",
-    "symbol": "GD",
-    "frontImage": "/assets/5cards/1. KHỞI ĐỘNG/GD/card_front card KĐ 1-19.png",
-    "backImage": "/assets/5cards/1. KHỞI ĐỘNG/GD/mat_sau.png"
-  },
-  {
-    "id": "c11",
-    "category": "WARM",
-    "symbol": "GD",
-    "frontImage": "/assets/5cards/1. KHỞI ĐỘNG/GD/card_front card KĐ 1-20.png",
-    "backImage": "/assets/5cards/1. KHỞI ĐỘNG/GD/mat_sau.png"
-  },
-  {
-    "id": "c12",
-    "category": "WARM",
-    "symbol": "GD",
-    "frontImage": "/assets/5cards/1. KHỞI ĐỘNG/GD/card_front card KĐ 1-22.png",
-    "backImage": "/assets/5cards/1. KHỞI ĐỘNG/GD/mat_sau.png"
-  },
-  {
-    "id": "c13",
-    "category": "WARM",
-    "symbol": "GD",
-    "frontImage": "/assets/5cards/1. KHỞI ĐỘNG/GD/card_front card KĐ 1-26.png",
-    "backImage": "/assets/5cards/1. KHỞI ĐỘNG/GD/mat_sau.png"
-  },
-  {
-    "id": "c14",
-    "category": "WARM",
-    "symbol": "GD",
-    "frontImage": "/assets/5cards/1. KHỞI ĐỘNG/GD/card_front card KĐ 1-27.png",
-    "backImage": "/assets/5cards/1. KHỞI ĐỘNG/GD/mat_sau.png"
-  },
-  {
-    "id": "c15",
-    "category": "WARM",
-    "symbol": "GD",
-    "frontImage": "/assets/5cards/1. KHỞI ĐỘNG/GD/card_front card KĐ 1-28.png",
-    "backImage": "/assets/5cards/1. KHỞI ĐỘNG/GD/mat_sau.png"
-  },
-  {
-    "id": "c16",
-    "category": "PLAY",
-    "symbol": "ACE",
-    "frontImage": "/assets/5cards/2. TƯƠNG TÁC/ACE/card_front card TT 1-36.png",
-    "backImage": "/assets/5cards/2. TƯƠNG TÁC/ACE/mat_sau.png"
-  },
-  {
-    "id": "c17",
-    "category": "PLAY",
-    "symbol": "ACE",
-    "frontImage": "/assets/5cards/2. TƯƠNG TÁC/ACE/card_front card TT 1-37.png",
-    "backImage": "/assets/5cards/2. TƯƠNG TÁC/ACE/mat_sau.png"
-  },
-  {
-    "id": "c18",
-    "category": "PLAY",
-    "symbol": "BM-C",
-    "frontImage": "/assets/5cards/2. TƯƠNG TÁC/BMC/card_front card TT 1-33.png",
-    "backImage": "/assets/5cards/2. TƯƠNG TÁC/BMC/mat_sau.png"
-  },
-  {
-    "id": "c19",
-    "category": "PLAY",
-    "symbol": "BM-C",
-    "frontImage": "/assets/5cards/2. TƯƠNG TÁC/BMC/card_front card TT 1-34.png",
-    "backImage": "/assets/5cards/2. TƯƠNG TÁC/BMC/mat_sau.png"
-  },
-  {
-    "id": "c20",
-    "category": "PLAY",
-    "symbol": "BM-C",
-    "frontImage": "/assets/5cards/2. TƯƠNG TÁC/BMC/card_front card TT 1-35.png",
-    "backImage": "/assets/5cards/2. TƯƠNG TÁC/BMC/mat_sau.png"
-  },
-  {
-    "id": "c21",
-    "category": "PLAY",
-    "symbol": "BT",
-    "frontImage": "/assets/5cards/2. TƯƠNG TÁC/BT/card_front card TT 1-30.png",
-    "backImage": "/assets/5cards/2. TƯƠNG TÁC/BT/mat_sau.png"
-  },
-  {
-    "id": "c22",
-    "category": "PLAY",
-    "symbol": "BT",
-    "frontImage": "/assets/5cards/2. TƯƠNG TÁC/BT/card_front card TT 1-32.png",
-    "backImage": "/assets/5cards/2. TƯƠNG TÁC/BT/mat_sau.png"
-  },
-  {
-    "id": "c23",
-    "category": "PLAY",
-    "symbol": "GD",
-    "frontImage": "/assets/5cards/2. TƯƠNG TÁC/GD/card-04.png",
-    "backImage": "/assets/5cards/2. TƯƠNG TÁC/GD/mat_sau.png"
-  },
-  {
-    "id": "c24",
-    "category": "PLAY",
-    "symbol": "GD",
-    "frontImage": "/assets/5cards/2. TƯƠNG TÁC/GD/card_front card TT 1-29.png",
-    "backImage": "/assets/5cards/2. TƯƠNG TÁC/GD/mat_sau.png"
-  },
-  {
-    "id": "c25",
-    "category": "PLAY",
-    "symbol": "GD",
-    "frontImage": "/assets/5cards/2. TƯƠNG TÁC/GD/card_front card TT 1-31.png",
-    "backImage": "/assets/5cards/2. TƯƠNG TÁC/GD/mat_sau.png"
-  },
-  {
-    "id": "c26",
-    "category": "PLAY",
-    "symbol": "GD",
-    "frontImage": "/assets/5cards/2. TƯƠNG TÁC/GD/card_front card TT 1-39.png",
-    "backImage": "/assets/5cards/2. TƯƠNG TÁC/GD/mat_sau.png"
-  },
-  {
-    "id": "c27",
-    "category": "PLAY",
-    "symbol": "GD",
-    "frontImage": "/assets/5cards/2. TƯƠNG TÁC/GD/card_front card TT 1-40.png",
-    "backImage": "/assets/5cards/2. TƯƠNG TÁC/GD/mat_sau.png"
-  },
-  {
-    "id": "c28",
-    "category": "PLAY",
-    "symbol": "GD",
-    "frontImage": "/assets/5cards/2. TƯƠNG TÁC/GD/card_front card TT 1-41.png",
-    "backImage": "/assets/5cards/2. TƯƠNG TÁC/GD/mat_sau.png"
-  },
-  {
-    "id": "c29",
-    "category": "PLAY",
-    "symbol": "OB-C",
-    "frontImage": "/assets/5cards/2. TƯƠNG TÁC/OBC/card_front card TT 1-38.png",
-    "backImage": "/assets/5cards/2. TƯƠNG TÁC/OBC/mat_sau.png"
-  },
-  {
-    "id": "c30",
-    "category": "PLAY",
-    "symbol": "TH",
-    "frontImage": "/assets/5cards/2. TƯƠNG TÁC/TH/card_front card TT 1-42.png",
-    "backImage": "/assets/5cards/2. TƯƠNG TÁC/TH/card_back card TT-48.png"
-  },
-  {
-    "id": "c31",
-    "category": "BOND",
-    "symbol": "ACE",
-    "frontImage": "/assets/5cards/3. THẤU HIỂU/thấu hiểu/ACE/Asset 5@4x.png",
-    "backImage": "/assets/5cards/3. THẤU HIỂU/thấu hiểu/ACE/mat_sau.png"
-  },
-  {
-    "id": "c32",
-    "category": "BOND",
-    "symbol": "ACE",
-    "frontImage": "/assets/5cards/3. THẤU HIỂU/thấu hiểu/ACE/Asset 6@4x.png",
-    "backImage": "/assets/5cards/3. THẤU HIỂU/thấu hiểu/ACE/mat_sau.png"
-  },
-  {
-    "id": "c33",
-    "category": "BOND",
-    "symbol": "BM-C",
-    "frontImage": "/assets/5cards/3. THẤU HIỂU/thấu hiểu/BM-C/Asset 10@4x.png",
-    "backImage": "/assets/5cards/3. THẤU HIỂU/thấu hiểu/BM-C/mat_sau.png"
-  },
-  {
-    "id": "c34",
-    "category": "BOND",
-    "symbol": "BM-C",
-    "frontImage": "/assets/5cards/3. THẤU HIỂU/thấu hiểu/BM-C/Asset 7@4x.png",
-    "backImage": "/assets/5cards/3. THẤU HIỂU/thấu hiểu/BM-C/mat_sau.png"
-  },
-  {
-    "id": "c35",
-    "category": "BOND",
-    "symbol": "BM-C",
-    "frontImage": "/assets/5cards/3. THẤU HIỂU/thấu hiểu/BM-C/Asset 8@4x.png",
-    "backImage": "/assets/5cards/3. THẤU HIỂU/thấu hiểu/BM-C/mat_sau.png"
-  },
-  {
-    "id": "c36",
-    "category": "BOND",
-    "symbol": "BM-C",
-    "frontImage": "/assets/5cards/3. THẤU HIỂU/thấu hiểu/BM-C/Asset 9@4x.png",
-    "backImage": "/assets/5cards/3. THẤU HIỂU/thấu hiểu/BM-C/mat_sau.png"
-  },
-  {
-    "id": "c37",
-    "category": "BOND",
-    "symbol": "BT",
-    "frontImage": "/assets/5cards/3. THẤU HIỂU/thấu hiểu/BT/Asset 12@4x.png",
-    "backImage": "/assets/5cards/3. THẤU HIỂU/thấu hiểu/BT/mat_sau.png"
-  },
-  {
-    "id": "c38",
-    "category": "BOND",
-    "symbol": "BT",
-    "frontImage": "/assets/5cards/3. THẤU HIỂU/thấu hiểu/BT/Asset 13@4x.png",
-    "backImage": "/assets/5cards/3. THẤU HIỂU/thấu hiểu/BT/mat_sau.png"
-  },
-  {
-    "id": "c39",
-    "category": "BOND",
-    "symbol": "BT",
-    "frontImage": "/assets/5cards/3. THẤU HIỂU/thấu hiểu/BT/Asset 14@4x.png",
-    "backImage": "/assets/5cards/3. THẤU HIỂU/thấu hiểu/BT/mat_sau.png"
-  },
-  {
-    "id": "c40",
-    "category": "BOND",
-    "symbol": "BT",
-    "frontImage": "/assets/5cards/3. THẤU HIỂU/thấu hiểu/BT/Asset 15@4x.png",
-    "backImage": "/assets/5cards/3. THẤU HIỂU/thấu hiểu/BT/mat_sau.png"
-  },
-  {
-    "id": "c41",
-    "category": "BOND",
-    "symbol": "BT",
-    "frontImage": "/assets/5cards/3. THẤU HIỂU/thấu hiểu/BT/Asset 16@4x.png",
-    "backImage": "/assets/5cards/3. THẤU HIỂU/thấu hiểu/BT/mat_sau.png"
-  },
-  {
-    "id": "c42",
-    "category": "BOND",
-    "symbol": "BT",
-    "frontImage": "/assets/5cards/3. THẤU HIỂU/thấu hiểu/BT/Asset 17@4x.png",
-    "backImage": "/assets/5cards/3. THẤU HIỂU/thấu hiểu/BT/mat_sau.png"
-  },
-  {
-    "id": "c43",
-    "category": "BOND",
-    "symbol": "BT",
-    "frontImage": "/assets/5cards/3. THẤU HIỂU/thấu hiểu/BT/Asset 18@4x.png",
-    "backImage": "/assets/5cards/3. THẤU HIỂU/thấu hiểu/BT/mat_sau.png"
-  },
-  {
-    "id": "c44",
-    "category": "BOND",
-    "symbol": "BT",
-    "frontImage": "/assets/5cards/3. THẤU HIỂU/thấu hiểu/BT/Asset 2@4x.png",
-    "backImage": "/assets/5cards/3. THẤU HIỂU/thấu hiểu/BT/mat_sau.png"
-  },
-  {
-    "id": "c45",
-    "category": "BOND",
-    "symbol": "BT",
-    "frontImage": "/assets/5cards/3. THẤU HIỂU/thấu hiểu/BT/the-1.png",
-    "backImage": "/assets/5cards/3. THẤU HIỂU/thấu hiểu/BT/mat_sau.png"
-  },
-  {
-    "id": "c46",
-    "category": "BOND",
-    "symbol": "GD",
-    "frontImage": "/assets/5cards/3. THẤU HIỂU/thấu hiểu/GD/Asset 11@4x.png",
-    "backImage": "/assets/5cards/3. THẤU HIỂU/thấu hiểu/GD/mat_sau.png"
-  },
-  {
-    "id": "c47",
-    "category": "BOND",
-    "symbol": "OB-C",
-    "frontImage": "/assets/5cards/3. THẤU HIỂU/thấu hiểu/OB-C/Asset 3@4x.png",
-    "backImage": "/assets/5cards/3. THẤU HIỂU/thấu hiểu/OB-C/mat_sau.png"
-  },
-  {
-    "id": "c48",
-    "category": "BOND",
-    "symbol": "OB-C",
-    "frontImage": "/assets/5cards/3. THẤU HIỂU/thấu hiểu/OB-C/Asset 4@4x.png",
-    "backImage": "/assets/5cards/3. THẤU HIỂU/thấu hiểu/OB-C/mat_sau.png"
-  },
-  {
-    "id": "c49",
-    "category": "HEART",
-    "symbol": "ACE",
-    "frontImage": "/assets/5cards/4. YÊU THƯƠNG/yêu thương/ACE/Asset 3@4x.png",
-    "backImage": "/assets/5cards/4. YÊU THƯƠNG/yêu thương/ACE/mat_sau.png"
-  },
-  {
-    "id": "c50",
-    "category": "HEART",
-    "symbol": "BM-C",
-    "frontImage": "/assets/5cards/4. YÊU THƯƠNG/yêu thương/BM-C/Asset 4@4x.png",
-    "backImage": "/assets/5cards/4. YÊU THƯƠNG/yêu thương/BM-C/mat_sau.png"
-  },
-  {
-    "id": "c51",
-    "category": "HEART",
-    "symbol": "BM-C",
-    "frontImage": "/assets/5cards/4. YÊU THƯƠNG/yêu thương/BM-C/Asset 7@4x.png",
-    "backImage": "/assets/5cards/4. YÊU THƯƠNG/yêu thương/BM-C/mat_sau.png"
-  },
-  {
-    "id": "c52",
-    "category": "HEART",
-    "symbol": "BT",
-    "frontImage": "/assets/5cards/4. YÊU THƯƠNG/yêu thương/BT/Asset 10@4x.png",
-    "backImage": "/assets/5cards/4. YÊU THƯƠNG/yêu thương/BT/mat_sau.png"
-  },
-  {
-    "id": "c53",
-    "category": "HEART",
-    "symbol": "BT",
-    "frontImage": "/assets/5cards/4. YÊU THƯƠNG/yêu thương/BT/Asset 11@4x.png",
-    "backImage": "/assets/5cards/4. YÊU THƯƠNG/yêu thương/BT/mat_sau.png"
-  },
-  {
-    "id": "c54",
-    "category": "HEART",
-    "symbol": "BT",
-    "frontImage": "/assets/5cards/4. YÊU THƯƠNG/yêu thương/BT/Asset 12@4x.png",
-    "backImage": "/assets/5cards/4. YÊU THƯƠNG/yêu thương/BT/mat_sau.png"
-  },
-  {
-    "id": "c55",
-    "category": "HEART",
-    "symbol": "BT",
-    "frontImage": "/assets/5cards/4. YÊU THƯƠNG/yêu thương/BT/Asset 13@4x.png",
-    "backImage": "/assets/5cards/4. YÊU THƯƠNG/yêu thương/BT/mat_sau.png"
-  },
-  {
-    "id": "c56",
-    "category": "HEART",
-    "symbol": "BT",
-    "frontImage": "/assets/5cards/4. YÊU THƯƠNG/yêu thương/BT/Asset 14@4x.png",
-    "backImage": "/assets/5cards/4. YÊU THƯƠNG/yêu thương/BT/mat_sau.png"
-  },
-  {
-    "id": "c57",
-    "category": "HEART",
-    "symbol": "BT",
-    "frontImage": "/assets/5cards/4. YÊU THƯƠNG/yêu thương/BT/Asset 5@4x.png",
-    "backImage": "/assets/5cards/4. YÊU THƯƠNG/yêu thương/BT/mat_sau.png"
-  },
-  {
-    "id": "c58",
-    "category": "HEART",
-    "symbol": "BT",
-    "frontImage": "/assets/5cards/4. YÊU THƯƠNG/yêu thương/BT/Asset 6@4x.png",
-    "backImage": "/assets/5cards/4. YÊU THƯƠNG/yêu thương/BT/mat_sau.png"
-  },
-  {
-    "id": "c59",
-    "category": "HEART",
-    "symbol": "BT",
-    "frontImage": "/assets/5cards/4. YÊU THƯƠNG/yêu thương/BT/Asset 8@4x.png",
-    "backImage": "/assets/5cards/4. YÊU THƯƠNG/yêu thương/BT/mat_sau.png"
-  },
-  {
-    "id": "c60",
-    "category": "HEART",
-    "symbol": "BT",
-    "frontImage": "/assets/5cards/4. YÊU THƯƠNG/yêu thương/BT/Asset 9@4x.png",
-    "backImage": "/assets/5cards/4. YÊU THƯƠNG/yêu thương/BT/mat_sau.png"
-  },
-  {
-    "id": "c61",
-    "category": "HEART",
-    "symbol": "GD",
-    "frontImage": "/assets/5cards/4. YÊU THƯƠNG/yêu thương/GD/Asset 1@4x.png",
-    "backImage": "/assets/5cards/4. YÊU THƯƠNG/yêu thương/GD/mat_sau.png"
-  },
-  {
-    "id": "c62",
-    "category": "HEART",
-    "symbol": "OB-C",
-    "frontImage": "/assets/5cards/4. YÊU THƯƠNG/yêu thương/OB-C/Asset 2@4x.png",
-    "backImage": "/assets/5cards/4. YÊU THƯƠNG/yêu thương/OB-C/mat_sau.png"
-  },
-  {
-    "id": "c63",
-    "category": "SAFE",
-    "symbol": "AT",
-    "frontImage": "/assets/5cards/5. AN TOÀN_/card-10.png",
-    "backImage": "/assets/5cards/5. AN TOÀN_/mat_sau.png",
-    "description": "Bạn không cần trả lời lá vừa rút. Hãy chọn một người và nói: “Cảm ơn vì đã ở đây.”"
-  },
-  {
-    "id": "c64",
-    "category": "SAFE",
-    "symbol": "AT",
-    "frontImage": "/assets/5cards/5. AN TOÀN_/card_front card AT 1-12.png",
-    "backImage": "/assets/5cards/5. AN TOÀN_/mat_sau.png",
-    "description": "Bạn có quyền giữ điều này cho riêng mình. Hãy mỉm cười, gật đầu hoặc gửi một cử chỉ tích cực đến một người."
-  },
-  {
-    "id": "c65",
-    "category": "SAFE",
-    "symbol": "AT",
-    "frontImage": "/assets/5cards/5. AN TOÀN_/card_front card AT 1-13.png",
-    "backImage": "/assets/5cards/5. AN TOÀN_/mat_sau.png",
-    "description": "Nếu câu hỏi quá khó, bạn được đổi sang một thẻ khởi động."
-  },
-  {
-    "id": "c66",
-    "category": "SAFE",
-    "symbol": "AT",
-    "frontImage": "/assets/5cards/5. AN TOÀN_/card_front card AT 1-14.png",
-    "backImage": "/assets/5cards/5. AN TOÀN_/mat_sau.png",
-    "description": "Bạn được quyền không trả lời. Thay vào đó, mỗi người khác nói một điều tích cực về bạn."
-  }
-];
+const CARDS_DATA: Card[] = ${JSON.stringify(cards, null, 2)};
 
 const SYMBOL_DETAILS: Record<string, { name: string; desc: string }> = {
   "GD": { name: "Cả gia đình", desc: "Cả gia đình / ai cũng có thể trả lời" },
@@ -605,7 +145,7 @@ export default function HomePage() {
       <section className="bg-brand-card border-3 border-brand-outline p-6 rounded-3xl shadow-pixel relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-6">
         <div className="space-y-3 flex-grow">
           <h2 className="font-pixel text-2xl md:text-3xl font-bold text-brand-text flex items-center gap-2">
-            <i className={`hn ${greetingIcon} text-brand-yellow text-[22px]`} />
+            <i className={`hn \${greetingIcon} text-brand-yellow text-[22px]`} />
             {greetingText}
           </h2>
           <p className="text-brand-text/80 text-xs md:text-sm font-semibold">
@@ -805,10 +345,10 @@ export default function HomePage() {
                     <button
                       key={item.emoji}
                       onClick={(e) => handleMoodSelect(item.emoji, e)}
-                      className={`flex flex-col items-center justify-center p-3 rounded-2xl transition-all cursor-pointer ${isSelected
+                      className={\`flex flex-col items-center justify-center p-3 rounded-2xl transition-all cursor-pointer \${isSelected
                         ? "bg-brand-purple text-white border-3 border-brand-outline scale-105 shadow-pixel-sm font-bold"
-                        : `bg-brand-bg text-brand-text border-brand-border ${item.color}`
-                        }`}
+                        : \`bg-brand-bg text-brand-text border-brand-border \${item.color}\`
+                        }\`}
                     >
                       <div className="relative w-10 h-10 mb-1.5 filter drop-shadow-sm select-none shrink-0">
                         <img
@@ -876,7 +416,7 @@ export default function HomePage() {
                     <div className="h-3 bg-brand-bg border border-brand-text rounded-full overflow-hidden p-0.5 shadow-inner">
                       <div
                         className="h-full bg-brand-purple-light rounded-full transition-all duration-300"
-                        style={{ width: `${(todayChallenge.progress / todayChallenge.maxProgress) * 100}%` }}
+                        style={{ width: \`\${(todayChallenge.progress / todayChallenge.maxProgress) * 100}%\` }}
                       />
                     </div>
                   </div>
@@ -953,9 +493,9 @@ export default function HomePage() {
                         triggerHeart(rect.left + rect.width / 2, rect.top, 2);
                         likeMoment(m.id);
                       }}
-                      className={`flex items-center gap-1 ${m.likedByUser ? "text-brand-pink" : "text-brand-text/70"} hover:scale-105 active:scale-95 transition-transform`}
+                      className={\`flex items-center gap-1 \${m.likedByUser ? "text-brand-pink" : "text-brand-text/70"} hover:scale-105 active:scale-95 transition-transform\`}
                     >
-                      <i className={`hn hn-heart-solid text-[14px] ${m.likedByUser ? "text-brand-pink" : "text-brand-text/70"}`} />
+                      <i className={\`hn hn-heart-solid text-[14px] \${m.likedByUser ? "text-brand-pink" : "text-brand-text/70"}\`} />
                       <span>{m.likes}</span>
                     </button>
                     <div className="flex items-center gap-1 text-brand-text/70">
@@ -975,3 +515,8 @@ export default function HomePage() {
     </div>
   );
 }
+`;
+
+const outputPath = path.join(__dirname, '..', 'src', 'app', 'page.tsx');
+fs.writeFileSync(outputPath, pageContent, 'utf8');
+console.log("Successfully wrote target homepage page.tsx file!");
