@@ -644,6 +644,9 @@ function CardsPageContent() {
   const [gameMode, setGameMode] = useState<"level" | "free">("level");
   const [currentLevel, setCurrentLevel] = useState<number>(1); // For level mode, level 1 to 4
   const [showGuideModal, setShowGuideModal] = useState(false);
+
+  const activePlayerRef = React.useRef<HTMLDivElement>(null);
+  const pageTopRef = React.useRef<HTMLDivElement>(null);
   
   // Players list state
   const [players, setPlayers] = useState<Player[]>([
@@ -654,6 +657,17 @@ function CardsPageContent() {
   const [newPlayerName, setNewPlayerName] = useState("");
   const [newPlayerRole, setNewPlayerRole] = useState<Player["role"]>("child");
   const [currentPlayerIndex, setCurrentPlayerIndex] = useState(0);
+
+  // Auto-scroll active player into center of horizontal queue
+  useEffect(() => {
+    if (gameState === "playing" && activePlayerRef.current) {
+      activePlayerRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest",
+        inline: "center"
+      });
+    }
+  }, [currentPlayerIndex, gameState]);
 
   // Play session states
   const [currentStep, setCurrentStep] = useState<1 | 2 | 3>(1);
@@ -874,7 +888,7 @@ function CardsPageContent() {
   const symbolInfo = currentCard ? SYMBOL_DETAILS[currentCard.symbol] : null;
 
   return (
-    <div className="max-w-4xl mx-auto space-y-6 pb-12">
+    <div ref={pageTopRef} className="max-w-4xl mx-auto space-y-6 pb-12">
       
       {/* HEADER BAR */}
       <section className="bg-brand-card border-3 border-brand-outline p-6 rounded-3xl shadow-pixel">
@@ -1064,22 +1078,25 @@ function CardsPageContent() {
               </div>
 
               {/* Turn Progression Queue */}
-              <div className="bg-brand-bg border-2 border-brand-border p-2 rounded-2xl flex items-center justify-start gap-2 overflow-x-auto">
+              <div className="bg-brand-bg border-2 border-brand-border p-2 rounded-2xl flex items-center justify-start gap-3 overflow-x-auto scrollbar-none">
                 <span className="text-[9px] font-pixel text-brand-text/50 uppercase font-bold shrink-0">Đang chơi:</span>
-                <div className="flex items-center gap-2 overflow-x-auto pb-0.5 scrollbar-none">
+                <div className="flex items-center gap-2 shrink-0">
                   {players.map((p, idx) => {
                     const isCurrent = idx === currentPlayerIndex;
                     const isNext = idx === (currentPlayerIndex + 1) % players.length;
                     return (
                       <React.Fragment key={idx}>
                         {idx > 0 && <span className="text-brand-text/30 font-bold text-[10px] shrink-0">➔</span>}
-                        <div className={`flex items-center gap-1.5 py-1 px-2.5 rounded-full border transition-all shrink-0 ${
-                          isCurrent 
-                            ? "border-brand-purple bg-brand-purple/10 text-brand-purple font-bold scale-102 shadow-pixel-sm" 
-                            : isNext
-                              ? "border-brand-pink/50 bg-brand-pink/5 text-brand-text font-bold"
-                              : "border-brand-outline bg-brand-card text-brand-text/50 text-[11px]"
-                        }`}>
+                        <div
+                          ref={isCurrent ? activePlayerRef : null}
+                          className={`flex items-center gap-1.5 py-1 px-2.5 rounded-full border transition-all shrink-0 ${
+                            isCurrent 
+                              ? "border-brand-purple bg-brand-purple/10 text-brand-purple font-bold scale-102 shadow-pixel-sm" 
+                              : isNext
+                                ? "border-brand-pink/50 bg-brand-pink/5 text-brand-text font-bold"
+                                : "border-brand-outline bg-brand-card text-brand-text/50 text-[11px]"
+                          }`}
+                        >
                           <span className="text-xs font-cozy">
                             {p.name} {isCurrent ? "🎯" : isNext ? "⏳" : ""}
                           </span>
