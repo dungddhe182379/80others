@@ -13,6 +13,7 @@ interface Card {
   symbol: "GD" | "BT" | "BM-C" | "ACE" | "OB-C" | "TH" | "AT";
   frontImage: string;
   backImage: string;
+  description?: string;
 }
 
 interface Player {
@@ -461,28 +462,32 @@ const CARDS_DATA: Card[] = [
     "category": "SAFE",
     "symbol": "AT",
     "frontImage": "/assets/5cards/5. AN TOÀN_/card-10.png",
-    "backImage": "/assets/5cards/5. AN TOÀN_/mat_sau.png"
+    "backImage": "/assets/5cards/5. AN TOÀN_/mat_sau.png",
+    "description": "Bạn không cần trả lời lá vừa rút. Hãy chọn một người và nói: “Cảm ơn vì đã ở đây.”"
   },
   {
     "id": "c64",
     "category": "SAFE",
     "symbol": "AT",
     "frontImage": "/assets/5cards/5. AN TOÀN_/card_front card AT 1-12.png",
-    "backImage": "/assets/5cards/5. AN TOÀN_/mat_sau.png"
+    "backImage": "/assets/5cards/5. AN TOÀN_/mat_sau.png",
+    "description": "Bạn có quyền giữ điều này cho riêng mình. Hãy mỉm cười, gật đầu hoặc gửi một cử chỉ tích cực đến một người."
   },
   {
     "id": "c65",
     "category": "SAFE",
     "symbol": "AT",
     "frontImage": "/assets/5cards/5. AN TOÀN_/card_front card AT 1-13.png",
-    "backImage": "/assets/5cards/5. AN TOÀN_/mat_sau.png"
+    "backImage": "/assets/5cards/5. AN TOÀN_/mat_sau.png",
+    "description": "Nếu câu hỏi quá khó, bạn được đổi sang một thẻ khởi động."
   },
   {
     "id": "c66",
     "category": "SAFE",
     "symbol": "AT",
     "frontImage": "/assets/5cards/5. AN TOÀN_/card_front card AT 1-14.png",
-    "backImage": "/assets/5cards/5. AN TOÀN_/mat_sau.png"
+    "backImage": "/assets/5cards/5. AN TOÀN_/mat_sau.png",
+    "description": "Bạn được quyền không trả lời. Thay vào đó, mỗi người khác nói một điều tích cực về bạn."
   }
 ];
 
@@ -770,7 +775,7 @@ function CardsPageContent() {
     
     // Reset criteria checkboxes
     const criteriaCount = SCORING_CRITERIA[deckKey]?.length || 0;
-    setCriteriaChecked(new Array(criteriaCount).fill(false));
+    setCriteriaChecked(new Array(criteriaCount).fill(true));
   };
 
   const handleCardFlip = () => {
@@ -1028,35 +1033,65 @@ function CardsPageContent() {
           {/* Main gameplay area (Left 8 cols) */}
           <div className="lg:col-span-8 bg-brand-card border-3 border-brand-outline p-5 rounded-3xl shadow-pixel space-y-5">
             
-            {/* Header info bar */}
-            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 border-b-2 border-brand-border pb-3">
-              <div>
-                <span className="text-[10px] font-pixel bg-brand-outline text-white px-2 py-0.5 rounded">
-                  {activeDeck.title} - {activeDeck.subtitle}
-                </span>
-                <h3 className="font-pixel text-base font-bold text-brand-text mt-1">
-                  Lượt của: <span className="text-brand-purple underline">{players[currentPlayerIndex]?.name}</span>
-                  <span className="text-xs text-brand-text/60 ml-2 font-cozy">
-                    ({players[currentPlayerIndex]?.role === "parent" ? "Bố / Mẹ" : players[currentPlayerIndex]?.role === "grandparent" ? "Ông / Bà" : "Con cái"})
+            {/* Sticky Turn & Player Header */}
+            <div className="sticky top-0 z-20 bg-brand-card/95 backdrop-blur-md -mx-5 px-5 pt-3 pb-3 border-b-2 border-brand-border space-y-3">
+              {/* Header info bar */}
+              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+                <div>
+                  <span className="text-[10px] font-pixel bg-brand-outline text-white px-2 py-0.5 rounded">
+                    {activeDeck.title} - {activeDeck.subtitle}
                   </span>
-                </h3>
+                  <h3 className="font-pixel text-base font-bold text-brand-text mt-1">
+                    Lượt của: <span className="text-brand-purple underline">{players[currentPlayerIndex]?.name}</span>
+                    <span className="text-xs text-brand-text/60 ml-2 font-cozy">
+                      ({players[currentPlayerIndex]?.role === "parent" ? "Bố / Mẹ" : players[currentPlayerIndex]?.role === "grandparent" ? "Ông / Bà" : "Con cái"})
+                    </span>
+                  </h3>
+                </div>
+                <div className="flex items-center gap-1 bg-brand-purple/10 border border-brand-purple px-2.5 py-1 rounded-full text-brand-purple text-xs font-bold font-pixel">
+                  {currentStep === 1 ? "Bước 1: RÚT BÀI" : currentStep === 2 ? "Bước 2: THỰC HIỆN" : "Bước 3: PHẢN HỒI"}
+                </div>
               </div>
-              <div className="flex items-center gap-1 bg-brand-purple/10 border border-brand-purple px-2.5 py-1 rounded-full text-brand-purple text-xs font-bold font-pixel">
-                {currentStep === 1 ? "Bước 1: RÚT BÀI" : currentStep === 2 ? "Bước 2: THỰC HIỆN" : "Bước 3: PHẢN HỒI"}
+
+              {/* Turn Progression Queue */}
+              <div className="bg-brand-bg border-2 border-brand-border p-2 rounded-2xl flex items-center justify-start gap-2 overflow-x-auto">
+                <span className="text-[9px] font-pixel text-brand-text/50 uppercase font-bold shrink-0">Đang chơi:</span>
+                <div className="flex items-center gap-2 overflow-x-auto pb-0.5 scrollbar-none">
+                  {players.map((p, idx) => {
+                    const isCurrent = idx === currentPlayerIndex;
+                    const isNext = idx === (currentPlayerIndex + 1) % players.length;
+                    return (
+                      <React.Fragment key={idx}>
+                        {idx > 0 && <span className="text-brand-text/30 font-bold text-[10px] shrink-0">➔</span>}
+                        <div className={`flex items-center gap-1.5 py-1 px-2.5 rounded-full border transition-all shrink-0 ${
+                          isCurrent 
+                            ? "border-brand-purple bg-brand-purple/10 text-brand-purple font-bold scale-102 shadow-pixel-sm" 
+                            : isNext
+                              ? "border-brand-pink/50 bg-brand-pink/5 text-brand-text font-bold"
+                              : "border-brand-outline bg-brand-card text-brand-text/50 text-[11px]"
+                        }`}>
+                          <span className="text-xs font-cozy">
+                            {p.name} {isCurrent ? "🎯" : isNext ? "⏳" : ""}
+                          </span>
+                          <span className="text-[8px] uppercase tracking-wider font-bold opacity-60">
+                            ({p.role === "parent" ? "Bố/Mẹ" : p.role === "grandparent" ? "Ông/Bà" : "Con"})
+                          </span>
+                        </div>
+                      </React.Fragment>
+                    );
+                  })}
+                </div>
               </div>
             </div>
 
             {/* Step 1: Draw Card (Sun/Pattern deck facing up, waiting to flip) */}
             {currentStep === 1 && (
               <div className="flex flex-col items-center py-6 space-y-6 text-center">
-                <p className="font-cozy font-semibold text-xs text-brand-text/70 leading-relaxed max-w-sm">
-                  Nhấn vào lá bài để rút bài và lật mặt trước lá bài để xem câu hỏi thử thách.
-                </p>
                 <div className="perspective-1000 py-2">
                   <motion.div
                     animate={{ rotateY: isFlipped ? 180 : 0 }}
                     transition={{ duration: 0.4 }}
-                    className="relative w-64 h-96 transform-style-3d cursor-pointer shadow-pixel-lg rounded-3xl bg-transparent"
+                    className="relative w-48 h-72 sm:w-56 sm:h-80 md:w-64 md:h-96 transform-style-3d cursor-pointer shadow-pixel-lg rounded-3xl bg-transparent"
                     onClick={handleCardFlip}
                   >
                     {/* Front side (hidden when flipped) */}
@@ -1081,7 +1116,7 @@ function CardsPageContent() {
             {/* Step 2: Answering / Performing Challenge */}
             {currentStep === 2 && (
               <div className="flex flex-col items-center py-4 space-y-6">
-                <div className="w-64 h-96 shadow-pixel-lg rounded-3xl overflow-hidden relative">
+                <div className="w-48 h-72 sm:w-56 sm:h-80 md:w-64 md:h-96 shadow-pixel-lg rounded-3xl overflow-hidden relative">
                   <img src={currentCard.frontImage} alt="Mặt trước lá bài" className="w-full h-full object-contain" />
                 </div>
 
@@ -1093,6 +1128,15 @@ function CardsPageContent() {
                         Đối tượng: {currentCard.symbol}
                       </span>
                       <span className="text-brand-text font-bold text-right">{symbolInfo.desc}</span>
+                    </div>
+                  )}
+
+                  {/* Card text description */}
+                  {currentCard.description && (
+                    <div className="bg-brand-purple/10 border-2 border-brand-purple/30 p-4 rounded-2xl text-center shadow-pixel-sm">
+                      <p className="font-cozy font-bold text-sm text-brand-purple leading-relaxed">
+                        {currentCard.description}
+                      </p>
                     </div>
                   )}
 
@@ -1140,24 +1184,16 @@ function CardsPageContent() {
                   </div>
                 </div>
 
-                {/* Gentle Feedback messages container */}
-                <div className="space-y-2 border-t border-brand-border pt-4">
-                  <label className="font-pixel text-xs font-bold text-brand-purple block uppercase">🗣️ 1. Mọi người phản hồi nhẹ nhàng (Gợi ý)</label>
-                  <p className="text-[11px] text-brand-text/60 leading-tight font-semibold">
-                    Sau khi chia sẻ, các thành viên khác hãy dành lời phản hồi tích cực và lắng nghe sâu sắc, tuyệt đối không chất vấn:
-                  </p>
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 pt-1">
-                    <div className="p-3 border border-brand-outline bg-brand-card rounded-xl text-xs font-cozy italic font-medium">
-                      “Cảm ơn vì đã chia sẻ điều này.”
-                    </div>
-                    <div className="p-3 border border-brand-outline bg-brand-card rounded-xl text-xs font-cozy italic font-medium">
-                      “Mình cũng nhớ chuyện đó lắm.”
-                    </div>
-                    <div className="p-3 border border-brand-outline bg-brand-card rounded-xl text-xs font-cozy italic font-medium">
-                      “Mình không biết bạn từng nghĩ như vậy.”
-                    </div>
+                {/* Card text description */}
+                {currentCard.description && (
+                  <div className="bg-slate-50 border border-slate-200 p-3.5 rounded-2xl text-center shadow-pixel-sm">
+                    <p className="font-cozy font-bold text-xs text-slate-700 italic">
+                      "{currentCard.description}"
+                    </p>
                   </div>
-                </div>
+                )}
+
+
 
                 {/* Score Checklist criteria section */}
                 <div className="space-y-3 border-t border-brand-border pt-4">

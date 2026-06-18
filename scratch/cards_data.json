@@ -438,27 +438,31 @@
     "category": "SAFE",
     "symbol": "AT",
     "frontImage": "/assets/5cards/5. AN TOÀN_/card-10.png",
-    "backImage": "/assets/5cards/5. AN TOÀN_/mat_sau.png"
+    "backImage": "/assets/5cards/5. AN TOÀN_/mat_sau.png",
+    "description": "Bạn không cần trả lời lá vừa rút. Hãy chọn một người và nói: “Cảm ơn vì đã ở đây.”"
   },
   {
     "id": "c64",
     "category": "SAFE",
     "symbol": "AT",
     "frontImage": "/assets/5cards/5. AN TOÀN_/card_front card AT 1-12.png",
-    "backImage": "/assets/5cards/5. AN TOÀN_/mat_sau.png"
+    "backImage": "/assets/5cards/5. AN TOÀN_/mat_sau.png",
+    "description": "Bạn có quyền giữ điều này cho riêng mình. Hãy mỉm cười, gật đầu hoặc gửi một cử chỉ tích cực đến một người."
   },
   {
     "id": "c65",
     "category": "SAFE",
     "symbol": "AT",
     "frontImage": "/assets/5cards/5. AN TOÀN_/card_front card AT 1-13.png",
-    "backImage": "/assets/5cards/5. AN TOÀN_/mat_sau.png"
+    "backImage": "/assets/5cards/5. AN TOÀN_/mat_sau.png",
+    "description": "Nếu câu hỏi quá khó, bạn được đổi sang một thẻ khởi động."
   },
   {
     "id": "c66",
     "category": "SAFE",
     "symbol": "AT",
     "frontImage": "/assets/5cards/5. AN TOÀN_/card_front card AT 1-14.png",
-    "backImage": "/assets/5cards/5. AN TOÀN_/mat_sau.png"
+    "backImage": "/assets/5cards/5. AN TOÀN_/mat_sau.png",
+    "description": "Bạn được quyền không trả lời. Thay vào đó, mỗi người khác nói một điều tích cực về bạn."
   }
 ]
