@@ -32,7 +32,14 @@ import {
   RefreshCw,
   X,
   Send,
-  AlertCircle
+  AlertCircle,
+  LogOut,
+  BarChart3,
+  MousePointerClick,
+  AlertTriangle,
+  Layers,
+  ArrowDownRight,
+  HelpCircle
 } from "lucide-react";
 
 // Mock Data Definitions
@@ -60,24 +67,60 @@ interface UserRecord {
   status: "Hoạt động" | "Ngoại tuyến" | "Tạm khóa";
 }
 
+interface PageUsageData {
+  name: string;
+  path: string;
+  views: number;
+  percentage: number;
+  avgTime: string;
+  icon: string;
+  color: string;
+}
+
+interface DropOffData {
+  contentName: string;
+  category: string;
+  dropRate: number;
+  usersLost: number;
+  reason: string;
+  riskLevel: "Cao" | "Trung bình" | "Thấp";
+}
+
+// Mock User Data in 1-month campaign (June 2026 - Early July 2026)
 const mockUsers: UserRecord[] = [
-  { id: "USR-362", name: "Nguyễn Văn An", avatar: "👨‍👩‍👦", email: "an.nguyen@gmail.com", role: "VIP", streak: 42, points: 1250, joinedDate: "hôm nay, 14:20", status: "Hoạt động" },
-  { id: "USR-361", name: "Trần Thị Mai", avatar: "👩‍🍳", email: "mai.tran@yahoo.com", role: "Thành viên", streak: 18, points: 640, joinedDate: "hôm nay, 11:05", status: "Hoạt động" },
-  { id: "USR-360", name: "Lê Minh Trí", avatar: "👨‍💻", email: "tri.le@tech.io", role: "VIP", streak: 95, points: 2890, joinedDate: "hôm qua", status: "Hoạt động" },
-  { id: "USR-359", name: "Phạm Phương Thảo", avatar: "👩‍🎨", email: "thao.pham@art.net", role: "Mới", streak: 3, points: 120, joinedDate: "hôm qua", status: "Hoạt động" },
-  { id: "USR-358", name: "Đặng Hoàng Nam", avatar: "🚴‍♂️", email: "nam.dang@sports.vn", role: "Thành viên", streak: 29, points: 980, joinedDate: "20/07/2026", status: "Ngoại tuyến" },
-  { id: "USR-357", name: "Vũ Bảo Ngọc", avatar: "👩‍🔬", email: "ngoc.vu@edu.vn", role: "VIP", streak: 56, points: 1840, joinedDate: "19/07/2026", status: "Hoạt động" },
-  { id: "USR-356", name: "Bùi Anh Tuấn", avatar: "🎧", email: "tuan.bui@music.com", role: "Mới", streak: 1, points: 40, joinedDate: "18/07/2026", status: "Tạm khóa" },
-  { id: "USR-355", name: "Hoàng Gia Hưng", avatar: "👨‍🌾", email: "hung.hoang@farm.vn", role: "Thành viên", streak: 14, points: 510, joinedDate: "17/07/2026", status: "Hoạt động" },
+  { id: "USR-362", name: "Nguyễn Văn An", avatar: "👨‍👩‍👦", email: "an.nguyen@gmail.com", role: "VIP", streak: 28, points: 1250, joinedDate: "04/07/2026", status: "Hoạt động" },
+  { id: "USR-361", name: "Trần Thị Mai", avatar: "👩‍🍳", email: "mai.tran@yahoo.com", role: "Thành viên", streak: 18, points: 640, joinedDate: "02/07/2026", status: "Hoạt động" },
+  { id: "USR-360", name: "Lê Minh Trí", avatar: "👨‍💻", email: "tri.le@tech.io", role: "VIP", streak: 30, points: 2890, joinedDate: "28/06/2026", status: "Hoạt động" },
+  { id: "USR-359", name: "Phạm Phương Thảo", avatar: "👩‍🎨", email: "thao.pham@art.net", role: "Mới", streak: 12, points: 420, joinedDate: "22/06/2026", status: "Hoạt động" },
+  { id: "USR-358", name: "Đặng Hoàng Nam", avatar: "🚴‍♂️", email: "nam.dang@sports.vn", role: "Thành viên", streak: 20, points: 980, joinedDate: "15/06/2026", status: "Ngoại tuyến" },
+  { id: "USR-357", name: "Vũ Bảo Ngọc", avatar: "👩‍🔬", email: "ngoc.vu@edu.vn", role: "VIP", streak: 25, points: 1840, joinedDate: "10/06/2026", status: "Hoạt động" },
+  { id: "USR-356", name: "Bùi Anh Tuấn", avatar: "🎧", email: "tuan.bui@music.com", role: "Mới", streak: 5, points: 140, joinedDate: "05/06/2026", status: "Tạm khóa" },
+  { id: "USR-355", name: "Hoàng Gia Hưng", avatar: "👨‍🌾", email: "hung.hoang@farm.vn", role: "VIP", streak: 30, points: 3510, joinedDate: "01/06/2026", status: "Hoạt động" },
+];
+
+// Most Visited & Used Pages Data
+const pageUsageStats: PageUsageData[] = [
+  { name: "Thẻ Hôm Nay", path: "/cards?tab=today", views: 604, percentage: 42.5, avgTime: "4m 12s", icon: "hn-grid-solid", color: "bg-purple-500" },
+  { name: "Thử Thách Gia Đình", path: "/challenges", views: 398, percentage: 28.0, avgTime: "3m 45s", icon: "hn-trophy-solid", color: "bg-pink-500" },
+  { name: "Cộng Đồng Kết Nối", path: "/community", views: 216, percentage: 15.2, avgTime: "2m 30s", icon: "hn-users-solid", color: "bg-emerald-500" },
+  { name: "Huy Hiệu & Thành Tích", path: "/badges", views: 125, percentage: 8.8, avgTime: "1m 15s", icon: "hn-crown-solid", color: "bg-amber-500" },
+  { name: "Hồ Sơ Cá Nhân", path: "/profile", views: 78, percentage: 5.5, avgTime: "0m 50s", icon: "hn-user-solid", color: "bg-blue-500" },
+];
+
+// Drop-Off Content Analysis Data
+const dropOffStats: DropOffData[] = [
+  { contentName: "Form Hướng Dẫn Thông Báo (Onboarding)", category: "Quy trình đăng ký", dropRate: 18.5, usersLost: 67, reason: "Popup xin quyền thông báo trên trình duyệt iOS bị từ chối", riskLevel: "Cao" },
+  { contentName: "Thử Thách Tuần 3: 'Viết Nhật Ký 100 Chữ'", category: "Nội dung thử thách", dropRate: 12.4, usersLost: 45, reason: "Yêu cầu nhập văn bản quá dài trên điện thoại di động", riskLevel: "Trung bình" },
+  { contentName: "Modal Gây Quỹ Cho Nhóm", category: "Tính năng liên kết", dropRate: 8.2, usersLost: 30, reason: "Chưa có thông tin chuyển khoản QR tự động", riskLevel: "Trung bình" },
+  { contentName: "Trang Danh Sách Huy Hiệu Khóa", category: "Trang danh mục", dropRate: 5.1, usersLost: 18, reason: "Cần thêm huy hiệu mới để duy trì động lực", riskLevel: "Thấp" },
 ];
 
 export default function AdminAnalyticsPage() {
-  const [timeRange, setTimeRange] = useState<"7d" | "30d" | "90d" | "all">("30d");
+  const [timeRange, setTimeRange] = useState<"w1" | "w2" | "w3" | "w4" | "all">("all");
   const [searchQuery, setSearchQuery] = useState("");
   const [statusFilter, setStatusFilter] = useState<string>("all");
   const [isBroadcastModalOpen, setIsBroadcastModalOpen] = useState(false);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
-  const [selectedUserAction, setSelectedUserAction] = useState<string | null>(null);
   const [broadcastText, setBroadcastText] = useState("");
   const [broadcastTitle, setBroadcastTitle] = useState("");
 
@@ -86,47 +129,49 @@ export default function AdminAnalyticsPage() {
     setTimeout(() => setToastMessage(null), 3500);
   };
 
-  // Dynamic user data timeline based on selected timeRange
+  // 4-Week Campaign Timeline Data (June 1, 2026 - July 5, 2026)
   const growthTimeline = useMemo(() => {
     switch (timeRange) {
-      case "7d":
+      case "w1":
         return [
-          { label: "T2", users: 320, active: 210, cards: 980 },
-          { label: "T3", users: 328, active: 218, cards: 1040 },
-          { label: "T4", users: 335, active: 225, cards: 1120 },
-          { label: "T5", users: 342, active: 230, cards: 1200 },
-          { label: "T6", users: 350, active: 238, cards: 1310 },
-          { label: "T7", users: 356, active: 242, cards: 1380 },
-          { label: "CN", users: 362, active: 248, cards: 1420 },
+          { label: "01/06", users: 20, active: 6, cards: 120 },
+          { label: "03/06", users: 45, active: 12, cards: 180 },
+          { label: "05/06", users: 68, active: 18, cards: 260 },
+          { label: "07/06", users: 85, active: 22, cards: 350 },
         ];
-      case "90d":
+      case "w2":
         return [
-          { label: "T5", users: 180, active: 110, cards: 620 },
-          { label: "T6", users: 260, active: 175, cards: 990 },
-          { label: "T7", users: 362, active: 248, cards: 1420 },
+          { label: "08/06", users: 102, active: 26, cards: 450 },
+          { label: "10/06", users: 128, active: 30, cards: 560 },
+          { label: "12/06", users: 155, active: 34, cards: 680 },
+          { label: "14/06", users: 178, active: 38, cards: 790 },
+        ];
+      case "w3":
+        return [
+          { label: "15/06", users: 205, active: 40, cards: 890 },
+          { label: "17/06", users: 230, active: 42, cards: 990 },
+          { label: "19/06", users: 252, active: 44, cards: 1100 },
+          { label: "21/06", users: 275, active: 45, cards: 1210 },
+        ];
+      case "w4":
+        return [
+          { label: "22/06", users: 298, active: 46, cards: 1280 },
+          { label: "25/06", users: 322, active: 47, cards: 1330 },
+          { label: "28/06", users: 345, active: 47, cards: 1380 },
+          { label: "05/07", users: 362, active: 48, cards: 1420 },
         ];
       case "all":
-        return [
-          { label: "T1", users: 45, active: 30, cards: 150 },
-          { label: "T2", users: 95, active: 62, cards: 380 },
-          { label: "T3", users: 150, active: 98, cards: 590 },
-          { label: "T4", users: 210, active: 140, cards: 820 },
-          { label: "T5", users: 275, active: 185, cards: 1050 },
-          { label: "T6", users: 320, active: 215, cards: 1240 },
-          { label: "T7", users: 362, active: 248, cards: 1420 },
-        ];
-      case "30d":
       default:
         return [
-          { label: "Tuần 1", users: 290, active: 190, cards: 1080 },
-          { label: "Tuần 2", users: 315, active: 208, cards: 1190 },
-          { label: "Tuần 3", users: 340, active: 228, cards: 1310 },
-          { label: "Tuần 4", users: 362, active: 248, cards: 1420 },
+          { label: "Tuần 1 (01-07/06)", users: 85, active: 22, cards: 350 },
+          { label: "Tuần 2 (08-14/06)", users: 178, active: 38, cards: 790 },
+          { label: "Tuần 3 (15-21/06)", users: 275, active: 45, cards: 1210 },
+          { label: "Tuần 4 (22/06-05/07)", users: 362, active: 48, cards: 1420 },
         ];
     }
   }, [timeRange]);
 
-  // Hourly peak heat distribution (24h)
+  // Peak activity hours during campaign
   const hourlyActivity = [
     { hour: "0h", val: 12 }, { hour: "3h", val: 4 }, { hour: "6h", val: 38 },
     { hour: "7h", val: 85 }, { hour: "8h", val: 94 }, { hour: "9h", val: 72 },
@@ -157,11 +202,11 @@ export default function AdminAnalyticsPage() {
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.href = url;
-    link.setAttribute("download", `80others_analytics_report_${new Date().toISOString().slice(0, 10)}.csv`);
+    link.setAttribute("download", `80others_campaign_report_June2026.csv`);
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-    showToast("Đã tải xuống file báo cáo CSV thành công!");
+    showToast("Đã tải xuống file tổng kết chiến dịch CSV!");
   };
 
   const handleSendBroadcast = (e: React.FormEvent) => {
@@ -176,51 +221,62 @@ export default function AdminAnalyticsPage() {
     setBroadcastText("");
   };
 
-  // Metrics summary
+  // Metrics summary for 1-month project lifecycle
   const metricCards: MetricCardData[] = [
     {
       title: "Tổng người dùng",
       value: "362",
-      change: "+14.8%",
+      change: "100%",
       isPositive: true,
-      subtext: "so với tháng trước (+46 tài khoản)",
-      icon: <Users className="w-6 h-6 text-brand-purple" />,
+      subtext: "Hoàn thành mục tiêu qua 4 tuần",
+      icon: <Users className="w-5 h-5 text-brand-purple" />,
       colorBg: "bg-purple-500/10 dark:bg-purple-500/20",
       colorBorder: "border-brand-purple",
       colorText: "text-brand-purple",
     },
     {
       title: "Người dùng HĐ (DAU)",
-      value: "248",
-      change: "+8.2%",
+      value: "48",
+      change: "13.3%",
       isPositive: true,
-      subtext: "Tỷ lệ tương tác đạt 68.5%",
-      icon: <Activity className="w-6 h-6 text-emerald-500" />,
+      subtext: "Trung bình 48 người hoạt động/ngày",
+      icon: <Activity className="w-5 h-5 text-emerald-500" />,
       colorBg: "bg-emerald-500/10 dark:bg-emerald-500/20",
       colorBorder: "border-emerald-500",
       colorText: "text-emerald-600 dark:text-emerald-400",
     },
     {
-      title: "Lượt lật thẻ hôm nay",
+      title: "Tổng lượt lật thẻ",
       value: "1,420",
-      change: "+22.4%",
+      change: "100%",
       isPositive: true,
-      subtext: "Trung bình 3.9 thẻ/người",
-      icon: <Zap className="w-6 h-6 text-amber-500" />,
+      subtext: "Trung bình 3.9 lượt lật/người",
+      icon: <Zap className="w-5 h-5 text-amber-500" />,
       colorBg: "bg-amber-500/10 dark:bg-amber-500/20",
       colorBorder: "border-amber-500",
       colorText: "text-amber-600 dark:text-amber-400",
     },
     {
       title: "Thử thách hoàn thành",
-      value: "856",
-      change: "+11.3%",
+      value: "3,856",
+      change: "100%",
       isPositive: true,
-      subtext: "Tổng 45,890 điểm thưởng",
-      icon: <Trophy className="w-6 h-6 text-brand-pink" />,
+      subtext: "Tổng 145,890 điểm tích lũy",
+      icon: <Trophy className="w-5 h-5 text-brand-pink" />,
       colorBg: "bg-pink-500/10 dark:bg-pink-500/20",
       colorBorder: "border-brand-pink",
       colorText: "text-brand-pink",
+    },
+    {
+      title: "Tỷ lệ rời bỏ (Churn Rate)",
+      value: "14.2%",
+      change: "-2.1%",
+      isPositive: false,
+      subtext: "51 người ngưng dùng sau tuần 1",
+      icon: <LogOut className="w-5 h-5 text-red-500" />,
+      colorBg: "bg-red-500/10 dark:bg-red-500/20",
+      colorBorder: "border-red-500",
+      colorText: "text-red-600 dark:text-red-400",
     },
   ];
 
@@ -246,35 +302,41 @@ export default function AdminAnalyticsPage() {
         <div className="space-y-1">
           <div className="flex items-center gap-3">
             <span className="px-3 py-1 bg-brand-purple/10 text-brand-purple border-2 border-brand-purple rounded-full text-xs font-pixel font-bold flex items-center gap-1.5">
-              <ShieldCheck className="w-3.5 h-3.5" /> Admin Panel
+              <ShieldCheck className="w-3.5 h-3.5" /> Báo Cáo Chiến Dịch 1 Tháng
             </span>
             <span className="px-2.5 py-0.5 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30 rounded-full text-[11px] font-pixel font-medium flex items-center gap-1">
-              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping inline-block" /> Live Data
+              <span className="w-2 h-2 rounded-full bg-emerald-500 inline-block" /> 01/06/2026 – 05/07/2026
             </span>
           </div>
           <h1 className="font-pixel text-2xl md:text-3xl font-extrabold text-brand-text tracking-tight flex items-center gap-2">
-            Phân Tích & Thống Kê Hệ Thống
+            Thống Kê Chiến Dịch 80others (1 Tháng)
           </h1>
           <p className="text-sm text-brand-text/70 font-medium">
-            Báo cáo trực quan tình hình người dùng, thẻ và thử thách trên 80others
+            Tổng kết dữ liệu 4 tuần vận hành dự án từ đầu Tháng 6 đến đầu Tháng 7/2026
           </p>
         </div>
 
         {/* Action Controls */}
         <div className="flex flex-wrap items-center gap-3">
-          {/* Time range selector */}
-          <div className="flex bg-brand-bg border-2 border-brand-outline rounded-xl p-1 shadow-pixel-sm">
-            {(["7d", "30d", "90d", "all"] as const).map((r) => (
+          {/* Time range selector (4 Weeks) */}
+          <div className="flex bg-brand-bg border-2 border-brand-outline rounded-xl p-1 shadow-pixel-sm overflow-x-auto">
+            {[
+              { id: "w1", label: "Tuần 1" },
+              { id: "w2", label: "Tuần 2" },
+              { id: "w3", label: "Tuần 3" },
+              { id: "w4", label: "Tuần 4" },
+              { id: "all", label: "Cả 4 Tuần" },
+            ].map((r) => (
               <button
-                key={r}
-                onClick={() => setTimeRange(r)}
-                className={`px-3 py-1.5 text-xs font-pixel rounded-lg transition-all ${
-                  timeRange === r
+                key={r.id}
+                onClick={() => setTimeRange(r.id as any)}
+                className={`px-2.5 py-1.5 text-xs font-pixel rounded-lg transition-all shrink-0 ${
+                  timeRange === r.id
                     ? "bg-brand-purple text-white shadow-pixel-sm font-bold"
                     : "text-brand-text hover:bg-brand-border/40 font-medium"
                 }`}
               >
-                {r === "7d" ? "7 Ngày" : r === "30d" ? "30 Ngày" : r === "90d" ? "90 Ngày" : "Tất Cả"}
+                {r.label}
               </button>
             ))}
           </div>
@@ -297,42 +359,148 @@ export default function AdminAnalyticsPage() {
         </div>
       </div>
 
-      {/* Top 4 Key Metric Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+      {/* Top 5 Key Metric Cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
         {metricCards.map((card, idx) => (
           <motion.div
             key={idx}
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: idx * 0.08 }}
-            className={`bg-brand-card border-3 ${card.colorBorder} p-5 rounded-2xl shadow-pixel relative overflow-hidden group hover:-translate-y-1 transition-all duration-200`}
+            className={`bg-brand-card border-3 ${card.colorBorder} p-4 rounded-2xl shadow-pixel relative overflow-hidden group hover:-translate-y-1 transition-all duration-200`}
           >
-            <div className="flex items-center justify-between mb-3">
-              <span className="text-xs font-pixel font-bold uppercase tracking-wider text-brand-text/70">
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-[11px] font-pixel font-bold uppercase tracking-wider text-brand-text/70 truncate">
                 {card.title}
               </span>
-              <div className={`p-2.5 rounded-xl border-2 ${card.colorBorder} ${card.colorBg}`}>
+              <div className={`p-2 rounded-xl border-2 ${card.colorBorder} ${card.colorBg} shrink-0`}>
                 {card.icon}
               </div>
             </div>
 
             <div className="space-y-1">
-              <div className="flex items-baseline gap-2">
-                <span className="font-pixel text-3xl font-extrabold text-brand-text tracking-tight">
+              <div className="flex items-baseline gap-1.5">
+                <span className="font-pixel text-2xl font-extrabold text-brand-text tracking-tight">
                   {card.value}
                 </span>
-                <span className="text-xs font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-md flex items-center gap-0.5 border border-emerald-500/20">
-                  <ArrowUpRight className="w-3 h-3" />
+                <span
+                  className={`text-[10px] font-bold px-1.5 py-0.5 rounded flex items-center border ${
+                    card.isPositive
+                      ? "text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 border-emerald-500/20"
+                      : "text-red-600 dark:text-red-400 bg-red-500/10 border-red-500/20"
+                  }`}
+                >
+                  {card.isPositive ? <ArrowUpRight className="w-3 h-3" /> : <ArrowDownRight className="w-3 h-3" />}
                   {card.change}
                 </span>
               </div>
-              <p className="text-[12px] text-brand-text/65 font-medium">{card.subtext}</p>
+              <p className="text-[11px] text-brand-text/65 font-medium leading-tight">{card.subtext}</p>
             </div>
           </motion.div>
         ))}
       </div>
 
-      {/* Charts Section: Row 1 - User Growth & Weekly Activity */}
+      {/* Row 1: Page Views & Usage Ranking + Drop-off Content Analysis */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* Most Visited & Used Pages */}
+        <div className="bg-brand-card border-3 border-brand-outline p-6 rounded-2xl shadow-pixel space-y-4">
+          <div className="flex items-center justify-between border-b-2 border-brand-border pb-3">
+            <div>
+              <h2 className="font-pixel text-lg font-bold text-brand-text flex items-center gap-2">
+                <MousePointerClick className="w-5 h-5 text-brand-purple" />
+                Trang Được Truy Cập & Sử Dụng Nhiều Nhất
+              </h2>
+              <p className="text-xs text-brand-text/70 font-medium">
+                Thống kê lưu lượng truy cập và thời gian giữ chân trung bình của người dùng
+              </p>
+            </div>
+            <span className="text-xs font-pixel font-bold px-2.5 py-1 bg-brand-purple/10 text-brand-purple rounded-lg border border-brand-purple/30">
+              Tổng 1,420 Lượt View
+            </span>
+          </div>
+
+          <div className="space-y-4 pt-1">
+            {pageUsageStats.map((page, idx) => (
+              <div key={idx} className="space-y-1.5">
+                <div className="flex items-center justify-between font-pixel text-xs">
+                  <div className="flex items-center gap-2">
+                    <span className="w-5 h-5 rounded-md bg-brand-bg border border-brand-outline font-bold flex items-center justify-center text-[10px] text-brand-purple">
+                      #{idx + 1}
+                    </span>
+                    <span className="font-bold text-brand-text">{page.name}</span>
+                    <code className="text-[10px] text-brand-text/60 bg-brand-bg px-1.5 py-0.5 rounded border border-brand-border">
+                      {page.path}
+                    </code>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <span className="font-bold text-brand-purple">{page.views.toLocaleString()} view</span>
+                    <span className="text-[11px] text-brand-text/60 font-semibold">{page.avgTime}/phiên</span>
+                  </div>
+                </div>
+
+                {/* Progress bar */}
+                <div className="h-3 w-full bg-brand-bg border-2 border-brand-outline rounded-lg overflow-hidden relative">
+                  <motion.div
+                    initial={{ width: 0 }}
+                    animate={{ width: `${page.percentage}%` }}
+                    transition={{ duration: 0.8, delay: idx * 0.1 }}
+                    className={`h-full ${page.color}`}
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Drop-Off Content & Drop Rate Analysis */}
+        <div className="bg-brand-card border-3 border-brand-outline p-6 rounded-2xl shadow-pixel space-y-4">
+          <div className="flex items-center justify-between border-b-2 border-brand-border pb-3">
+            <div>
+              <h2 className="font-pixel text-lg font-bold text-brand-text flex items-center gap-2">
+                <AlertTriangle className="w-5 h-5 text-red-500" />
+                Phân Tích Tỷ Lệ & Nội Dung Người Dùng Rời Bỏ
+              </h2>
+              <p className="text-xs text-brand-text/70 font-medium">
+                Các điểm tương tác có tỷ lệ rời bỏ (drop-off) cao nhất và lý do ghi nhận
+              </p>
+            </div>
+            <span className="text-xs font-pixel font-bold px-2.5 py-1 bg-red-500/10 text-red-600 dark:text-red-400 rounded-lg border border-red-500/30">
+              51/362 Users Drop-off
+            </span>
+          </div>
+
+          <div className="space-y-3 pt-1">
+            {dropOffStats.map((item, idx) => (
+              <div
+                key={idx}
+                className="p-3.5 bg-brand-bg border-2 border-brand-outline rounded-xl space-y-2 hover:border-brand-purple transition-all"
+              >
+                <div className="flex items-start justify-between gap-2 font-pixel">
+                  <div>
+                    <span className="text-xs font-bold text-brand-text block">{item.contentName}</span>
+                    <span className="text-[10px] text-brand-text/60 font-semibold">{item.category}</span>
+                  </div>
+                  <div className="text-right shrink-0">
+                    <span className="text-xs font-bold text-red-500 block">
+                      Tỷ lệ rời bỏ: {item.dropRate}%
+                    </span>
+                    <span className="text-[10px] text-brand-text/60 font-semibold">
+                      ({item.usersLost} người dừng)
+                    </span>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-2 pt-1 border-t border-brand-border text-[11px] text-brand-text/80">
+                  <HelpCircle className="w-3.5 h-3.5 text-amber-500 shrink-0" />
+                  <span className="italic font-medium">Nguyên nhân: {item.reason}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Row 2: Charts Section - User Growth & Platform Breakdown */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* User Growth Area Chart (2 cols) */}
         <div className="lg:col-span-2 bg-brand-card border-3 border-brand-outline p-6 rounded-2xl shadow-pixel space-y-4">
@@ -340,10 +508,10 @@ export default function AdminAnalyticsPage() {
             <div>
               <h2 className="font-pixel text-lg font-bold text-brand-text flex items-center gap-2">
                 <TrendingUp className="w-5 h-5 text-brand-purple" />
-                Tăng Trưởng Người Dùng ({growthTimeline[0].label} - {growthTimeline[growthTimeline.length - 1].label})
+                Tăng Trưởng Người Dùng Qua 4 Tuần ({growthTimeline[0].label} – {growthTimeline[growthTimeline.length - 1].label})
               </h2>
               <p className="text-xs text-brand-text/70 font-medium">
-                Xu hướng người dùng mới đăng ký đạt <strong className="text-brand-purple">362 người dùng</strong>
+                Số lượng người dùng tích lũy tăng liên tục đạt cột mốc <strong className="text-brand-purple">362 người dùng</strong> ở cuối chiến dịch
               </p>
             </div>
             <div className="flex items-center gap-4 text-xs font-pixel">
@@ -353,7 +521,7 @@ export default function AdminAnalyticsPage() {
               </div>
               <div className="flex items-center gap-1.5">
                 <span className="w-3 h-3 rounded-full bg-emerald-500 inline-block" />
-                <span>Hoạt động (248)</span>
+                <span>Hoạt động (48 DAU)</span>
               </div>
             </div>
           </div>
@@ -365,10 +533,6 @@ export default function AdminAnalyticsPage() {
                 <linearGradient id="purpleGradient" x1="0" y1="0" x2="0" y2="1">
                   <stop offset="0%" stopColor="#8B5CF6" stopOpacity="0.4" />
                   <stop offset="100%" stopColor="#8B5CF6" stopOpacity="0.0" />
-                </linearGradient>
-                <linearGradient id="greenGradient" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="#10B981" stopOpacity="0.3" />
-                  <stop offset="100%" stopColor="#10B981" stopOpacity="0.0" />
                 </linearGradient>
               </defs>
 
@@ -484,12 +648,12 @@ export default function AdminAnalyticsPage() {
           </div>
         </div>
 
-        {/* Device Breakdown & User Categories Donut Charts (1 col) */}
+        {/* Device Breakdown Donut Chart (1 col) */}
         <div className="bg-brand-card border-3 border-brand-outline p-6 rounded-2xl shadow-pixel space-y-5 flex flex-col justify-between">
           <div>
             <h2 className="font-pixel text-lg font-bold text-brand-text flex items-center gap-2 border-b-2 border-brand-border pb-3">
               <Smartphone className="w-5 h-5 text-brand-pink" />
-              Nền Tảng Truy Cập
+              Nền Tảng Đăng Nhập
             </h2>
             <p className="text-xs text-brand-text/70 font-medium mt-1">
               Phân bổ ứng dụng di động PWA vs Trình duyệt Web
@@ -563,7 +727,7 @@ export default function AdminAnalyticsPage() {
         </div>
       </div>
 
-      {/* Row 2: Peak Hours Activity Heatmap & Activity Distribution */}
+      {/* Row 3: Peak Hours Activity Heatmap & Campaign Summary */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Peak Hours Heatmap (2 cols) */}
         <div className="lg:col-span-2 bg-brand-card border-3 border-brand-outline p-6 rounded-2xl shadow-pixel space-y-4">
@@ -571,20 +735,20 @@ export default function AdminAnalyticsPage() {
             <div>
               <h2 className="font-pixel text-lg font-bold text-brand-text flex items-center gap-2">
                 <Clock className="w-5 h-5 text-amber-500" />
-                Khung Giờ Hoạt Động Cao ĐiểmTrong Ngày
+                Giờ Hoạt Động Cao Điểm (Mẫu Tương Tác 24h)
               </h2>
               <p className="text-xs text-brand-text/70 font-medium">
-                Mật độ truy cập cao nhất vào lúc <strong className="text-amber-600 dark:text-amber-400">20h - 22h tối</strong>
+                Mật độ lật thẻ & thực hiện thử thách đạt đỉnh vào khung giờ <strong className="text-amber-600 dark:text-amber-400">20h - 22h mỗi tối</strong>
               </p>
             </div>
             <span className="text-xs font-pixel font-bold px-2.5 py-1 bg-amber-500/10 text-amber-600 dark:text-amber-400 rounded-lg border border-amber-500/30">
-              Peak: 110 active/h
+              Đỉnh: 110 lượt/h
             </span>
           </div>
 
           <div className="grid grid-cols-6 sm:grid-cols-12 gap-2 pt-2">
             {hourlyActivity.map((item, idx) => {
-              const intensity = item.val / 110; // 0 to 1
+              const intensity = item.val / 110;
               return (
                 <div key={idx} className="flex flex-col items-center gap-1.5 group cursor-pointer">
                   <div
@@ -603,28 +767,28 @@ export default function AdminAnalyticsPage() {
           </div>
         </div>
 
-        {/* System Health / Summary Panel (1 col) */}
+        {/* Campaign Summary Box (1 col) */}
         <div className="bg-brand-card border-3 border-brand-outline p-6 rounded-2xl shadow-pixel space-y-4">
           <h2 className="font-pixel text-lg font-bold text-brand-text flex items-center gap-2 border-b-2 border-brand-border pb-3">
             <Sparkles className="w-5 h-5 text-brand-yellow" />
-            Trạng Thái Hệ Thống
+            Tổng Kết Chiến Dịch
           </h2>
 
           <div className="space-y-3 font-pixel text-xs">
             <div className="flex items-center justify-between p-3 bg-emerald-500/10 border-2 border-emerald-500/40 rounded-xl text-emerald-700 dark:text-emerald-300">
               <div className="flex items-center gap-2">
                 <CheckCircle2 className="w-4 h-4 text-emerald-500" />
-                <span className="font-bold">Máy chủ Web & API</span>
+                <span className="font-bold">Trạng thái chiến dịch</span>
               </div>
-              <span className="font-bold">99.9% Online</span>
+              <span className="font-bold">Hoàn thành 100%</span>
             </div>
 
             <div className="flex items-center justify-between p-3 bg-purple-500/10 border-2 border-purple-500/40 rounded-xl text-purple-700 dark:text-purple-300">
               <div className="flex items-center gap-2">
                 <Heart className="w-4 h-4 text-brand-pink fill-brand-pink" />
-                <span className="font-bold">Tổng lượt thả tim</span>
+                <span className="font-bold">Lượt thả tim tích lũy</span>
               </div>
-              <span className="font-bold">3,940 tim</span>
+              <span className="font-bold">38,940 tim</span>
             </div>
 
             <div className="flex items-center justify-between p-3 bg-amber-500/10 border-2 border-amber-500/40 rounded-xl text-amber-700 dark:text-amber-300">
@@ -632,7 +796,7 @@ export default function AdminAnalyticsPage() {
                 <Crown className="w-4 h-4 text-amber-500" />
                 <span className="font-bold">Huy hiệu đã mở</span>
               </div>
-              <span className="font-bold">612 mở khóa</span>
+              <span className="font-bold">2,612 mở khóa</span>
             </div>
           </div>
         </div>
@@ -645,10 +809,10 @@ export default function AdminAnalyticsPage() {
           <div>
             <h2 className="font-pixel text-xl font-bold text-brand-text flex items-center gap-2">
               <Users className="w-5 h-5 text-brand-purple" />
-              Danh Sách Người Dùng Gần Đây (Tổng: 362)
+              Danh Sách Người Dùng Đăng Ký Trong Chiến Dịch (362 Tài Khoản)
             </h2>
             <p className="text-xs text-brand-text/70 font-medium">
-              Quản lý danh sách thành viên đăng ký và theo dõi thông số chuỗi streak
+              Danh sách thành viên đăng ký từ 01/06/2026 đến 05/07/2026
             </p>
           </div>
 
@@ -824,7 +988,7 @@ export default function AdminAnalyticsPage() {
                   <input
                     type="text"
                     required
-                    placeholder="Ví dụ: Thử thách mới hôm nay đã sẵn sàng! 🎉"
+                    placeholder="Ví dụ: Cảm ơn bạn đã đồng hành trong chiến dịch! 🎉"
                     value={broadcastTitle}
                     onChange={(e) => setBroadcastTitle(e.target.value)}
                     className="w-full px-3 py-2 bg-brand-bg border-2 border-brand-outline rounded-xl text-brand-text focus:outline-none focus:border-brand-purple"
@@ -845,7 +1009,7 @@ export default function AdminAnalyticsPage() {
 
                 <div className="p-3 bg-purple-500/10 border border-brand-purple/30 rounded-xl text-[11px] text-brand-purple flex items-start gap-2">
                   <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
-                  <span>Thông báo này sẽ được gửi dưới dạng Push Notification tới tất cả 362 thiết bị đã đăng ký.</span>
+                  <span>Thông báo này sẽ được gửi tới tất cả 362 tài khoản thành viên.</span>
                 </div>
 
                 <div className="flex items-center justify-end gap-2 pt-2">
